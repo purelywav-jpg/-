@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>유나업클래스 | 온라인 수익화 교육</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --deep-purple:#33195A;
+    --deep-purple-2:#241040;
+    --violet:#7C4FE0;
+    --violet-dark:#5F35B8;
+    --violet-soft:#B79CF0;
+    --beige-warm:#ECDFC4;
+    --beige-warm-2:#E4D4AE;
+    --cream:#FBF5E9;
+    --cream-deep:#F5ECDA;
+    --ink:#2A1B3D;
+    --muted:#6E5E82;
+    --muted-soft:#8B7BA0;
+    --white:#FFFFFF;
+    --line:#E2D6C2;
+    --radius-s:10px;
+    --radius-m:16px;
+    --radius-l:26px;
+    --space-1:4px;
+    --space-2:8px;
+    --space-3:12px;
+    --space-4:16px;
+    --space-5:24px;
+    --space-6:32px;
+    --space-7:48px;
+    --space-8:72px;
+    --shadow-card:0 10px 30px -18px rgba(51,25,90,0.35);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;}
+  ul{margin:0;padding:0;list-style:none;}
+  h1,h2,h3,h4{font-family:'Gowun Batang', 'Noto Serif KR', serif;margin:0;text-wrap:balance;font-weight:700;}
+  p{margin:0;}
+  .container{max-width:1180px;margin:0 auto;padding:0 var(--space-5);}
+  :focus-visible{outline:3px solid var(--violet-dark);outline-offset:2px;}
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:var(--space-2);
+    font-size:0.78rem;font-weight:700;letter-spacing:0.14em;
+    color:var(--violet-dark);text-transform:uppercase;
+  }
+  .eyebrow::before{content:"";width:18px;height:2px;background:var(--violet-dark);display:inline-block;}
+
+  /* ---------- Top utility bar ---------- */
+  .topbar{background:var(--cream-deep);border-bottom:1px solid var(--line);font-size:0.82rem;color:var(--muted);}
+  .topbar .container{display:flex;justify-content:space-between;align-items:center;height:40px;}
+  .topbar .date{font-variant-numeric:tabular-nums;}
+  .topbar nav ul{display:flex;gap:var(--space-5);}
+  .topbar nav a:hover{color:var(--violet-dark);}
+
+  /* ---------- Header ---------- */
+  .site-header{background:var(--cream);padding:var(--space-6) 0 var(--space-4);}
+  .site-header .container{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--space-6);flex-wrap:wrap;}
+  .brand h1{font-size:clamp(1.5rem,2.4vw,1.9rem);color:var(--deep-purple);}
+  .brand p{margin-top:var(--space-2);color:var(--muted);font-size:0.92rem;max-width:46ch;}
+  .search{display:flex;align-items:center;background:var(--white);border:1px solid var(--line);border-radius:999px;padding:var(--space-2) var(--space-2) var(--space-2) var(--space-5);min-width:280px;}
+  .search input{border:none;background:none;flex:1;font-size:0.9rem;color:var(--ink);}
+  .search input:focus{outline:none;}
+  .search button{width:36px;height:36px;border-radius:50%;background:var(--violet);color:var(--white);display:grid;place-items:center;flex-shrink:0;}
+  .search button svg{width:16px;height:16px;}
+
+  /* ---------- Nav ---------- */
+  .main-nav{background:var(--deep-purple);position:sticky;top:0;z-index:50;box-shadow:0 4px 20px -10px rgba(36,16,64,0.5);}
+  .main-nav .container{display:flex;align-items:stretch;justify-content:space-between;}
+  .nav-list{display:flex;}
+  .nav-list > li{position:relative;}
+  .nav-list > li > a, .nav-list > li > button.nav-top{
+    display:flex;align-items:center;gap:6px;height:56px;padding:0 var(--space-5);
+    color:#EDE6F7;font-weight:600;font-size:0.95rem;white-space:nowrap;
+    transition:background .15s ease, color .15s ease;
+  }
+  .nav-list > li > a:hover, .nav-list > li:hover > button.nav-top, .nav-list > li.open > button.nav-top{
+    background:var(--violet-dark);color:var(--white);
+  }
+  .caret{width:9px;height:9px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s ease;}
+  li.open .caret{transform:rotate(-135deg) translateY(2px);}
+
+  .dropdown{
+    position:absolute;top:100%;left:0;min-width:240px;background:var(--white);
+    border-radius:0 0 var(--radius-m) var(--radius-m);box-shadow:var(--shadow-card);
+    padding:var(--space-2);opacity:0;visibility:hidden;transform:translateY(-6px);
+    transition:opacity .18s ease, transform .18s ease, visibility .18s ease;
+  }
+  .nav-list > li:hover .dropdown,
+  .nav-list > li.open .dropdown{opacity:1;visibility:visible;transform:translateY(0);}
+  .dropdown a{
+    display:flex;align-items:center;gap:var(--space-3);padding:var(--space-3) var(--space-4);
+    border-radius:var(--radius-s);color:var(--ink);font-size:0.9rem;font-weight:500;
+  }
+  .dropdown a:hover{background:var(--cream-deep);color:var(--violet-dark);}
+  .dropdown a .ico-sm{width:18px;height:18px;color:var(--violet);flex-shrink:0;}
+
+  .nav-utility{display:flex;align-items:center;gap:var(--space-4);}
+  .nav-utility a{color:#EDE6F7;font-size:0.86rem;font-weight:600;}
+  .nav-utility a:hover{color:var(--white);}
+  .hamburger{display:none;width:56px;height:56px;align-items:center;justify-content:center;color:var(--white);}
+  .hamburger span, .hamburger::before, .hamburger::after{display:none;}
+  .ham-icon{width:22px;height:16px;position:relative;}
+  .ham-icon i{position:absolute;left:0;width:100%;height:2px;background:currentColor;border-radius:2px;}
+  .ham-icon i:nth-child(1){top:0;}
+  .ham-icon i:nth-child(2){top:7px;}
+  .ham-icon i:nth-child(3){top:14px;}
+
+  /* ---------- Notice ticker ---------- */
+  .ticker{background:var(--violet-dark);color:#F3ECFF;}
+  .ticker .container{display:flex;align-items:center;gap:var(--space-4);height:42px;}
+  .ticker .tag{flex-shrink:0;font-size:0.78rem;font-weight:700;letter-spacing:0.06em;background:rgba(255,255,255,0.15);padding:4px 10px;border-radius:999px;}
+  .ticker p{font-size:0.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:var(--space-8) 0;}
+  .hero .container{display:grid;grid-template-columns:1.1fr 0.9fr;gap:var(--space-7);align-items:center;}
+  .hero-copy .eyebrow{margin-bottom:var(--space-4);}
+  .hero-copy h2{font-size:clamp(2rem,3.6vw,2.9rem);color:var(--deep-purple);line-height:1.28;}
+  .hero-copy h2 em{font-style:normal;color:var(--violet);}
+  .hero-copy p{margin-top:var(--space-4);color:var(--muted);font-size:1.02rem;max-width:44ch;}
+  .hero-actions{display:flex;gap:var(--space-3);margin-top:var(--space-6);flex-wrap:wrap;}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;font-weight:700;font-size:0.94rem;transition:transform .15s ease, box-shadow .15s ease, background .15s ease;}
+  .btn-primary{background:var(--violet);color:var(--white);box-shadow:0 14px 28px -14px rgba(124,79,224,0.65);}
+  .btn-primary:hover{background:var(--violet-dark);transform:translateY(-2px);}
+  .btn-ghost{background:transparent;color:var(--deep-purple);border:1.5px solid var(--deep-purple);}
+  .btn-ghost:hover{background:var(--deep-purple);color:var(--white);}
+  .btn-block{width:100%;justify-content:center;}
+  .btn-sm{padding:10px 18px;font-size:0.85rem;}
+
+  .hero-panel{
+    position:relative;border-radius:var(--radius-l);
+    background:linear-gradient(150deg, var(--violet) 0%, var(--violet-dark) 55%, var(--deep-purple) 100%);
+    padding:var(--space-7) var(--space-6);color:var(--white);min-height:320px;
+    display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;
+  }
+  .hero-panel::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 82% 12%, rgba(255,255,255,0.22), transparent 45%);
+  }
+  .hero-coin{position:absolute;border-radius:50%;background:rgba(255,255,255,0.14);display:grid;place-items:center;color:#F6EFFF;font-family:'Gowun Batang',serif;font-weight:700;}
+  .hero-coin svg{width:55%;height:55%;}
+  .coin-1{width:70px;height:70px;top:14px;right:36px;}
+  .coin-2{width:44px;height:44px;top:96px;right:120px;background:rgba(255,255,255,0.22);}
+  .coin-3{width:32px;height:32px;top:40px;right:150px;background:rgba(255,255,255,0.16);}
+  .hero-panel h3{position:relative;font-size:1.5rem;line-height:1.4;max-width:20ch;}
+  .hero-panel .hero-panel-sub{position:relative;margin-top:var(--space-3);color:#E4D8FB;font-size:0.9rem;}
+
+  /* ---------- Quick link rail ---------- */
+  .rail{background:var(--beige-warm);padding:var(--space-6) 0;}
+  .rail-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--space-4);}
+  .rail-item{display:flex;flex-direction:column;align-items:center;gap:var(--space-3);text-align:center;padding:var(--space-4) var(--space-2);border-radius:var(--radius-m);transition:background .15s ease, transform .15s ease;}
+  .rail-item:hover{background:var(--cream);transform:translateY(-3px);}
+  .rail-icon{width:58px;height:58px;border-radius:50%;background:var(--white);display:grid;place-items:center;color:var(--violet);box-shadow:0 10px 22px -14px rgba(51,25,90,0.4);}
+  .rail-icon svg{width:26px;height:26px;}
+  .rail-item span{font-size:0.86rem;font-weight:700;color:var(--deep-purple);}
+
+  /* ---------- Section shell ---------- */
+  section.block{padding:var(--space-8) 0;}
+  .block.alt{background:var(--cream-deep);}
+  .block-head{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--space-5);margin-bottom:var(--space-6);flex-wrap:wrap;}
+  .block-head h2{font-size:clamp(1.5rem,2.4vw,1.9rem);color:var(--deep-purple);margin-top:var(--space-2);}
+  .block-head p.lede{color:var(--muted);margin-top:var(--space-2);max-width:52ch;}
+
+  /* ---------- Course cards ---------- */
+  .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-5);}
+  .card{background:var(--white);border-radius:var(--radius-m);overflow:hidden;box-shadow:var(--shadow-card);border:1px solid var(--line);display:flex;flex-direction:column;}
+  .card-media{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg, var(--violet-soft), var(--violet-dark) 60%, var(--deep-purple));display:flex;align-items:flex-end;padding:var(--space-4);}
+  .card-media .badge{position:absolute;top:var(--space-4);left:var(--space-4);background:var(--white);color:var(--violet-dark);font-size:0.72rem;font-weight:800;letter-spacing:0.04em;padding:5px 12px;border-radius:999px;}
+  .card-media .ico-big{position:absolute;right:var(--space-4);bottom:var(--space-4);width:44px;height:44px;color:rgba(255,255,255,0.55);}
+  .card-media h4{color:var(--white);font-size:1.2rem;position:relative;line-height:1.35;}
+  .card-body{padding:var(--space-5);display:flex;flex-direction:column;gap:var(--space-3);flex:1;}
+  .card-body .desc{color:var(--muted);font-size:0.9rem;}
+  .card-meta{display:flex;align-items:center;gap:var(--space-2);color:var(--muted-soft);font-size:0.82rem;font-variant-numeric:tabular-nums;}
+  .card-meta .stars{color:var(--violet);letter-spacing:1px;}
+  .card-price{display:flex;align-items:baseline;gap:var(--space-2);margin-top:auto;padding-top:var(--space-2);}
+  .card-price .now{font-size:1.15rem;font-weight:800;color:var(--deep-purple);font-variant-numeric:tabular-nums;}
+  .card-price .note{font-size:0.82rem;color:var(--muted);}
+
+  /* ---------- Tips cards ---------- */
+  .tips-card{display:flex;gap:var(--space-4);background:var(--white);border:1px solid var(--line);border-radius:var(--radius-m);padding:var(--space-5);box-shadow:var(--shadow-card);align-items:flex-start;}
+  .tips-icon{width:52px;height:52px;border-radius:var(--radius-s);background:var(--beige-warm);display:grid;place-items:center;color:var(--violet-dark);flex-shrink:0;}
+  .tips-icon svg{width:26px;height:26px;}
+  .tips-card h4{font-size:1.1rem;color:var(--deep-purple);margin-bottom:var(--space-2);}
+  .tips-card p{color:var(--muted);font-size:0.9rem;margin-bottom:var(--space-4);}
+
+  /* ---------- Reviews ---------- */
+  .review-tabs{display:flex;gap:var(--space-2);margin-bottom:var(--space-5);}
+  .tab-btn{padding:10px 20px;border-radius:999px;font-weight:700;font-size:0.86rem;background:var(--white);color:var(--muted);border:1px solid var(--line);}
+  .tab-btn.active{background:var(--violet);color:var(--white);border-color:var(--violet);}
+  .review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-5);margin-bottom:var(--space-7);}
+  .review-card{background:var(--white);border-radius:var(--radius-m);border:1px solid var(--line);box-shadow:var(--shadow-card);overflow:hidden;}
+  .review-card[hidden]{display:none;}
+  .review-card .rv-media{aspect-ratio:16/10;background:linear-gradient(135deg, var(--deep-purple), var(--violet-dark));position:relative;display:grid;place-items:center;}
+  .review-card .rv-media img, .review-card .rv-media video{width:100%;height:100%;object-fit:cover;}
+  .review-card .rv-media .play{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.9);color:var(--violet-dark);display:grid;place-items:center;}
+  .review-card .rv-media .play svg{width:20px;height:20px;}
+  .review-card .rv-media .rv-tag{position:absolute;top:12px;left:12px;background:rgba(255,255,255,0.92);color:var(--violet-dark);font-size:0.7rem;font-weight:800;padding:4px 10px;border-radius:999px;}
+  .review-card .rv-body{padding:var(--space-4) var(--space-5) var(--space-5);}
+  .review-card .rv-name{font-weight:700;color:var(--deep-purple);font-size:0.92rem;}
+  .review-card .rv-quote{color:var(--muted);font-size:0.88rem;margin-top:6px;}
+  .kakao-bubble{background:#FFF7D6;border:1px solid #F2E4A0;border-radius:var(--radius-s);padding:var(--space-4);margin:var(--space-4);font-size:0.85rem;color:#4a3f1f;}
+  .kakao-bubble img{border-radius:8px;margin-top:8px;}
+
+  .review-form-wrap{background:var(--beige-warm);border-radius:var(--radius-l);padding:var(--space-6);}
+  .review-form-wrap h3{color:var(--deep-purple);font-size:1.3rem;}
+  .review-form-wrap p.hint{color:var(--muted);font-size:0.88rem;margin-top:var(--space-2);}
+  #reviewForm{margin-top:var(--space-5);display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4);}
+  #reviewForm .full{grid-column:1 / -1;}
+  .field label{display:block;font-size:0.82rem;font-weight:700;color:var(--deep-purple);margin-bottom:6px;}
+  .field input[type=text], .field input[type=url], .field textarea, .field select{
+    width:100%;padding:12px 14px;border-radius:var(--radius-s);border:1px solid var(--line);
+    background:var(--white);font-family:inherit;font-size:0.9rem;color:var(--ink);
+  }
+  .field textarea{resize:vertical;min-height:90px;}
+  .field input:focus, .field textarea:focus, .field select:focus{outline:2px solid var(--violet);}
+  .type-toggle{display:flex;gap:var(--space-2);}
+  .type-toggle label{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:var(--radius-s);border:1px solid var(--line);background:var(--white);font-size:0.86rem;font-weight:600;color:var(--muted);cursor:pointer;}
+  .type-toggle input{accent-color:var(--violet);}
+  .type-toggle input:checked + span{color:var(--violet-dark);}
+  .upload-box{border:1.5px dashed var(--violet-soft);border-radius:var(--radius-s);padding:var(--space-4);background:var(--white);}
+  .upload-box input[type=file]{font-size:0.82rem;}
+  .file-note{font-size:0.76rem;color:var(--muted-soft);margin-top:6px;}
+  #formMsg{font-size:0.85rem;font-weight:700;color:var(--violet-dark);min-height:1.2em;}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--deep-purple-2);color:#C9BEE0;padding:var(--space-7) 0 var(--space-6);}
+  .footer-grid{display:flex;justify-content:space-between;gap:var(--space-6);flex-wrap:wrap;}
+  footer h5{color:var(--white);font-family:'Gowun Batang',serif;font-size:1.15rem;}
+  footer .foot-links{display:flex;gap:var(--space-5);flex-wrap:wrap;}
+  footer .foot-links a{font-size:0.85rem;}
+  footer .foot-links a:hover{color:var(--white);}
+  footer .copyright{margin-top:var(--space-6);font-size:0.78rem;color:#8C7EAA;border-top:1px solid rgba(255,255,255,0.08);padding-top:var(--space-5);}
+
+  @media (max-width:960px){
+    .hero .container{grid-template-columns:1fr;}
+    .rail-grid{grid-template-columns:repeat(3,1fr);}
+    .grid-2{grid-template-columns:1fr 1fr;}
+    .review-grid{grid-template-columns:1fr 1fr;}
+    #reviewForm{grid-template-columns:1fr;}
+  }
+  @media (max-width:720px){
+    .topbar nav ul{gap:var(--space-3);}
+    .nav-list{position:fixed;top:96px;left:0;right:0;bottom:0;background:var(--deep-purple);flex-direction:column;padding:var(--space-4);overflow:auto;
+      transform:translateX(-100%);transition:transform .2s ease;}
+    .nav-list.mobile-open{transform:translateX(0);}
+    .nav-list > li{width:100%;}
+    .nav-list > li > a, .nav-list > li > button.nav-top{height:auto;padding:var(--space-4) var(--space-3);width:100%;justify-content:space-between;}
+    .dropdown{position:static;box-shadow:none;background:rgba(255,255,255,0.06);opacity:1;visibility:visible;transform:none;max-height:0;overflow:hidden;padding:0 var(--space-2);transition:max-height .2s ease;}
+    li.open .dropdown{max-height:300px;padding:var(--space-2);}
+    .dropdown a{color:#EDE6F7;}
+    .dropdown a:hover{background:rgba(255,255,255,0.08);color:var(--white);}
+    .nav-utility{display:none;}
+    .hamburger{display:flex;}
+    .rail-grid{grid-template-columns:repeat(2,1fr);}
+    .grid-2, .review-grid{grid-template-columns:1fr;}
+    .search{min-width:0;flex:1;}
+    .site-header .container{flex-direction:column;align-items:stretch;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= Top utility bar ================= -->
+<div class="topbar">
+  <div class="container">
+    <span class="date" id="todayDate">2026.08.26 수요일</span>
+    <nav>
+      <ul>
+        <li><a href="#">로그인</a></li>
+        <li><a href="#">회원가입</a></li>
+        <li><a href="#">마이페이지</a></li>
+        <li><a href="#tips">관리자</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- ================= Header ================= -->
+<header class="site-header">
+  <div class="container">
+    <div class="brand">
+      <h1>유나업클래스</h1>
+      <p>수익화, 쇼핑쇼츠, 제휴마케팅을 통해 성공적인 온라인 비즈니스를 시작하세요. 세미나와 컨설팅으로 직접 경험해보세요.</p>
+    </div>
+    <form class="search" role="search" onsubmit="return false;">
+      <input type="text" placeholder="강의, 후기, 수익화 팁 검색">
+      <button type="submit" aria-label="검색">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.3" y2="16.3"/></svg>
+      </button>
+    </form>
+  </div>
+</header>
+
+<!-- ================= Main nav ================= -->
+<div class="main-nav">
+  <div class="container">
+    <ul class="nav-list" id="navList">
+      <li><a href="#notice">공지사항</a></li>
+      <li><a href="#reviews">수강생후기</a></li>
+      <li class="dd">
+        <button class="nav-top" aria-expanded="false">강의<span class="caret"></span></button>
+        <div class="dropdown">
+          <a href="https://youna0410.xlink.kr/iframe?r=link&layout_type=banner_txt&sysuid=1787" target="_blank" rel="noopener noreferrer">
+            <svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M8 8V7a4 4 0 0 1 8 0v1"/></svg>
+            쇼핑쇼츠 1:1 컨설팅
+          </a>
+          <a href="https://youna0410.xlink.kr/iframe?r=link&layout_type=banner_txt&sysuid=1685" target="_blank" rel="noopener noreferrer">
+            <svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
+            쇼핑쇼츠 VOD
+          </a>
+        </div>
+      </li>
+      <li class="dd">
+        <button class="nav-top" aria-expanded="false">수익화 tips<span class="caret"></span></button>
+        <div class="dropdown">
+          <a href="https://www.leadgeny.kr/lpo.php?seq=4d7a63304e6a4d33" target="_blank" rel="noopener noreferrer">
+            <svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="10" r="6"/><line x1="9.5" y1="18" x2="14.5" y2="18"/><line x1="10.3" y1="21" x2="13.7" y2="21"/></svg>
+            클로드
+          </a>
+          <a href="https://www.ddoksang.kr/" target="_blank" rel="noopener noreferrer">
+            <svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.3" y2="16.3"/></svg>
+            소재찾기
+          </a>
+        </div>
+      </li>
+      <li><a href="#contact">문의하기</a></li>
+      <li><a href="#gallery">갤러리</a></li>
+    </ul>
+    <div class="nav-utility">
+      <a href="#">쪽지</a>
+      <a href="#">출석체크</a>
+      <a href="#">내정보</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="메뉴 열기" aria-controls="navList" aria-expanded="false">
+      <span class="ham-icon"><i></i><i></i><i></i></span>
+    </button>
+  </div>
+</div>
+
+<!-- ================= Notice ticker ================= -->
+<div class="ticker" id="notice">
+  <div class="container">
+    <span class="tag">공지</span>
+    <p>유나업클래스에 오신 것을 환영합니다! 8월 신규 강의 &amp; 1:1 컨설팅 오픈 안내</p>
+  </div>
+</div>
+
+<!-- ================= Hero ================= -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-copy">
+      <span class="eyebrow">Youna Up Class</span>
+      <h2>쇼핑쇼츠부터 수익화까지,<br><em>보라빛 성장</em>을 함께 만듭니다</h2>
+      <p>구글 SEO·AEO·GEO에 특화된 강의와 1:1 컨설팅으로, 오늘부터 나만의 온라인 비즈니스를 시작해보세요.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#courses">강의 둘러보기</a>
+        <a class="btn btn-ghost" href="#reviews">수강생 후기 보기</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <span class="hero-coin coin-1"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><text x="12" y="16.5" text-anchor="middle" font-size="10" fill="currentColor" font-family="'Gowun Batang',serif">₩</text></svg></span>
+      <span class="hero-coin coin-2"></span>
+      <span class="hero-coin coin-3"></span>
+      <h3>쇼핑쇼츠 1:1 컨설팅으로<br>내 채널을 직접 세팅해드립니다</h3>
+      <p class="hero-panel-sub">관리자 화면에서 모든 설정이 가능한 맞춤형 커리큘럼</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Quick link rail ================= -->
+<section class="rail">
+  <div class="container rail-grid">
+    <a class="rail-item" href="#notice">
+      <span class="rail-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="2,10 2,14 6,14 14,18 14,6 6,10"/></svg></span>
+      <span>공지사항</span>
+    </a>
+    <a class="rail-item" href="#reviews">
+      <span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="12" rx="4"/><polygon points="7,16 7,20 11,16" fill="currentColor" stroke="none"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="11.2" x2="14" y2="11.2"/></svg></span>
+      <span>수강생후기</span>
+    </a>
+    <a class="rail-item" href="#courses">
+      <span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12,4 22,9 12,14 2,9" fill="currentColor" stroke="none"/><line x1="20" y1="10" x2="20" y2="15"/><circle cx="20" cy="16.3" r="1.3" fill="currentColor" stroke="none"/></svg></span>
+      <span>강의</span>
+    </a>
+    <a class="rail-item" href="#tips">
+      <span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="10" r="6"/><line x1="9.5" y1="18" x2="14.5" y2="18"/><line x1="10.3" y1="21" x2="13.7" y2="21"/></svg></span>
+      <span>수익화 tips</span>
+    </a>
+    <a class="rail-item" href="#contact">
+      <span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><polyline points="2,7 12,14 22,7"/></svg></span>
+      <span>문의하기</span>
+    </a>
+  </div>
+</section>
+
+<!-- ================= Courses ================= -->
+<section class="block" id="courses">
+  <div class="container">
+    <div class="block-head">
+      <div>
+        <span class="eyebrow">Courses</span>
+        <h2>강의 둘러보기</h2>
+        <p class="lede">초보도 쉽게 따라오는 쇼핑쇼츠 강의, 원하는 방식으로 시작해보세요.</p>
+      </div>
+    </div>
+    <div class="grid-2">
+      <article class="card">
+        <div class="card-media">
+          <span class="badge">컨설팅</span>
+          <svg class="ico-big" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M8 8V7a4 4 0 0 1 8 0v1"/></svg>
+          <h4>쇼핑쇼츠 1:1 컨설팅</h4>
+        </div>
+        <div class="card-body">
+          <p class="desc">내 채널에 맞춘 1:1 밀착 컨설팅으로 쇼핑쇼츠 세팅부터 수익화 전략까지 함께 만듭니다.</p>
+          <div class="card-meta"><span class="stars">★★★★★</span><span>후기 000+</span></div>
+          <div class="card-price"><span class="now">상담 신청 시 안내</span></div>
+          <a class="btn btn-primary btn-block" href="https://youna0410.xlink.kr/iframe?r=link&layout_type=banner_txt&sysuid=1787" target="_blank" rel="noopener noreferrer">1:1 컨설팅 신청하기</a>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-media">
+          <span class="badge">VOD</span>
+          <svg class="ico-big" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
+          <h4>쇼핑쇼츠 VOD 강의</h4>
+        </div>
+        <div class="card-body">
+          <p class="desc">초보자도 따라만 하면 완성되는 쇼핑쇼츠 제작 A to Z. 언제 어디서든 반복 수강하세요.</p>
+          <div class="card-meta"><span class="stars">★★★★★</span><span>수강생 000명+</span></div>
+          <div class="card-price"><span class="now">지금 바로 수강</span></div>
+          <a class="btn btn-primary btn-block" href="https://youna0410.xlink.kr/iframe?r=link&layout_type=banner_txt&sysuid=1685" target="_blank" rel="noopener noreferrer">VOD 바로 수강하기</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 수익화 tips ================= -->
+<section class="block alt" id="tips">
+  <div class="container">
+    <div class="block-head">
+      <div>
+        <span class="eyebrow">Monetize Tips</span>
+        <h2>수익화 tips</h2>
+        <p class="lede">바로 써먹는 실전 도구 모음입니다.</p>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="tips-card">
+        <span class="tips-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="14" rx="3"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="13" y2="13"/></svg>
+        </span>
+        <div>
+          <h4>클로드로 콘텐츠 자동화하기</h4>
+          <p>AI로 상세페이지·숏폼 대본을 빠르게 뽑아내는 실전 활용법을 확인해보세요.</p>
+          <a class="btn btn-ghost btn-sm" href="https://www.leadgeny.kr/lpo.php?seq=4d7a63304e6a4d33" target="_blank" rel="noopener noreferrer">바로가기 →</a>
+        </div>
+      </div>
+      <div class="tips-card">
+        <span class="tips-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.3" y2="16.3"/></svg>
+        </span>
+        <div>
+          <h4>트렌드 소재찾기</h4>
+          <p>지금 잘 나가는 쇼핑쇼츠 소재를 빠르게 찾아 벤치마킹해보세요.</p>
+          <a class="btn btn-ghost btn-sm" href="https://www.ddoksang.kr/" target="_blank" rel="noopener noreferrer">바로가기 →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Reviews ================= -->
+<section class="block" id="reviews">
+  <div class="container">
+    <div class="block-head">
+      <div>
+        <span class="eyebrow">Student Story</span>
+        <h2>수강생 후기</h2>
+        <p class="lede">카카오톡 캡처와 영상으로 생생한 후기를 남겨주세요. 아래 예시처럼 노출됩니다.</p>
+      </div>
+      <div class="review-tabs" role="tablist">
+        <button class="tab-btn active" data-filter="all">전체</button>
+        <button class="tab-btn" data-filter="kakao">카톡후기</button>
+        <button class="tab-btn" data-filter="video">영상후기</button>
+      </div>
+    </div>
+
+    <div class="review-grid" id="reviewGrid">
+      <!-- sample: kakao -->
+      <article class="review-card" data-type="kakao">
+        <div class="kakao-bubble">
+          "강의 그대로 따라했는데 첫 쇼핑쇼츠 업로드부터 반응이 왔어요! 1:1 컨설팅 신청 잘한 것 같아요 🙏"
+        </div>
+        <div class="rv-body">
+          <p class="rv-name">수강생 A · 카톡 후기</p>
+          <p class="rv-quote">여기에 실제 카톡 캡처 이미지가 표시됩니다.</p>
+        </div>
+      </article>
+      <!-- sample: video -->
+      <article class="review-card" data-type="video">
+        <div class="rv-media">
+          <span class="rv-tag">영상후기</span>
+          <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="9,7 18,12 9,17"/></svg></span>
+        </div>
+        <div class="rv-body">
+          <p class="rv-name">수강생 B · 영상 인터뷰</p>
+          <p class="rv-quote">여기에 실제 후기 영상이 표시됩니다.</p>
+        </div>
+      </article>
+      <!-- sample: kakao -->
+      <article class="review-card" data-type="kakao">
+        <div class="kakao-bubble">
+          "VOD 강의 퀄리티가 정말 좋아요. 초보인 저도 하나씩 따라갈 수 있었습니다!"
+        </div>
+        <div class="rv-body">
+          <p class="rv-name">수강생 C · 카톡 후기</p>
+          <p class="rv-quote">여기에 실제 카톡 캡처 이미지가 표시됩니다.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="review-form-wrap">
+      <h3>후기 남기기</h3>
+      <p class="hint">카카오톡 캡처 이미지 또는 후기 영상(파일/링크)을 함께 올릴 수 있어요.</p>
+      <form id="reviewForm">
+        <div class="field">
+          <label for="rvName">닉네임</label>
+          <input type="text" id="rvName" placeholder="예: 수강생 D" maxlength="30">
+        </div>
+        <div class="field">
+          <label>후기 유형</label>
+          <div class="type-toggle">
+            <label><input type="radio" name="rvType" value="kakao" checked><span>카톡후기</span></label>
+            <label><input type="radio" name="rvType" value="video"><span>영상후기</span></label>
+          </div>
+        </div>
+        <div class="field full">
+          <label for="rvText">후기 내용</label>
+          <textarea id="rvText" placeholder="강의를 듣고 느낀 점을 자유롭게 남겨주세요." required></textarea>
+        </div>
+
+        <div class="field full" id="kakaoField">
+          <label>카톡 캡처 이미지</label>
+          <div class="upload-box">
+            <input type="file" id="rvImage" accept="image/*">
+            <p class="file-note">jpg / png, 최대 3MB 권장</p>
+          </div>
+        </div>
+
+        <div class="field full" id="videoField" style="display:none;">
+          <label>후기 영상</label>
+          <div class="upload-box">
+            <input type="file" id="rvVideoFile" accept="video/*">
+            <p class="file-note">짧은 영상 파일 또는 아래 링크 중 하나만 입력해주세요.</p>
+          </div>
+        </div>
+        <div class="field full" id="videoLinkField" style="display:none;">
+          <label for="rvVideoUrl">영상 링크 (유튜브 등)</label>
+          <input type="url" id="rvVideoUrl" placeholder="https://youtube.com/...">
+        </div>
+
+        <div class="field full" style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);">
+          <span id="formMsg"></span>
+          <button type="submit" class="btn btn-primary">후기 등록하기</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Contact / footer ================= -->
+<footer id="contact">
+  <div class="container footer-grid">
+    <div>
+      <h5>유나업클래스</h5>
+      <p style="margin-top:8px;font-size:0.85rem;">수익화, 쿠팡파트너스, 제휴마케팅 온라인 교육</p>
+    </div>
+    <ul class="foot-links">
+      <li><a href="#notice">공지사항</a></li>
+      <li><a href="#reviews">수강생후기</a></li>
+      <li><a href="#courses">강의</a></li>
+      <li><a href="#tips">수익화 tips</a></li>
+      <li><a href="#">문의하기</a></li>
+    </ul>
+  </div>
+  <div class="container copyright">© 2026 유나업클래스. All rights reserved.</div>
+</footer>
+
+<script>
+(function(){
+  // live date
+  var days = ['일','월','화','수','목','금','토'];
+  var d = new Date();
+  var el = document.getElementById('todayDate');
+  if(el){
+    el.textContent = d.getFullYear()+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+String(d.getDate()).padStart(2,'0')+' '+days[d.getDay()]+'요일';
+  }
+
+  // dropdown (click for touch/mobile, hover handled by CSS on desktop)
+  document.querySelectorAll('.nav-list > li.dd').forEach(function(li){
+    var btn = li.querySelector('.nav-top');
+    btn.addEventListener('click', function(){
+      var isOpen = li.classList.contains('open');
+      document.querySelectorAll('.nav-list > li.dd').forEach(function(o){ o.classList.remove('open'); });
+      if(!isOpen){ li.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+      else { btn.setAttribute('aria-expanded','false'); }
+    });
+  });
+
+  // hamburger
+  var ham = document.getElementById('hamburger');
+  var navList = document.getElementById('navList');
+  ham.addEventListener('click', function(){
+    var open = navList.classList.toggle('mobile-open');
+    ham.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  // review tabs
+  var tabs = document.querySelectorAll('.tab-btn');
+  var grid = document.getElementById('reviewGrid');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      tabs.forEach(function(t){ t.classList.remove('active'); });
+      tab.classList.add('active');
+      var f = tab.dataset.filter;
+      grid.querySelectorAll('.review-card').forEach(function(card){
+        card.hidden = (f !== 'all' && card.dataset.type !== f);
+      });
+    });
+  });
+
+  // review type toggle -> show relevant upload fields
+  var typeRadios = document.querySelectorAll('input[name="rvType"]');
+  var kakaoField = document.getElementById('kakaoField');
+  var videoField = document.getElementById('videoField');
+  var videoLinkField = document.getElementById('videoLinkField');
+  function syncFields(){
+    var val = document.querySelector('input[name="rvType"]:checked').value;
+    kakaoField.style.display = val === 'kakao' ? '' : 'none';
+    videoField.style.display = val === 'video' ? '' : 'none';
+    videoLinkField.style.display = val === 'video' ? '' : 'none';
+  }
+  typeRadios.forEach(function(r){ r.addEventListener('change', syncFields); });
+  syncFields();
+
+  // load persisted reviews
+  var STORE_KEY = 'younaUpClassReviews';
+  function loadReviews(){
+    try{ return JSON.parse(localStorage.getItem(STORE_KEY) || '[]'); }
+    catch(e){ return []; }
+  }
+  function saveReviews(list){
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(list)); }
+    catch(e){ /* storage full or unavailable */ }
+  }
+
+  function youtubeEmbed(url){
+    var m = url.match(/(?:youtu\.be\/|v=|shorts\/)([A-Za-z0-9_-]{6,})/);
+    return m ? 'https://www.youtube.com/embed/' + m[1] : null;
+  }
+
+  function buildCard(rv){
+    var art = document.createElement('article');
+    art.className = 'review-card';
+    art.dataset.type = rv.type;
+
+    if(rv.type === 'kakao'){
+      var bubbleHtml = '<div class="kakao-bubble">' + escapeHtml(rv.text || '') +
+        (rv.image ? '<br><img src="'+rv.image+'" alt="카톡 후기 캡처" style="max-width:100%;">' : '') +
+        '</div>';
+      art.innerHTML = bubbleHtml +
+        '<div class="rv-body"><p class="rv-name">'+escapeHtml(rv.name || '익명')+' · 카톡 후기</p></div>';
+    } else {
+      var mediaInner;
+      var yt = rv.videoUrl ? youtubeEmbed(rv.videoUrl) : null;
+      if(rv.videoData){
+        mediaInner = '<video src="'+rv.videoData+'" controls style="width:100%;height:100%;object-fit:cover;"></video>';
+      } else if(yt){
+        mediaInner = '<iframe src="'+yt+'" style="width:100%;height:100%;border:0;" allowfullscreen></iframe>';
+      } else if(rv.videoUrl){
+        mediaInner = '<span class="rv-tag" style="position:static;">외부 링크</span>';
+      } else {
+        mediaInner = '<span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="9,7 18,12 9,17"/></svg></span>';
+      }
+      art.innerHTML = '<div class="rv-media">'+mediaInner+'</div>' +
+        '<div class="rv-body"><p class="rv-name">'+escapeHtml(rv.name || '익명')+' · 영상 후기</p>' +
+        '<p class="rv-quote">'+escapeHtml(rv.text || '')+'</p>' +
+        (rv.videoUrl && !yt && !rv.videoData ? '<p style="margin-top:8px;"><a class="btn btn-ghost btn-sm" href="'+escapeAttr(rv.videoUrl)+'" target="_blank" rel="noopener noreferrer">영상 보러가기 →</a></p>' : '') +
+        '</div>';
+    }
+    return art;
+  }
+
+  function escapeHtml(str){
+    return String(str).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function escapeAttr(str){ return escapeHtml(str); }
+
+  loadReviews().forEach(function(rv){
+    grid.insertBefore(buildCard(rv), grid.firstChild);
+  });
+
+  // form submit
+  var form = document.getElementById('reviewForm');
+  var formMsg = document.getElementById('formMsg');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var type = document.querySelector('input[name="rvType"]:checked').value;
+    var name = document.getElementById('rvName').value.trim();
+    var text = document.getElementById('rvText').value.trim();
+    if(!text){ formMsg.textContent = '후기 내용을 입력해주세요.'; return; }
+
+    var rv = { type: type, name: name, text: text };
+
+    function finish(){
+      var list = loadReviews();
+      list.push(rv);
+      saveReviews(list);
+      grid.insertBefore(buildCard(rv), grid.firstChild);
+      form.reset();
+      syncFields();
+      formMsg.textContent = '후기가 등록되었습니다. 감사합니다!';
+      setTimeout(function(){ formMsg.textContent = ''; }, 4000);
+    }
+
+    var imageFile = document.getElementById('rvImage').files[0];
+    var videoFile = document.getElementById('rvVideoFile').files[0];
+    var videoUrl = document.getElementById('rvVideoUrl').value.trim();
+    rv.videoUrl = videoUrl || undefined;
+
+    var MAX_BYTES = 3 * 1024 * 1024;
+
+    if(type === 'kakao' && imageFile){
+      if(imageFile.size > MAX_BYTES){ formMsg.textContent = '이미지 용량이 너무 큽니다 (3MB 이하 권장).'; return; }
+      var r1 = new FileReader();
+      r1.onload = function(){ rv.image = r1.result; finish(); };
+      r1.readAsDataURL(imageFile);
+    } else if(type === 'video' && videoFile){
+      if(videoFile.size > MAX_BYTES){ formMsg.textContent = '영상 용량이 너무 큽니다. 링크로 등록해주세요.'; return; }
+      var r2 = new FileReader();
+      r2.onload = function(){ rv.videoData = r2.result; finish(); };
+      r2.readAsDataURL(videoFile);
+    } else {
+      finish();
+    }
+  });
+})();
+</script>
+</body>
+</html>
