@@ -352,30 +352,38 @@
   .modal-msg.success{color:var(--lavender-deep);}
 
   /* ---------- My Page ---------- */
-  #mypageOverlay{padding:0;}
-  .mypage-card{background:var(--white);width:100%;max-width:100%;height:100vh;max-height:100vh;box-shadow:none;position:relative;overflow:hidden;display:flex;}
-  .mypage-layout{display:flex;width:100%;max-height:100vh;max-width:1180px;margin:0 auto;}
-  .mypage-side{width:220px;flex-shrink:0;background:var(--cream-deep);padding:var(--space-6) var(--space-5);border-right:1px solid var(--line);overflow:auto;}
+  body.mypage-open #mainContent{display:none;}
+  #mypageOverlay{display:none;background:linear-gradient(180deg,var(--lavender-pale) 0%,var(--cream) 45%,var(--cream) 100%);padding:var(--space-6) var(--space-5) var(--space-8);}
+  body.mypage-open #mypageOverlay{display:block;}
+  .mypage-card{width:100%;max-width:1180px;margin:0 auto;position:relative;}
+  .mypage-home{display:inline-flex;align-items:center;gap:8px;margin-bottom:var(--space-5);font-family:'Jua',sans-serif;font-size:1.05rem;color:var(--lavender-deep);}
+  .mypage-home svg{width:18px;height:18px;}
+  .mypage-home:hover{color:var(--lavender);}
+  .mypage-home:hover svg{transform:translateX(-2px);}
+  .mypage-layout{position:relative;display:flex;width:100%;background:var(--white);border-radius:var(--radius-l);box-shadow:var(--shadow-card);overflow:hidden;border:1px solid var(--lavender-line);}
+  .mypage-side{width:220px;flex-shrink:0;background:linear-gradient(180deg,var(--cream-deep),var(--lavender-pale) 140%);padding:var(--space-6) var(--space-5);border-right:1px solid var(--lavender-line);overflow:auto;}
   .mypage-side h4{font-family:'Jua',sans-serif;font-size:1.15rem;color:var(--ink);}
-  .mypage-who{display:block;margin-top:6px;font-size:0.78rem;color:var(--muted);font-weight:600;}
-  .mypage-nav{display:flex;flex-direction:column;margin-top:var(--space-6);gap:2px;}
+  .mypage-who{display:block;margin-top:6px;font-size:0.78rem;color:var(--lavender-deep);font-weight:700;}
+  .mypage-nav{display:flex;flex-direction:column;margin-top:var(--space-6);gap:4px;}
   .mypage-tab{text-align:left;padding:12px var(--space-3);border-radius:var(--radius-s);font-size:0.88rem;font-weight:700;color:var(--muted);border-left:3px solid transparent;}
-  .mypage-tab:hover{background:var(--white);color:var(--ink);}
-  .mypage-tab.active{background:var(--white);color:var(--lavender-deep);border-left-color:var(--lavender);}
-  .mypage-content{flex:1;padding:var(--space-6);overflow:auto;}
+  .mypage-tab:hover{background:rgba(255,255,255,0.6);color:var(--ink);}
+  .mypage-tab.active{background:var(--white);color:var(--lavender-deep);border-left-color:var(--lavender);box-shadow:var(--shadow-soft);}
+  .mypage-content{flex:1;padding:var(--space-6);overflow:auto;background:linear-gradient(180deg,var(--white),var(--lavender-pale) 260%);}
   .mypage-content h3{font-size:1.1rem;color:var(--ink);}
   .mypage-pane-head{display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);}
-  .mypage-empty{margin-top:var(--space-6);padding:var(--space-7) var(--space-4);text-align:center;background:var(--cream-deep);border-radius:var(--radius-m);color:var(--muted);font-size:0.9rem;}
+  .mypage-empty{margin-top:var(--space-6);padding:var(--space-7) var(--space-4);text-align:center;background:linear-gradient(160deg,var(--cream-deep),var(--lavender-pale));border:1px solid var(--lavender-line);border-radius:var(--radius-m);color:var(--muted);font-size:0.9rem;}
   .mypage-empty p{margin-bottom:var(--space-4);}
-  .mypage-table-wrap{margin-top:var(--space-5);overflow-x:auto;}
+  .mypage-table-wrap{margin-top:var(--space-5);overflow-x:auto;border:1px solid var(--lavender-line);border-radius:var(--radius-m);background:var(--white);}
   .mypage-table{width:100%;border-collapse:collapse;font-size:0.86rem;}
-  .mypage-table thead th{text-align:left;padding:10px var(--space-3);border-bottom:1px solid var(--line);color:var(--muted);font-weight:700;font-size:0.76rem;white-space:nowrap;}
+  .mypage-table thead th{text-align:left;padding:10px var(--space-3);border-bottom:1px solid var(--lavender-line);background:var(--lavender-pale);color:var(--lavender-deep);font-weight:800;font-size:0.76rem;white-space:nowrap;}
   .mypage-table tbody td{padding:12px var(--space-3);border-bottom:1px solid var(--line);color:var(--ink-soft);}
   .mypage-table tbody tr:last-child td{border-bottom:none;}
+  .mypage-table tbody tr:hover{background:var(--cream);}
   .mypage-status{display:inline-block;padding:3px 10px;border-radius:999px;background:var(--lavender-pale);color:var(--lavender-deep);font-size:0.72rem;font-weight:700;white-space:nowrap;}
   @media (max-width:640px){
+    #mypageOverlay{padding:var(--space-4) var(--space-3) var(--space-6);}
     .mypage-layout{flex-direction:column;}
-    .mypage-side{width:100%;border-right:none;border-bottom:1px solid var(--line);padding:var(--space-5);}
+    .mypage-side{width:100%;border-right:none;border-bottom:1px solid var(--lavender-line);padding:var(--space-5);}
     .mypage-nav{flex-direction:row;flex-wrap:wrap;margin-top:var(--space-4);}
     .mypage-tab{border-left:none;border-bottom:3px solid transparent;}
     .mypage-tab.active{border-left-color:transparent;border-bottom-color:var(--lavender);}
@@ -532,6 +540,7 @@
   </div>
 </div>
 
+<main id="mainContent">
 <!-- ================= Hero ================= -->
 <section class="hero">
   <span class="sparkle" style="top:60px;left:8%;"></span>
@@ -886,6 +895,7 @@
   </div>
   <div class="container copyright">© 2026 유나업클래스. All rights reserved.</div>
 </footer>
+</main>
 
 <!-- ================= Auth modals ================= -->
 <div class="modal-overlay" id="authOverlay">
@@ -983,11 +993,15 @@
   </div>
 </div>
 
-<!-- ================= My Page modal ================= -->
-<div class="modal-overlay" id="mypageOverlay">
+<!-- ================= My Page ================= -->
+<div id="mypageOverlay">
   <div class="mypage-card">
-    <button type="button" class="modal-close" id="mypageClose" aria-label="닫기">×</button>
+    <button type="button" class="mypage-home" id="mypageHome">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
+      유나업클래스
+    </button>
     <div class="mypage-layout">
+      <button type="button" class="modal-close" id="mypageClose" aria-label="닫기">×</button>
       <aside class="mypage-side">
         <h4>마이페이지</h4>
         <span class="mypage-who" id="mypageWho"></span>
@@ -1385,13 +1399,15 @@
     var session = getSession();
     if(!session){ openAuth('login'); return; }
     document.getElementById('mypageWho').textContent = session.name + '님';
-    mypageOverlay.classList.add('open');
+    window.scrollTo(0,0);
+    document.body.classList.add('mypage-open');
     renderMypageInquiries();
   }
-  function closeMypage(){ mypageOverlay.classList.remove('open'); }
+  function closeMypage(){ document.body.classList.remove('mypage-open'); }
   document.getElementById('navMypage1').addEventListener('click', function(e){ e.preventDefault(); openMypage(); });
   document.getElementById('navMypage2').addEventListener('click', function(e){ e.preventDefault(); openMypage(); });
   document.getElementById('mypageClose').addEventListener('click', closeMypage);
+  document.getElementById('mypageHome').addEventListener('click', closeMypage);
   mypageOverlay.addEventListener('click', function(e){ if(e.target === mypageOverlay) closeMypage(); });
 
   document.querySelectorAll('.mypage-tab').forEach(function(tab){
