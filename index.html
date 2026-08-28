@@ -353,7 +353,7 @@
 
   /* ---------- My Page ---------- */
   body.mypage-open #mainContent{display:none;}
-  #mypageOverlay{display:none;background:linear-gradient(180deg,var(--lavender-pale) 0%,var(--cream) 45%,var(--cream) 100%);padding:var(--space-6) var(--space-5) var(--space-8);}
+  #mypageOverlay{display:none;background:var(--cream);padding:var(--space-6) var(--space-5) var(--space-8);}
   body.mypage-open #mypageOverlay{display:block;}
   .mypage-card{width:100%;max-width:1180px;margin:0 auto;position:relative;}
   .mypage-home{display:inline-flex;align-items:center;gap:8px;margin-bottom:var(--space-5);font-family:'Jua',sans-serif;font-size:1.05rem;color:var(--lavender-deep);}
@@ -361,17 +361,17 @@
   .mypage-home:hover{color:var(--lavender);}
   .mypage-home:hover svg{transform:translateX(-2px);}
   .mypage-layout{position:relative;display:flex;width:100%;background:var(--white);border-radius:var(--radius-l);box-shadow:var(--shadow-card);overflow:hidden;border:1px solid var(--lavender-line);}
-  .mypage-side{width:220px;flex-shrink:0;background:linear-gradient(180deg,var(--cream-deep),var(--lavender-pale) 140%);padding:var(--space-6) var(--space-5);border-right:1px solid var(--lavender-line);overflow:auto;}
+  .mypage-side{width:220px;flex-shrink:0;background:var(--cream-deep);padding:var(--space-6) var(--space-5);border-right:1px solid var(--lavender-line);overflow:auto;}
   .mypage-side h4{font-family:'Jua',sans-serif;font-size:1.15rem;color:var(--ink);}
   .mypage-who{display:block;margin-top:6px;font-size:0.78rem;color:var(--lavender-deep);font-weight:700;}
   .mypage-nav{display:flex;flex-direction:column;margin-top:var(--space-6);gap:4px;}
   .mypage-tab{text-align:left;padding:12px var(--space-3);border-radius:var(--radius-s);font-size:0.88rem;font-weight:700;color:var(--muted);border-left:3px solid transparent;}
   .mypage-tab:hover{background:rgba(255,255,255,0.6);color:var(--ink);}
   .mypage-tab.active{background:var(--white);color:var(--lavender-deep);border-left-color:var(--lavender);box-shadow:var(--shadow-soft);}
-  .mypage-content{flex:1;padding:var(--space-6);overflow:auto;background:linear-gradient(180deg,var(--white),var(--lavender-pale) 260%);}
+  .mypage-content{flex:1;padding:var(--space-6);overflow:auto;background:var(--white);}
   .mypage-content h3{font-size:1.1rem;color:var(--ink);}
   .mypage-pane-head{display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);}
-  .mypage-empty{margin-top:var(--space-6);padding:var(--space-7) var(--space-4);text-align:center;background:linear-gradient(160deg,var(--cream-deep),var(--lavender-pale));border:1px solid var(--lavender-line);border-radius:var(--radius-m);color:var(--muted);font-size:0.9rem;}
+  .mypage-empty{margin-top:var(--space-6);padding:var(--space-7) var(--space-4);text-align:center;background:var(--cream-deep);border:1px solid var(--lavender-line);border-radius:var(--radius-m);color:var(--muted);font-size:0.9rem;}
   .mypage-empty p{margin-bottom:var(--space-4);}
   .mypage-table-wrap{margin-top:var(--space-5);overflow-x:auto;border:1px solid var(--lavender-line);border-radius:var(--radius-m);background:var(--white);}
   .mypage-table{width:100%;border-collapse:collapse;font-size:0.86rem;}
@@ -387,6 +387,24 @@
     .mypage-nav{flex-direction:row;flex-wrap:wrap;margin-top:var(--space-4);}
     .mypage-tab{border-left:none;border-bottom:3px solid transparent;}
     .mypage-tab.active{border-left-color:transparent;border-bottom-color:var(--lavender);}
+  }
+
+  /* ---------- Board post detail (full view) ---------- */
+  body.board-detail-open #mainContent{display:none;}
+  #boardDetailOverlay{display:none;background:var(--cream);padding:var(--space-6) var(--space-5) var(--space-8);}
+  body.board-detail-open #boardDetailOverlay{display:block;}
+  .board-detail-card{width:100%;max-width:820px;margin:0 auto;}
+  .board-detail-panel{position:relative;background:var(--white);border:1px solid var(--lavender-line);border-radius:var(--radius-l);box-shadow:var(--shadow-card);padding:var(--space-7) var(--space-6);}
+  .board-detail-tag{display:inline-block;font-size:0.78rem;font-weight:800;letter-spacing:0.02em;background:var(--lavender-pale);color:var(--lavender-deep);padding:4px 12px;border-radius:999px;margin-bottom:var(--space-4);}
+  .board-detail-panel h2{font-size:1.5rem;color:var(--ink);line-height:1.45;padding-right:var(--space-6);}
+  .board-detail-meta-full{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-top:var(--space-4);padding-bottom:var(--space-5);border-bottom:1px solid var(--line);font-size:0.82rem;color:var(--muted);font-weight:600;font-variant-numeric:tabular-nums;}
+  .board-detail-meta-full .board-avatar{width:16px;height:16px;border-radius:50%;background:var(--lavender);flex-shrink:0;}
+  .board-detail-meta-full .dot-sep{width:3px;height:3px;border-radius:50%;background:var(--muted-soft);flex-shrink:0;opacity:0.6;}
+  .board-detail-body{margin-top:var(--space-5);color:var(--ink-soft);font-size:1rem;line-height:1.95;font-weight:500;white-space:pre-line;}
+  .board-detail-body img{max-width:100%;border-radius:var(--radius-m);margin-top:var(--space-5);display:block;}
+  @media (max-width:640px){
+    #boardDetailOverlay{padding:var(--space-4) var(--space-3) var(--space-6);}
+    .board-detail-panel{padding:var(--space-6) var(--space-4);}
   }
 
   /* ---------- Footer ---------- */
@@ -460,7 +478,7 @@
 <header class="site-header">
   <div class="container">
     <div class="brand">
-      <h1>유나업클래스</h1>
+      <h1><a href="#" id="brandHome">유나업클래스</a></h1>
     </div>
     <form class="search" role="search" onsubmit="return false;">
       <input type="text" placeholder="강의, 후기, 수익화 팁 검색">
@@ -1040,6 +1058,23 @@
   </div>
 </div>
 
+<!-- ================= Board post detail ================= -->
+<div id="boardDetailOverlay">
+  <div class="board-detail-card">
+    <button type="button" class="mypage-home" id="boardDetailHome">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
+      유나업클래스
+    </button>
+    <div class="board-detail-panel">
+      <button type="button" class="modal-close" id="boardDetailClose" aria-label="닫기">×</button>
+      <span class="board-detail-tag" id="boardDetailTag"></span>
+      <h2 id="boardDetailTitle"></h2>
+      <div class="board-detail-meta-full" id="boardDetailMeta"></div>
+      <div class="board-detail-body" id="boardDetailBody"></div>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
   var days = ['일','월','화','수','목','금','토'];
@@ -1125,13 +1160,37 @@
         '<div class="board-detail"><p>'+escapeHtml(n.body)+'</p></div>';
     }).join('');
   }
-  function wireBoardToggles(container, onOpen){
+  var boardDetailOverlay = document.getElementById('boardDetailOverlay');
+  function openBoardDetail(opts){
+    var tagEl = document.getElementById('boardDetailTag');
+    if(opts.tag){ tagEl.textContent = opts.tag; tagEl.style.display = ''; }
+    else { tagEl.style.display = 'none'; }
+    document.getElementById('boardDetailTitle').textContent = opts.title || '';
+    document.getElementById('boardDetailMeta').innerHTML = opts.metaHtml || '';
+    document.getElementById('boardDetailBody').innerHTML = opts.bodyHtml || '';
+    window.scrollTo(0,0);
+    document.body.classList.add('board-detail-open');
+  }
+  function closeBoardDetail(){ document.body.classList.remove('board-detail-open'); }
+  document.getElementById('boardDetailClose').addEventListener('click', closeBoardDetail);
+  document.getElementById('boardDetailHome').addEventListener('click', closeBoardDetail);
+  function wireBoardToggles(container, list, config){
+    config = config || {};
     container.querySelectorAll('.board-post').forEach(function(post){
       post.addEventListener('click', function(){
-        var detail = post.nextElementSibling;
-        var opening = !detail.classList.contains('open');
-        detail.classList.toggle('open');
-        if(opening && onOpen) onOpen(parseInt(post.dataset.i, 10));
+        var i = parseInt(post.dataset.i, 10);
+        var item = list[i];
+        if(!item) return;
+        if(config.onOpen) config.onOpen(i);
+        var metaParts = ['<span class="board-avatar"></span><span>'+escapeHtml(config.authorLabel ? config.authorLabel(item) : '관리자')+'</span>'];
+        if(item.date) metaParts.push('<span class="dot-sep"></span><span>'+escapeHtml(item.date)+'</span>');
+        if(config.showViews) metaParts.push('<span class="dot-sep"></span><span class="board-stat">'+EYE_ICON+' '+((item.views||0) + 1)+'</span>');
+        openBoardDetail({
+          tag: config.tag,
+          title: item.title || '',
+          metaHtml: metaParts.join(''),
+          bodyHtml: config.bodyHtml ? config.bodyHtml(item) : '<p>'+escapeHtml(item.body||'')+'</p>'
+        });
       });
     });
   }
@@ -1143,13 +1202,14 @@
     var list = loadNotices();
     document.getElementById('tickerText').textContent = list[0].title;
     var html = boardPostsHtml(list, '관리자');
+    var noticeConfig = {tag: '공지', authorLabel: function(){ return '관리자'; }, showViews: true, onOpen: bumpNoticeViews};
     var noticeList = document.getElementById('noticeList');
     noticeList.innerHTML = html;
-    wireBoardToggles(noticeList, bumpNoticeViews);
+    wireBoardToggles(noticeList, list, noticeConfig);
     var noticeBoardList = document.getElementById('noticeBoardList');
     if(noticeBoardList){
       noticeBoardList.innerHTML = html;
-      wireBoardToggles(noticeBoardList, bumpNoticeViews);
+      wireBoardToggles(noticeBoardList, list, noticeConfig);
     }
   }
   var tickerRow = document.getElementById('tickerRow');
@@ -1201,7 +1261,21 @@
         '</div>'+
         '<div class="board-detail"><p>'+escapeHtml(n.body)+'</p>'+attach+'</div>';
     }).join('');
-    wireBoardToggles(wrap);
+    wireBoardToggles(wrap, list, {
+      tag: '스터디',
+      authorLabel: function(){ return '관리자'; },
+      bodyHtml: function(n){
+        var body = '<p>'+escapeHtml(n.body)+'</p>';
+        if(n.fileData){
+          if(n.fileType && n.fileType.indexOf('image/') === 0){
+            body += '<img src="'+n.fileData+'" alt="첨부 이미지">';
+          } else {
+            body += '<p><a class="btn btn-ghost btn-sm" style="display:inline-flex;margin-top:var(--space-3);" href="'+n.fileData+'" download="'+escapeHtml(n.fileName || '첨부파일')+'">'+escapeHtml(n.fileName || '첨부파일')+' 다운로드</a></p>';
+          }
+        }
+        return body;
+      }
+    });
   }
   document.getElementById('studyNewFile').addEventListener('change', function(e){
     var f = e.target.files[0];
@@ -1260,7 +1334,8 @@
       rows.innerHTML = '<div class="board-post" style="cursor:default;color:var(--muted);">접수된 문의가 없습니다.</div>';
       return;
     }
-    rows.innerHTML = list.slice().reverse().map(function(q, i){
+    var reversed = list.slice().reverse();
+    rows.innerHTML = reversed.map(function(q, i){
       return '<div class="board-post" data-i="'+i+'">'+
         '<div class="board-title">'+escapeHtml(q.title)+'</div>'+
         '<div class="board-meta">'+
@@ -1270,7 +1345,11 @@
         '</div></div>'+
         '<div class="board-detail"><p>'+escapeHtml(q.contact)+'<br>'+escapeHtml(q.body)+'</p></div>';
     }).join('');
-    wireBoardToggles(rows);
+    wireBoardToggles(rows, reversed, {
+      tag: '문의',
+      authorLabel: function(q){ return q.name; },
+      bodyHtml: function(q){ return '<p>'+escapeHtml(q.contact)+'</p><p>'+escapeHtml(q.body)+'</p>'; }
+    });
   }
   document.getElementById('inquiryForm').addEventListener('submit', function(e){
     e.preventDefault();
@@ -1342,7 +1421,7 @@
   document.getElementById('loginClose').addEventListener('click', closeAuth);
   document.getElementById('signupClose').addEventListener('click', closeAuth);
   authOverlay.addEventListener('click', function(e){ if(e.target === authOverlay) closeAuth(); });
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ closeAuth(); closeMypage(); } });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ closeAuth(); closeMypage(); closeBoardDetail(); } });
 
   document.getElementById('signupForm').addEventListener('submit', function(e){
     e.preventDefault();
@@ -1408,6 +1487,12 @@
   document.getElementById('navMypage2').addEventListener('click', function(e){ e.preventDefault(); openMypage(); });
   document.getElementById('mypageClose').addEventListener('click', closeMypage);
   document.getElementById('mypageHome').addEventListener('click', closeMypage);
+  document.getElementById('brandHome').addEventListener('click', function(e){
+    e.preventDefault();
+    closeMypage();
+    closeBoardDetail();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
   mypageOverlay.addEventListener('click', function(e){ if(e.target === mypageOverlay) closeMypage(); });
 
   document.querySelectorAll('.mypage-tab').forEach(function(tab){
