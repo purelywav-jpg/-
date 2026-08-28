@@ -149,11 +149,17 @@
   .ticker-row.open .ticker-caret{transform:rotate(-135deg);}
   .notice-panel{position:absolute;top:100%;left:0;right:0;background:var(--white);border:1px solid var(--lavender-line);border-top:none;border-radius:0 0 var(--radius-m) var(--radius-m);box-shadow:var(--shadow-card);max-height:0;overflow:hidden;opacity:0;transition:max-height .22s ease, opacity .18s ease;z-index:40;}
   .ticker-row.open .notice-panel{max-height:420px;opacity:1;overflow:auto;}
-  .notice-item{padding:var(--space-4) var(--space-5);border-bottom:1px solid var(--line);}
+  .notice-item{border-bottom:1px solid var(--line);}
   .notice-item:last-child{border-bottom:none;}
-  .notice-item .n-date{font-size:0.72rem;color:var(--muted-soft);font-weight:700;}
-  .notice-item .n-title{font-size:0.95rem;font-weight:800;color:var(--ink);margin-top:4px;}
-  .notice-item .n-body{font-size:0.85rem;color:var(--muted);margin-top:6px;line-height:1.75;font-family:'Gothic A1',sans-serif;}
+  .notice-row-btn{display:flex;align-items:baseline;gap:var(--space-4);width:100%;text-align:left;padding:var(--space-4) var(--space-5);cursor:pointer;}
+  .notice-row-btn:hover{background:var(--cream-deep);}
+  .notice-row-btn .n-date{flex-shrink:0;font-size:0.72rem;color:var(--muted-soft);font-weight:700;font-variant-numeric:tabular-nums;}
+  .notice-row-btn .n-title{flex:1;font-size:0.9rem;font-weight:800;color:var(--ink);}
+  .notice-row-btn .n-row-caret{flex-shrink:0;width:8px;height:8px;border-right:2px solid var(--muted-soft);border-bottom:2px solid var(--muted-soft);transform:rotate(45deg);transition:transform .15s ease;}
+  .notice-item.open .n-row-caret{transform:rotate(-135deg);}
+  .notice-item .n-body{max-height:0;overflow:hidden;transition:max-height .2s ease;}
+  .notice-item.open .n-body{max-height:220px;}
+  .notice-item .n-body p{font-size:0.85rem;color:var(--muted);padding:0 var(--space-5) var(--space-4);line-height:1.75;font-family:'Gothic A1',sans-serif;}
   .notice-admin-row{padding:var(--space-4) var(--space-5);background:var(--cream-deep);}
   .notice-admin-row input, .notice-admin-row textarea{width:100%;padding:10px 12px;border-radius:var(--radius-s);border:1px solid var(--line);font-family:inherit;font-size:0.85rem;margin-bottom:8px;color:var(--ink);}
   .notice-admin-row textarea{min-height:60px;resize:vertical;}
@@ -177,6 +183,7 @@
   .hero-badge strong{color:var(--lavender-deep);font-weight:800;}
   .hero h2{margin-top:var(--space-5);font-size:clamp(2.1rem,4.6vw,3.1rem);line-height:1.42;color:var(--ink);}
   .hero h2 em{font-style:normal;color:var(--lavender-deep);}
+  .hero-subline{margin-top:var(--space-3);color:var(--ink-soft);font-size:1.05rem;font-weight:700;}
   .hero .lede{margin-top:var(--space-5);color:var(--ink-soft);font-size:1.02rem;line-height:1.85;font-weight:500;}
   .hero .lede b{color:var(--lavender-deep);font-weight:800;}
 
@@ -430,7 +437,7 @@
         </div>
       </li>
       <li class="dd">
-        <button class="nav-top" aria-expanded="false">수익화 tips<span class="caret"></span></button>
+        <button class="nav-top" aria-expanded="false">수익화TIP<span class="caret"></span></button>
         <div class="dropdown">
           <a href="https://www.leadgeny.kr/lpo.php?seq=4d7a63304e6a4d33" target="_blank" rel="noopener noreferrer">
             <svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="10" r="6"/><line x1="9.5" y1="18" x2="14.5" y2="18"/><line x1="10.3" y1="21" x2="13.7" y2="21"/></svg>
@@ -482,10 +489,10 @@
   <span class="sparkle" style="bottom:40px;left:16%;width:9px;height:9px;"></span>
   <div class="container">
     <span class="hero-badge"><span class="dot"></span>왕초보를 위한 <strong>수익화 클래스</strong></span>
-    <h2>쇼핑쇼츠 수익화는<br><em>경험과 재능</em>에 묶여 있지<br>않습니다</h2>
-    <p class="lede">기획·촬영·편집·수익화, 쇼핑쇼츠 성장의 4단계를 강의와 1:1 컨설팅이 함께합니다.<br>
-    채널을 늘려도 <b>배워야 할 부담은 그대로</b>입니다.<br>
-    마케팅팀 없이 돌아가는 채널, <b>오늘</b>부터 가능합니다.</p>
+    <h2>배우고, 실행하고, <em>성장하는</em><br>과정에 함께합니다</h2>
+    <p class="hero-subline">쇼핑쇼츠 수익화는 경험과 재능에 묶여 있지 않습니다.</p>
+    <p class="lede">CBL은 교육·마케팅·컨설팅을 통해 개인과 기업의 성장을 돕습니다.<br><br>
+    변화에 맞는 교육부터 전략적인 마케팅과 비즈니스 컨설팅까지, 배움이 실제 성과로 이어질 수 있도록 함께합니다.</p>
 
     <div class="hero-photos" id="heroPhotos"></div>
 
@@ -507,7 +514,6 @@
         VOD 강의
       </a>
       <a class="chip" href="#tips">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="10" r="6"/><line x1="9.5" y1="18" x2="14.5" y2="18"/></svg>
         AI 활용 tip
       </a>
       <a class="chip" href="https://pf.kakao.com/_tmKxin" target="_blank" rel="noopener noreferrer">
@@ -517,10 +523,7 @@
     </div>
 
     <div class="hero-actions">
-      <a class="btn btn-primary" href="#contact">
-        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 14.6,9 22,9.3 16,14 18,21.5 12,17.3 6,21.5 8,14 2,9.3 9.4,9"/></svg>
-        무료 상담 신청하기
-      </a>
+      <a class="btn btn-primary" href="#contact">무료 상담 신청하기</a>
     </div>
   </div>
 </section>
@@ -542,7 +545,7 @@
     </a>
     <a class="rail-item" href="#tips">
       <span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="10" r="6"/><line x1="9.5" y1="18" x2="14.5" y2="18"/><line x1="10.3" y1="21" x2="13.7" y2="21"/></svg></span>
-      <span>수익화 tips</span>
+      <span>수익화TIP</span>
     </a>
     <a class="rail-item" href="#contact">
       <span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><polyline points="2,7 12,14 22,7"/></svg></span>
@@ -598,13 +601,13 @@
   </div>
 </section>
 
-<!-- ================= 수익화 tips ================= -->
+<!-- ================= 수익화TIP ================= -->
 <section class="block alt" id="tips">
   <div class="container">
     <div class="block-head">
       <div>
         <span class="eyebrow">Monetize Tips</span>
-        <h2>수익화 tips</h2>
+        <h2>수익화TIP</h2>
         <p class="lede">바로 써먹는 실전 도구 모음입니다.</p>
       </div>
     </div>
@@ -847,7 +850,7 @@
       <li><a href="#notice">공지사항</a></li>
       <li><a href="#reviews">수강생후기</a></li>
       <li><a href="#courses">강의</a></li>
-      <li><a href="#tips">수익화 tips</a></li>
+      <li><a href="#tips">수익화TIP</a></li>
       <li><a href="#contact">문의하기</a></li>
     </ul>
   </div>
@@ -919,18 +922,25 @@
     return [{
       date: '2026.08.26',
       title: '유나업클래스에 오신 것을 환영합니다! 8월 신규 강의 & 1:1 컨설팅 오픈 안내',
-      body: '8월 한 달간 신규 강의 오픈 기념 혜택과 1:1 컨설팅 조기 신청자 한정 혜택을 안내드립니다. 자세한 일정과 강의별 커리큘럼은 강의 메뉴에서 확인해주세요.'
+      body: '8월 신규 강의 및 1:1 컨설팅 관련 안내입니다. 세부 일정은 강의 메뉴에서 확인해주세요.'
     }];
   }
   function saveNotices(list){ try{ localStorage.setItem(NOTICE_KEY, JSON.stringify(list)); }catch(e){} }
   function renderNotices(){
     var list = loadNotices();
     document.getElementById('tickerText').textContent = list[0].title;
-    document.getElementById('noticeList').innerHTML = list.map(function(n){
-      return '<div class="notice-item"><div class="n-date">'+escapeHtml(n.date)+'</div>'+
-        '<div class="n-title">'+escapeHtml(n.title)+'</div>'+
-        '<div class="n-body">'+escapeHtml(n.body)+'</div></div>';
+    var noticeList = document.getElementById('noticeList');
+    noticeList.innerHTML = list.map(function(n, i){
+      return '<div class="notice-item" data-i="'+i+'">'+
+        '<button type="button" class="notice-row-btn"><span class="n-date">'+escapeHtml(n.date)+'</span>'+
+        '<span class="n-title">'+escapeHtml(n.title)+'</span><span class="n-row-caret"></span></button>'+
+        '<div class="n-body"><p>'+escapeHtml(n.body)+'</p></div></div>';
     }).join('');
+    noticeList.querySelectorAll('.notice-row-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        btn.closest('.notice-item').classList.toggle('open');
+      });
+    });
   }
   var tickerRow = document.getElementById('tickerRow');
   var tickerTrigger = document.getElementById('tickerTrigger');
