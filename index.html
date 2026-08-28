@@ -348,6 +348,35 @@
   .modal-msg.error{color:#C0392B;}
   .modal-msg.success{color:var(--lavender-deep);}
 
+  /* ---------- My Page ---------- */
+  .mypage-card{background:var(--white);border-radius:var(--radius-l);width:100%;max-width:760px;max-height:88vh;box-shadow:0 30px 60px -20px rgba(36,28,51,0.45);position:relative;overflow:hidden;display:flex;}
+  .mypage-layout{display:flex;width:100%;max-height:88vh;}
+  .mypage-side{width:200px;flex-shrink:0;background:var(--cream-deep);padding:var(--space-6) var(--space-5);border-right:1px solid var(--line);overflow:auto;}
+  .mypage-side h4{font-family:'Jua',sans-serif;font-size:1.15rem;color:var(--ink);}
+  .mypage-who{display:block;margin-top:6px;font-size:0.78rem;color:var(--muted);font-weight:600;}
+  .mypage-nav{display:flex;flex-direction:column;margin-top:var(--space-6);gap:2px;}
+  .mypage-tab{text-align:left;padding:12px var(--space-3);border-radius:var(--radius-s);font-size:0.88rem;font-weight:700;color:var(--muted);border-left:3px solid transparent;}
+  .mypage-tab:hover{background:var(--white);color:var(--ink);}
+  .mypage-tab.active{background:var(--white);color:var(--lavender-deep);border-left-color:var(--lavender);}
+  .mypage-content{flex:1;padding:var(--space-6);overflow:auto;}
+  .mypage-content h3{font-size:1.1rem;color:var(--ink);}
+  .mypage-pane-head{display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);}
+  .mypage-empty{margin-top:var(--space-6);padding:var(--space-7) var(--space-4);text-align:center;background:var(--cream-deep);border-radius:var(--radius-m);color:var(--muted);font-size:0.9rem;}
+  .mypage-empty p{margin-bottom:var(--space-4);}
+  .mypage-table-wrap{margin-top:var(--space-5);overflow-x:auto;}
+  .mypage-table{width:100%;border-collapse:collapse;font-size:0.86rem;}
+  .mypage-table thead th{text-align:left;padding:10px var(--space-3);border-bottom:1px solid var(--line);color:var(--muted);font-weight:700;font-size:0.76rem;white-space:nowrap;}
+  .mypage-table tbody td{padding:12px var(--space-3);border-bottom:1px solid var(--line);color:var(--ink-soft);}
+  .mypage-table tbody tr:last-child td{border-bottom:none;}
+  .mypage-status{display:inline-block;padding:3px 10px;border-radius:999px;background:var(--lavender-pale);color:var(--lavender-deep);font-size:0.72rem;font-weight:700;white-space:nowrap;}
+  @media (max-width:640px){
+    .mypage-layout{flex-direction:column;}
+    .mypage-side{width:100%;border-right:none;border-bottom:1px solid var(--line);padding:var(--space-5);}
+    .mypage-nav{flex-direction:row;flex-wrap:wrap;margin-top:var(--space-4);}
+    .mypage-tab{border-left:none;border-bottom:3px solid transparent;}
+    .mypage-tab.active{border-left-color:transparent;border-bottom-color:var(--lavender);}
+  }
+
   /* ---------- Footer ---------- */
   footer{background:var(--ink);color:#C9C0DE;padding:var(--space-7) 0 var(--space-6);}
   .footer-grid{display:flex;justify-content:space-between;gap:var(--space-6);flex-wrap:wrap;}
@@ -403,7 +432,7 @@
       <ul>
         <li><a href="#" id="navLogin">로그인</a></li>
         <li><a href="#" id="navSignup">회원가입</a></li>
-        <li><a href="#">마이페이지</a></li>
+        <li><a href="#" id="navMypage1">마이페이지</a></li>
         <li>
           <a href="#contact" class="topbar-icon" aria-label="문의하기">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><polyline points="2,7 12,14 22,7"/></svg>
@@ -468,7 +497,7 @@
       <li><a href="#contact">문의하기</a></li>
     </ul>
     <div class="nav-utility">
-      <a href="#">내정보</a>
+      <a href="#" id="navMypage2">내정보</a>
     </div>
     <button class="hamburger" id="hamburger" aria-label="메뉴 열기" aria-controls="navList" aria-expanded="false">
       <span class="ham-icon"><i></i><i></i><i></i></span>
@@ -916,6 +945,54 @@
   </div>
 </div>
 
+<!-- ================= My Page modal ================= -->
+<div class="modal-overlay" id="mypageOverlay">
+  <div class="mypage-card">
+    <button type="button" class="modal-close" id="mypageClose" aria-label="닫기">×</button>
+    <div class="mypage-layout">
+      <aside class="mypage-side">
+        <h4>마이페이지</h4>
+        <span class="mypage-who" id="mypageWho"></span>
+        <nav class="mypage-nav">
+          <button type="button" class="mypage-tab active" data-tab="classes">구매 클래스</button>
+          <button type="button" class="mypage-tab" data-tab="earnings">내 수익 현황</button>
+          <button type="button" class="mypage-tab" data-tab="inquiries">문의내역</button>
+          <button type="button" class="mypage-tab" data-tab="posts">내 게시글 현황</button>
+        </nav>
+      </aside>
+      <div class="mypage-content">
+        <div class="mypage-pane" data-pane="classes">
+          <h3>구매 클래스</h3>
+          <div class="mypage-empty">
+            <p>아직 구매한 강의가 없습니다.</p>
+            <a class="btn btn-ghost btn-sm" href="#courses" id="mypageGoCourses">강의 둘러보기 →</a>
+          </div>
+        </div>
+        <div class="mypage-pane" data-pane="earnings" hidden>
+          <h3>내 수익 현황</h3>
+          <div class="mypage-empty"><p>준비 중인 기능입니다.</p></div>
+        </div>
+        <div class="mypage-pane" data-pane="inquiries" hidden>
+          <div class="mypage-pane-head">
+            <h3>문의내역</h3>
+            <a class="btn btn-ghost btn-sm" href="#contact" id="mypageGoContact">문의하기</a>
+          </div>
+          <div class="mypage-table-wrap">
+            <table class="mypage-table">
+              <thead><tr><th>순번</th><th>제목</th><th>문의일</th><th>답변상태</th></tr></thead>
+              <tbody id="mypageInquiryRows"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="mypage-pane" data-pane="posts" hidden>
+          <h3>내 게시글 현황</h3>
+          <div class="mypage-empty"><p>준비 중인 기능입니다.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
   var days = ['일','월','화','수','목','금','토'];
@@ -1101,8 +1178,10 @@
     if(!title || !name || !contact || !body){ msg.textContent = '필수 항목을 입력해주세요.'; return; }
     if(!agree){ msg.textContent = '개인정보 수집 동의가 필요합니다.'; return; }
     var list = loadInquiries();
-    list.push({at: todayStr(), title: title, name: name, contact: contact, type: type, body: body});
+    var owner = getSession();
+    list.push({at: todayStr(), title: title, name: name, contact: contact, type: type, body: body, email: owner ? owner.email : ''});
     saveInquiries(list);
+    if(typeof renderMypageInquiries === 'function') renderMypageInquiries();
     e.target.reset();
     msg.textContent = '문의가 접수되었습니다. 빠르게 확인 후 개별 연락드리겠습니다.';
     renderInquiries();
@@ -1157,7 +1236,7 @@
   document.getElementById('loginClose').addEventListener('click', closeAuth);
   document.getElementById('signupClose').addEventListener('click', closeAuth);
   authOverlay.addEventListener('click', function(e){ if(e.target === authOverlay) closeAuth(); });
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeAuth(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ closeAuth(); closeMypage(); } });
 
   document.getElementById('signupForm').addEventListener('submit', function(e){
     e.preventDefault();
@@ -1207,6 +1286,51 @@
   });
 
   updateAuthUI();
+
+  /* ---------- My Page ---------- */
+  var mypageOverlay = document.getElementById('mypageOverlay');
+  function openMypage(){
+    var session = getSession();
+    if(!session){ openAuth('login'); return; }
+    document.getElementById('mypageWho').textContent = session.name + '님';
+    mypageOverlay.classList.add('open');
+    renderMypageInquiries();
+  }
+  function closeMypage(){ mypageOverlay.classList.remove('open'); }
+  document.getElementById('navMypage1').addEventListener('click', function(e){ e.preventDefault(); openMypage(); });
+  document.getElementById('navMypage2').addEventListener('click', function(e){ e.preventDefault(); openMypage(); });
+  document.getElementById('mypageClose').addEventListener('click', closeMypage);
+  mypageOverlay.addEventListener('click', function(e){ if(e.target === mypageOverlay) closeMypage(); });
+
+  document.querySelectorAll('.mypage-tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      document.querySelectorAll('.mypage-tab').forEach(function(t){ t.classList.remove('active'); });
+      tab.classList.add('active');
+      var key = tab.dataset.tab;
+      document.querySelectorAll('.mypage-pane').forEach(function(pane){
+        pane.hidden = pane.dataset.pane !== key;
+      });
+    });
+  });
+  document.getElementById('mypageGoCourses').addEventListener('click', closeMypage);
+  document.getElementById('mypageGoContact').addEventListener('click', closeMypage);
+
+  function renderMypageInquiries(){
+    var rows = document.getElementById('mypageInquiryRows');
+    if(!rows) return;
+    var session = getSession();
+    var list = loadInquiries().filter(function(q){
+      return session && (q.email === session.email || q.contact === session.email);
+    });
+    if(!list.length){
+      rows.innerHTML = '<tr><td colspan="4" style="color:var(--muted);">문의 내역이 없습니다.</td></tr>';
+      return;
+    }
+    rows.innerHTML = list.map(function(q, i){
+      return '<tr><td>'+(i+1)+'</td><td>'+escapeHtml(q.title)+'</td><td>'+escapeHtml(q.at)+'</td>'+
+        '<td><span class="mypage-status">답변대기</span></td></tr>';
+    }).join('');
+  }
 })();
 </script>
 </body>
