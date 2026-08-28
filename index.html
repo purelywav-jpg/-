@@ -125,6 +125,7 @@
   }
   .nav-list > li:hover .dropdown,
   .nav-list > li.open .dropdown{opacity:1;visibility:visible;transform:translateY(0);}
+  .dropdown-end{left:auto;right:0;}
   .dropdown a{
     display:flex;align-items:center;gap:var(--space-3);padding:var(--space-3) var(--space-4);
     border-radius:var(--radius-s);color:var(--ink);font-size:0.9rem;font-weight:600;
@@ -181,6 +182,15 @@
   .study-upload-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
   .study-upload-row input[type=file]{font-size:0.8rem;color:var(--muted);}
   .study-upload-row .modal-hint{margin:0;color:var(--lavender-deep);font-weight:700;}
+  .admin-style-row{display:flex;gap:var(--space-4);flex-wrap:wrap;margin-bottom:10px;font-size:0.8rem;color:var(--ink-soft);font-weight:600;}
+  .admin-style-row label{display:flex;align-items:center;gap:6px;}
+  .admin-style-row select{padding:6px 8px;border-radius:var(--radius-s);border:1px solid var(--line);font-family:inherit;font-size:0.8rem;color:var(--ink);background:var(--white);}
+  .board-post{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-3);}
+  .board-post-main{flex:1;min-width:0;}
+  .board-admin-actions{gap:6px;flex-shrink:0;margin-top:2px;}
+  .board-mini-btn{padding:5px 10px;border-radius:var(--radius-s);font-size:0.72rem;font-weight:700;border:1px solid var(--line);color:var(--muted);background:var(--white);white-space:nowrap;}
+  .board-mini-btn:hover{border-color:var(--lavender);color:var(--lavender-deep);}
+  .board-mini-btn.board-del-btn:hover{border-color:#C0392B;color:#C0392B;}
 
   /* ---------- Hero ---------- */
   .hero{
@@ -522,7 +532,7 @@
       </li>
       <li class="dd">
         <button class="nav-top" aria-expanded="false">수익화TIP<span class="caret"></span></button>
-        <div class="dropdown">
+        <div class="dropdown dropdown-end">
           <a href="https://www.leadgeny.kr/lpo.php?seq=4d7a63304e6a4d33" target="_blank" rel="noopener noreferrer">
             <svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="10" r="6"/><line x1="9.5" y1="18" x2="14.5" y2="18"/><line x1="10.3" y1="21" x2="13.7" y2="21"/></svg>
             클로드
@@ -640,9 +650,19 @@
     </div>
     <div class="board-card">
       <div class="board-list" id="noticeBoardList"></div>
-      <div class="notice-admin-row admin-only">
+      <div class="notice-admin-row admin-only" id="noticeAdminRow">
         <input type="text" id="noticeNewTitle" placeholder="새 공지 제목">
         <textarea id="noticeNewBody" placeholder="새 공지 내용"></textarea>
+        <div class="admin-style-row">
+          <label>글씨 크기
+            <select id="noticeNewFontSize">
+              <option value="0.78rem">작게</option>
+              <option value="0.85rem" selected>보통</option>
+              <option value="0.95rem">크게</option>
+              <option value="1.1rem">아주 크게</option>
+            </select>
+          </label>
+        </div>
         <button type="button" class="btn btn-primary btn-sm" id="noticeAddBtn">공지 등록</button>
       </div>
     </div>
@@ -705,12 +725,30 @@
     </div>
     <div class="board-card">
       <div class="board-list" id="studyList"></div>
-      <div class="notice-admin-row admin-only">
+      <div class="notice-admin-row admin-only" id="studyAdminRow">
         <input type="text" id="studyNewTitle" placeholder="새 스터디 글 제목 (일정/모임 안내)">
         <textarea id="studyNewBody" placeholder="장소, 시간 등 내용을 자유롭게 작성해주세요"></textarea>
         <div class="study-upload-row">
           <input type="file" id="studyNewFile" accept="image/*,.pdf,.doc,.docx,.hwp,.zip">
           <span class="modal-hint" id="studyFileName"></span>
+        </div>
+        <div class="admin-style-row">
+          <label>글씨 크기
+            <select id="studyNewFontSize">
+              <option value="0.78rem">작게</option>
+              <option value="0.85rem" selected>보통</option>
+              <option value="0.95rem">크게</option>
+              <option value="1.1rem">아주 크게</option>
+            </select>
+          </label>
+          <label>사진 크기
+            <select id="studyNewImgSize">
+              <option value="100%" selected>100%</option>
+              <option value="70%">70%</option>
+              <option value="50%">50%</option>
+              <option value="30%">30%</option>
+            </select>
+          </label>
         </div>
         <button type="button" class="btn btn-primary btn-sm" id="studyAddBtn">스터디 글 등록</button>
       </div>
@@ -1084,9 +1122,11 @@
     el.textContent = d.getFullYear()+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+String(d.getDate()).padStart(2,'0')+' '+days[d.getDay()]+'요일';
   }
 
+  var navIsMobile = function(){ return window.matchMedia('(max-width:720px)').matches; };
   document.querySelectorAll('.nav-list > li.dd').forEach(function(li){
     var btn = li.querySelector('.nav-top');
     btn.addEventListener('click', function(){
+      if(!navIsMobile()) return; // desktop opens on hover only, not click
       var isOpen = li.classList.contains('open');
       document.querySelectorAll('.nav-list > li.dd').forEach(function(o){ o.classList.remove('open'); });
       if(!isOpen){ li.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
@@ -1147,9 +1187,16 @@
     }];
   }
   function saveNotices(list){ try{ localStorage.setItem(NOTICE_KEY, JSON.stringify(list)); }catch(e){} }
-  function boardPostsHtml(list, authorLabel){
+  function boardAdminActionsHtml(i){
+    return '<div class="board-admin-actions admin-only flex">'+
+      '<button type="button" class="board-mini-btn board-edit-btn" data-i="'+i+'">수정</button>'+
+      '<button type="button" class="board-mini-btn board-del-btn" data-i="'+i+'">삭제</button>'+
+      '</div>';
+  }
+  function boardPostsHtml(list, authorLabel, withActions){
     return list.map(function(n, i){
       return '<div class="board-post" data-i="'+i+'">'+
+        '<div class="board-post-main">'+
         '<div class="board-title">'+escapeHtml(n.title)+'</div>'+
         '<div class="board-meta">'+
         '<span class="board-avatar"></span><span>'+authorLabel+'</span>'+
@@ -1157,6 +1204,8 @@
         '<span class="dot-sep"></span><span class="board-stat">'+EYE_ICON+' '+(n.views||0)+'</span>'+
         '<span class="board-stat">'+CHAT_ICON+' 0</span>'+
         '</div></div>'+
+        (withActions ? boardAdminActionsHtml(i) : '')+
+        '</div>'+
         '<div class="board-detail"><p>'+escapeHtml(n.body)+'</p></div>';
     }).join('');
   }
@@ -1189,8 +1238,20 @@
           tag: config.tag,
           title: item.title || '',
           metaHtml: metaParts.join(''),
-          bodyHtml: config.bodyHtml ? config.bodyHtml(item) : '<p>'+escapeHtml(item.body||'')+'</p>'
+          bodyHtml: config.bodyHtml ? config.bodyHtml(item) : '<p style="font-size:'+(item.fontSize||'1rem')+';">'+escapeHtml(item.body||'')+'</p>'
         });
+      });
+    });
+    container.querySelectorAll('.board-edit-btn').forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        e.stopPropagation();
+        if(config.onEdit) config.onEdit(parseInt(btn.dataset.i, 10));
+      });
+    });
+    container.querySelectorAll('.board-del-btn').forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        e.stopPropagation();
+        if(config.onDelete) config.onDelete(parseInt(btn.dataset.i, 10));
       });
     });
   }
@@ -1198,17 +1259,45 @@
     var list = loadNotices();
     if(list[i]){ list[i].views = (list[i].views || 0) + 1; saveNotices(list); }
   }
+  var noticeEditIndex = -1;
+  function resetNoticeForm(){
+    document.getElementById('noticeNewTitle').value = '';
+    document.getElementById('noticeNewBody').value = '';
+    document.getElementById('noticeNewFontSize').value = '0.85rem';
+    document.getElementById('noticeAddBtn').textContent = '공지 등록';
+    noticeEditIndex = -1;
+  }
+  function editNotice(i){
+    var n = loadNotices()[i];
+    if(!n) return;
+    noticeEditIndex = i;
+    document.getElementById('noticeNewTitle').value = n.title;
+    document.getElementById('noticeNewBody').value = n.body;
+    document.getElementById('noticeNewFontSize').value = n.fontSize || '0.85rem';
+    document.getElementById('noticeAddBtn').textContent = '공지 수정 완료';
+    var row = document.getElementById('noticeAdminRow');
+    if(row) row.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+  function deleteNotice(i){
+    if(!confirm('이 공지를 삭제하시겠습니까?')) return;
+    var list = loadNotices();
+    list.splice(i, 1);
+    saveNotices(list);
+    if(noticeEditIndex === i) resetNoticeForm();
+    renderNotices();
+  }
   function renderNotices(){
     var list = loadNotices();
     document.getElementById('tickerText').textContent = list[0].title;
-    var html = boardPostsHtml(list, '관리자');
-    var noticeConfig = {tag: '공지', authorLabel: function(){ return '관리자'; }, showViews: true, onOpen: bumpNoticeViews};
+    var tickerHtml = boardPostsHtml(list, '관리자', false);
+    var boardHtml = boardPostsHtml(list, '관리자', true);
+    var noticeConfig = {tag: '공지', authorLabel: function(){ return '관리자'; }, showViews: true, onOpen: bumpNoticeViews, onEdit: editNotice, onDelete: deleteNotice};
     var noticeList = document.getElementById('noticeList');
-    noticeList.innerHTML = html;
-    wireBoardToggles(noticeList, list, noticeConfig);
+    noticeList.innerHTML = tickerHtml;
+    wireBoardToggles(noticeList, list, {tag: '공지', authorLabel: function(){ return '관리자'; }, showViews: true, onOpen: bumpNoticeViews});
     var noticeBoardList = document.getElementById('noticeBoardList');
     if(noticeBoardList){
-      noticeBoardList.innerHTML = html;
+      noticeBoardList.innerHTML = boardHtml;
       wireBoardToggles(noticeBoardList, list, noticeConfig);
     }
   }
@@ -1225,12 +1314,18 @@
   document.getElementById('noticeAddBtn').addEventListener('click', function(){
     var t = document.getElementById('noticeNewTitle').value.trim();
     var b = document.getElementById('noticeNewBody').value.trim();
+    var fs = document.getElementById('noticeNewFontSize').value;
     if(!t) return;
     var list = loadNotices();
-    list.unshift({date: todayStr(), title: t, body: b, views: 0});
+    if(noticeEditIndex >= 0 && list[noticeEditIndex]){
+      list[noticeEditIndex].title = t;
+      list[noticeEditIndex].body = b;
+      list[noticeEditIndex].fontSize = fs;
+    } else {
+      list.unshift({date: todayStr(), title: t, body: b, views: 0, fontSize: fs});
+    }
     saveNotices(list);
-    document.getElementById('noticeNewTitle').value = '';
-    document.getElementById('noticeNewBody').value = '';
+    resetNoticeForm();
     renderNotices();
   });
   renderNotices();
@@ -1239,6 +1334,38 @@
   var STUDY_KEY = 'unaStudyPosts';
   function loadStudy(){ try{ return JSON.parse(localStorage.getItem(STUDY_KEY) || '[]'); }catch(e){ return []; } }
   function saveStudy(list){ try{ localStorage.setItem(STUDY_KEY, JSON.stringify(list)); }catch(e){} }
+  var studyEditIndex = -1;
+  function resetStudyForm(){
+    document.getElementById('studyNewTitle').value = '';
+    document.getElementById('studyNewBody').value = '';
+    document.getElementById('studyNewFile').value = '';
+    document.getElementById('studyFileName').textContent = '';
+    document.getElementById('studyNewFontSize').value = '0.85rem';
+    document.getElementById('studyNewImgSize').value = '100%';
+    document.getElementById('studyAddBtn').textContent = '스터디 글 등록';
+    studyEditIndex = -1;
+  }
+  function editStudy(i){
+    var n = loadStudy()[i];
+    if(!n) return;
+    studyEditIndex = i;
+    document.getElementById('studyNewTitle').value = n.title;
+    document.getElementById('studyNewBody').value = n.body;
+    document.getElementById('studyFileName').textContent = n.fileData ? '기존 첨부: '+(n.fileName || '첨부파일')+' (그대로 유지, 새 파일 선택 시 교체)' : '';
+    document.getElementById('studyNewFontSize').value = n.fontSize || '0.85rem';
+    document.getElementById('studyNewImgSize').value = n.imgWidth || '100%';
+    document.getElementById('studyAddBtn').textContent = '스터디 글 수정 완료';
+    var row = document.getElementById('studyAdminRow');
+    if(row) row.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+  function deleteStudy(i){
+    if(!confirm('이 스터디 글을 삭제하시겠습니까?')) return;
+    var list = loadStudy();
+    list.splice(i, 1);
+    saveStudy(list);
+    if(studyEditIndex === i) resetStudyForm();
+    renderStudy();
+  }
   function renderStudy(){
     var wrap = document.getElementById('studyList');
     var list = loadStudy();
@@ -1247,28 +1374,25 @@
       return;
     }
     wrap.innerHTML = list.map(function(n, i){
-      var attach = '';
-      if(n.fileData){
-        if(n.fileType && n.fileType.indexOf('image/') === 0){
-          attach = '<img src="'+n.fileData+'" alt="첨부 이미지" style="max-width:100%;border-radius:var(--radius-s);margin-top:var(--space-3);display:block;">';
-        } else {
-          attach = '<a class="btn btn-ghost btn-sm" style="margin-top:var(--space-3);display:inline-flex;" href="'+n.fileData+'" download="'+escapeHtml(n.fileName || '첨부파일')+'">'+escapeHtml(n.fileName || '첨부파일')+' 다운로드</a>';
-        }
-      }
       return '<div class="board-post" data-i="'+i+'">'+
+        '<div class="board-post-main">'+
         '<div class="board-title">'+escapeHtml(n.title)+'</div>'+
         '<div class="board-meta"><span class="board-avatar"></span><span>관리자</span><span class="dot-sep"></span><span>'+escapeHtml(n.date)+'</span></div>'+
         '</div>'+
-        '<div class="board-detail"><p>'+escapeHtml(n.body)+'</p>'+attach+'</div>';
+        boardAdminActionsHtml(i)+
+        '</div>'+
+        '<div class="board-detail"><p>'+escapeHtml(n.body)+'</p></div>';
     }).join('');
     wireBoardToggles(wrap, list, {
       tag: '스터디',
       authorLabel: function(){ return '관리자'; },
+      onEdit: editStudy,
+      onDelete: deleteStudy,
       bodyHtml: function(n){
-        var body = '<p>'+escapeHtml(n.body)+'</p>';
+        var body = '<p style="font-size:'+(n.fontSize||'1rem')+';">'+escapeHtml(n.body)+'</p>';
         if(n.fileData){
           if(n.fileType && n.fileType.indexOf('image/') === 0){
-            body += '<img src="'+n.fileData+'" alt="첨부 이미지">';
+            body += '<img src="'+n.fileData+'" alt="첨부 이미지" style="width:'+(n.imgWidth||'100%')+';">';
           } else {
             body += '<p><a class="btn btn-ghost btn-sm" style="display:inline-flex;margin-top:var(--space-3);" href="'+n.fileData+'" download="'+escapeHtml(n.fileName || '첨부파일')+'">'+escapeHtml(n.fileName || '첨부파일')+' 다운로드</a></p>';
           }
@@ -1284,17 +1408,25 @@
   document.getElementById('studyAddBtn').addEventListener('click', function(){
     var t = document.getElementById('studyNewTitle').value.trim();
     var b = document.getElementById('studyNewBody').value.trim();
+    var fs = document.getElementById('studyNewFontSize').value;
+    var imgW = document.getElementById('studyNewImgSize').value;
     var fileInput = document.getElementById('studyNewFile');
     var f = fileInput.files[0];
     if(!t){ alert('제목을 입력해주세요.'); return; }
     function finish(fileData, fileName, fileType){
       var list = loadStudy();
-      list.unshift({date: todayStr(), title: t, body: b, fileData: fileData || '', fileName: fileName || '', fileType: fileType || ''});
+      if(studyEditIndex >= 0 && list[studyEditIndex]){
+        var existing = list[studyEditIndex];
+        existing.title = t;
+        existing.body = b;
+        existing.fontSize = fs;
+        existing.imgWidth = imgW;
+        if(fileData){ existing.fileData = fileData; existing.fileName = fileName; existing.fileType = fileType; }
+      } else {
+        list.unshift({date: todayStr(), title: t, body: b, fileData: fileData || '', fileName: fileName || '', fileType: fileType || '', fontSize: fs, imgWidth: imgW});
+      }
       saveStudy(list);
-      document.getElementById('studyNewTitle').value = '';
-      document.getElementById('studyNewBody').value = '';
-      fileInput.value = '';
-      document.getElementById('studyFileName').textContent = '';
+      resetStudyForm();
       renderStudy();
     }
     if(f){
