@@ -114,7 +114,7 @@
   li.open .caret{transform:rotate(-135deg) translateY(2px);}
 
   .dropdown{
-    position:absolute;top:100%;left:0;min-width:240px;background:var(--white);
+    position:absolute;top:100%;left:0;min-width:280px;background:var(--white);
     border-radius:0 0 var(--radius-m) var(--radius-m);box-shadow:var(--shadow-card);
     padding:var(--space-2);opacity:0;visibility:hidden;transform:translateY(-6px);
     transition:opacity .18s ease, transform .18s ease, visibility .18s ease;
@@ -149,20 +149,20 @@
   .ticker-row.open .ticker-caret{transform:rotate(-135deg);}
   .notice-panel{position:absolute;top:100%;left:0;right:0;background:var(--white);border:1px solid var(--lavender-line);border-top:none;border-radius:0 0 var(--radius-m) var(--radius-m);box-shadow:var(--shadow-card);max-height:0;overflow:hidden;opacity:0;transition:max-height .22s ease, opacity .18s ease;z-index:40;}
   .ticker-row.open .notice-panel{max-height:420px;opacity:1;overflow:auto;}
-  .notice-table{width:100%;border-collapse:collapse;}
-  .notice-table thead th{font-size:0.7rem;color:var(--muted);font-weight:700;text-align:left;padding:10px var(--space-5);border-bottom:1px solid var(--line);background:var(--cream-deep);position:sticky;top:0;}
-  .notice-table thead th.n-col-date{text-align:center;}
-  .notice-table thead th.n-col-badge{text-align:right;}
-  .notice-table tbody tr.notice-row{cursor:pointer;border-bottom:1px solid var(--line);transition:background .12s ease;}
-  .notice-table tbody tr.notice-row:hover{background:var(--cream-deep);}
-  .notice-table td{padding:12px var(--space-5);font-size:0.86rem;color:var(--ink);font-weight:700;vertical-align:middle;}
-  .notice-table td.n-date-cell{color:var(--muted-soft);font-size:0.76rem;font-weight:600;text-align:center;white-space:nowrap;font-variant-numeric:tabular-nums;}
-  .notice-table td.n-badge-cell{text-align:right;}
-  .notice-pill{display:inline-block;padding:4px 12px;border-radius:999px;border:1px solid var(--lavender-line);background:var(--lavender-pale);color:var(--lavender-deep);font-size:0.7rem;font-weight:700;white-space:nowrap;}
-  .notice-detail-row td{padding:0;border-bottom:1px solid var(--line);}
-  .notice-detail-row .n-body{max-height:0;overflow:hidden;transition:max-height .2s ease;}
-  .notice-detail-row.open .n-body{max-height:220px;}
-  .notice-detail-row .n-body p{font-size:0.85rem;color:var(--muted);padding:var(--space-1) var(--space-5) var(--space-4);line-height:1.75;font-family:'Gothic A1',sans-serif;font-weight:500;}
+  .board-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-m);box-shadow:var(--shadow-card);overflow:hidden;}
+  .board-list{display:flex;flex-direction:column;}
+  .board-post{padding:var(--space-4) var(--space-5);cursor:pointer;border-bottom:1px solid var(--line);transition:background .12s ease;}
+  .board-post:last-child{border-bottom:none;}
+  .board-post:hover{background:var(--cream-deep);}
+  .board-title{font-size:0.95rem;font-weight:800;color:var(--ink);}
+  .board-meta{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:0.76rem;color:var(--muted-soft);font-weight:600;font-variant-numeric:tabular-nums;}
+  .board-avatar{width:16px;height:16px;border-radius:50%;background:var(--lavender);flex-shrink:0;}
+  .board-meta .dot-sep{width:3px;height:3px;border-radius:50%;background:var(--muted-soft);flex-shrink:0;opacity:0.6;}
+  .board-stat{display:inline-flex;align-items:center;gap:3px;}
+  .board-stat svg{width:13px;height:13px;}
+  .board-detail{max-height:0;overflow:hidden;transition:max-height .2s ease;}
+  .board-detail.open{max-height:220px;}
+  .board-detail p{padding:0 var(--space-5) var(--space-4);color:var(--muted);font-size:0.85rem;line-height:1.75;font-family:'Gothic A1',sans-serif;font-weight:500;}
   .notice-admin-row{padding:var(--space-4) var(--space-5);background:var(--cream-deep);}
   .notice-admin-row input, .notice-admin-row textarea{width:100%;padding:10px 12px;border-radius:var(--radius-s);border:1px solid var(--line);font-family:inherit;font-size:0.85rem;margin-bottom:8px;color:var(--ink);font-weight:400;}
   .notice-admin-row textarea{min-height:60px;resize:vertical;}
@@ -303,7 +303,7 @@
   .field-check{display:flex;align-items:flex-start;gap:8px;font-size:0.82rem;color:var(--muted);}
   .field-check input{margin-top:3px;accent-color:var(--lavender);}
   #inquiryMsg{font-size:0.85rem;font-weight:700;color:var(--lavender-deep);min-height:1.2em;}
-  .admin-inquiry-list{margin-top:var(--space-6);background:var(--white);border:1px solid var(--line);border-radius:var(--radius-m);padding:var(--space-5);box-shadow:var(--shadow-card);overflow:hidden;}
+  .admin-inquiry-list{margin-top:var(--space-6);}
   .admin-inquiry-list h4{font-size:1rem;color:var(--ink);margin-bottom:var(--space-3);}
 
   /* ---------- Footer ---------- */
@@ -394,7 +394,7 @@
         <div class="dropdown">
           <a href="https://youna0410.xlink.kr/iframe?r=link&layout_type=banner_txt&sysuid=1787" target="_blank" rel="noopener noreferrer">
             <svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M8 8V7a4 4 0 0 1 8 0v1"/></svg>
-            쇼핑쇼츠 1:1 컨설팅
+            쇼핑쇼츠 1:1 대면 커리큘럼
           </a>
           <a href="https://youna0410.xlink.kr/iframe?r=link&layout_type=banner_txt&sysuid=1685" target="_blank" rel="noopener noreferrer">
             <svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
@@ -429,7 +429,7 @@
 </div>
 
 <!-- ================= Notice ticker ================= -->
-<div class="ticker" id="notice">
+<div class="ticker" id="noticeTicker">
   <div class="container ticker-row" id="tickerRow">
     <button type="button" class="ticker-trigger" id="tickerTrigger" aria-expanded="false">
       <span class="tag">공지</span>
@@ -437,17 +437,7 @@
       <span class="ticker-caret"></span>
     </button>
     <div class="notice-panel" id="noticePanel">
-      <table class="notice-table">
-        <thead>
-          <tr><th>제목</th><th class="n-col-date">등록일</th><th class="n-col-badge"></th></tr>
-        </thead>
-        <tbody id="noticeList"></tbody>
-      </table>
-      <div class="notice-admin-row admin-only">
-        <input type="text" id="noticeNewTitle" placeholder="새 공지 제목">
-        <textarea id="noticeNewBody" placeholder="새 공지 내용"></textarea>
-        <button type="button" class="btn btn-primary btn-sm" id="noticeAddBtn">공지 등록</button>
-      </div>
+      <div class="board-list" id="noticeList"></div>
     </div>
   </div>
 </div>
@@ -477,7 +467,7 @@
     <div class="chip-row">
       <a class="chip" href="https://youna0410.xlink.kr/iframe?r=link&layout_type=banner_txt&sysuid=1787" target="_blank" rel="noopener noreferrer">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M8 8V7a4 4 0 0 1 8 0v1"/></svg>
-        1:1 컨설팅
+        1:1 대면 커리큘럼
       </a>
       <a class="chip" href="https://youna0410.xlink.kr/iframe?r=link&layout_type=banner_txt&sysuid=1685" target="_blank" rel="noopener noreferrer">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
@@ -521,6 +511,27 @@
   </div>
 </section>
 
+<!-- ================= Notice board ================= -->
+<section class="block alt" id="notice">
+  <div class="container">
+    <div class="block-head">
+      <div>
+        <span class="eyebrow">Notice</span>
+        <h2>공지사항</h2>
+        <p class="lede">유나업클래스의 새로운 소식을 확인해보세요.</p>
+      </div>
+    </div>
+    <div class="board-card">
+      <div class="board-list" id="noticeBoardList"></div>
+      <div class="notice-admin-row admin-only">
+        <input type="text" id="noticeNewTitle" placeholder="새 공지 제목">
+        <textarea id="noticeNewBody" placeholder="새 공지 내용"></textarea>
+        <button type="button" class="btn btn-primary btn-sm" id="noticeAddBtn">공지 등록</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= Courses ================= -->
 <section class="block" id="courses">
   <div class="container">
@@ -534,16 +545,16 @@
     <div class="grid-2">
       <article class="card">
         <div class="card-media">
-          <span class="badge">컨설팅</span>
+          <span class="badge">1:1 대면</span>
           <svg class="ico-big" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M8 8V7a4 4 0 0 1 8 0v1"/></svg>
-          <h4>쇼핑쇼츠 1:1 컨설팅</h4>
+          <h4>쇼핑쇼츠 1:1 대면 커리큘럼</h4>
         </div>
         <div class="card-body">
-          <p class="desc">내 채널에 맞춘 1:1 밀착 컨설팅으로 쇼핑쇼츠 세팅부터 수익화 전략까지 함께 만듭니다.</p>
+          <p class="desc">내 채널에 맞춘 1:1 대면 커리큘럼으로 쇼핑쇼츠 세팅부터 수익화 전략까지 함께 만듭니다.</p>
           <div class="card-meta"><span class="stars">★★★★★</span><span>후기 000+</span></div>
           <div class="card-price"><span class="now">상담 신청 시 안내</span></div>
           <div class="card-actions">
-            <a class="btn btn-primary" href="https://youna0410.xlink.kr/iframe?r=link&layout_type=banner_txt&sysuid=1787" target="_blank" rel="noopener noreferrer">1:1 컨설팅 신청하기</a>
+            <a class="btn btn-primary" href="https://youna0410.xlink.kr/iframe?r=link&layout_type=banner_txt&sysuid=1787" target="_blank" rel="noopener noreferrer">1:1 대면 커리큘럼 신청하기</a>
             <a class="btn btn-ghost" href="https://app.notion.com/p/1-1-3c840394f34080c9aaeae269d9009a02" target="_blank" rel="noopener noreferrer">커리큘럼 보기</a>
           </div>
         </div>
@@ -729,12 +740,9 @@
 
     <div class="admin-inquiry-list admin-only" id="adminInquiryList">
       <h4>접수된 문의</h4>
-      <table class="notice-table">
-        <thead>
-          <tr><th>제목</th><th class="n-col-date">등록일</th><th class="n-col-badge">상태</th></tr>
-        </thead>
-        <tbody id="adminInquiryRows"></tbody>
-      </table>
+      <div class="board-card">
+        <div class="board-list" id="adminInquiryRows"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -821,6 +829,8 @@
 
   /* ---------- Notices ---------- */
   var NOTICE_KEY = 'unaNotices';
+  var EYE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>';
+  var CHAT_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v11H9l-4 4V5Z"/></svg>';
   function loadNotices(){
     try{
       var v = JSON.parse(localStorage.getItem(NOTICE_KEY) || 'null');
@@ -829,27 +839,50 @@
     return [{
       date: '2026.08.26',
       title: '유나업클래스에 오신 것을 환영합니다! 8월 신규 강의 & 1:1 컨설팅 오픈 안내',
-      body: '8월 신규 강의 및 1:1 컨설팅 관련 안내입니다. 세부 일정은 강의 메뉴에서 확인해주세요.'
+      body: '8월 신규 강의 및 1:1 컨설팅 관련 안내입니다. 세부 일정은 강의 메뉴에서 확인해주세요.',
+      views: 0
     }];
   }
   function saveNotices(list){ try{ localStorage.setItem(NOTICE_KEY, JSON.stringify(list)); }catch(e){} }
+  function boardPostsHtml(list, authorLabel){
+    return list.map(function(n, i){
+      return '<div class="board-post" data-i="'+i+'">'+
+        '<div class="board-title">'+escapeHtml(n.title)+'</div>'+
+        '<div class="board-meta">'+
+        '<span class="board-avatar"></span><span>'+authorLabel+'</span>'+
+        '<span class="dot-sep"></span><span>'+escapeHtml(n.date)+'</span>'+
+        '<span class="dot-sep"></span><span class="board-stat">'+EYE_ICON+' '+(n.views||0)+'</span>'+
+        '<span class="board-stat">'+CHAT_ICON+' 0</span>'+
+        '</div></div>'+
+        '<div class="board-detail"><p>'+escapeHtml(n.body)+'</p></div>';
+    }).join('');
+  }
+  function wireBoardToggles(container, onOpen){
+    container.querySelectorAll('.board-post').forEach(function(post){
+      post.addEventListener('click', function(){
+        var detail = post.nextElementSibling;
+        var opening = !detail.classList.contains('open');
+        detail.classList.toggle('open');
+        if(opening && onOpen) onOpen(parseInt(post.dataset.i, 10));
+      });
+    });
+  }
+  function bumpNoticeViews(i){
+    var list = loadNotices();
+    if(list[i]){ list[i].views = (list[i].views || 0) + 1; saveNotices(list); }
+  }
   function renderNotices(){
     var list = loadNotices();
     document.getElementById('tickerText').textContent = list[0].title;
+    var html = boardPostsHtml(list, '관리자');
     var noticeList = document.getElementById('noticeList');
-    noticeList.innerHTML = list.map(function(n, i){
-      return '<tr class="notice-row" data-i="'+i+'">'+
-        '<td>'+escapeHtml(n.title)+'</td>'+
-        '<td class="n-date-cell">'+escapeHtml(n.date)+'</td>'+
-        '<td class="n-badge-cell"><span class="notice-pill">공지</span></td>'+
-        '</tr>'+
-        '<tr class="notice-detail-row" data-i="'+i+'"><td colspan="3"><div class="n-body"><p>'+escapeHtml(n.body)+'</p></div></td></tr>';
-    }).join('');
-    noticeList.querySelectorAll('.notice-row').forEach(function(row){
-      row.addEventListener('click', function(){
-        row.nextElementSibling.classList.toggle('open');
-      });
-    });
+    noticeList.innerHTML = html;
+    wireBoardToggles(noticeList, bumpNoticeViews);
+    var noticeBoardList = document.getElementById('noticeBoardList');
+    if(noticeBoardList){
+      noticeBoardList.innerHTML = html;
+      wireBoardToggles(noticeBoardList, bumpNoticeViews);
+    }
   }
   var tickerRow = document.getElementById('tickerRow');
   var tickerTrigger = document.getElementById('tickerTrigger');
@@ -866,7 +899,7 @@
     var b = document.getElementById('noticeNewBody').value.trim();
     if(!t) return;
     var list = loadNotices();
-    list.unshift({date: todayStr(), title: t, body: b});
+    list.unshift({date: todayStr(), title: t, body: b, views: 0});
     saveNotices(list);
     document.getElementById('noticeNewTitle').value = '';
     document.getElementById('noticeNewBody').value = '';
@@ -897,24 +930,20 @@
     if(!rows) return;
     var list = loadInquiries();
     if(!list.length){
-      rows.innerHTML = '<tr><td colspan="3" style="color:var(--muted);font-weight:400;">접수된 문의가 없습니다.</td></tr>';
+      rows.innerHTML = '<div class="board-post" style="cursor:default;color:var(--muted);">접수된 문의가 없습니다.</div>';
       return;
     }
-    rows.innerHTML = list.map(function(q, i){
-      return '<tr class="notice-row" data-i="'+i+'">'+
-        '<td>'+escapeHtml(q.title)+'</td>'+
-        '<td class="n-date-cell">'+escapeHtml(q.at)+'</td>'+
-        '<td class="n-badge-cell"><span class="notice-pill">접수완료</span></td>'+
-        '</tr>'+
-        '<tr class="notice-detail-row" data-i="'+i+'"><td colspan="3"><div class="n-body"><p>'+
-        escapeHtml(q.name)+' · '+escapeHtml(q.contact)+' · '+escapeHtml(q.type)+'<br>'+escapeHtml(q.body)+
-        '</p></div></td></tr>';
-    }).reverse().join('');
-    rows.querySelectorAll('.notice-row').forEach(function(row){
-      row.addEventListener('click', function(){
-        row.nextElementSibling.classList.toggle('open');
-      });
-    });
+    rows.innerHTML = list.slice().reverse().map(function(q, i){
+      return '<div class="board-post" data-i="'+i+'">'+
+        '<div class="board-title">'+escapeHtml(q.title)+'</div>'+
+        '<div class="board-meta">'+
+        '<span class="board-avatar"></span><span>'+escapeHtml(q.name)+'</span>'+
+        '<span class="dot-sep"></span><span>'+escapeHtml(q.at)+'</span>'+
+        '<span class="dot-sep"></span><span>'+escapeHtml(q.type)+'</span>'+
+        '</div></div>'+
+        '<div class="board-detail"><p>'+escapeHtml(q.contact)+'<br>'+escapeHtml(q.body)+'</p></div>';
+    }).join('');
+    wireBoardToggles(rows);
   }
   document.getElementById('inquiryForm').addEventListener('submit', function(e){
     e.preventDefault();
