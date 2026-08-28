@@ -1598,6 +1598,23 @@
   document.getElementById('signupClose').addEventListener('click', closeAuth);
   authOverlay.addEventListener('click', function(e){ if(e.target === authOverlay) closeAuth(); });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ closeAuth(); closeMypage(); closeBoardDetail(); } });
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[href^="#"]');
+    if(!a) return;
+    var id = a.getAttribute('href').slice(1);
+    if(!id) return;
+    var target = document.getElementById(id);
+    if(!target) return;
+    var overlayWasOpen = document.body.classList.contains('mypage-open') || document.body.classList.contains('board-detail-open');
+    if(!overlayWasOpen) return;
+    e.preventDefault();
+    closeMypage();
+    closeBoardDetail();
+    requestAnimationFrame(function(){
+      target.scrollIntoView();
+      history.replaceState(null, '', '#'+id);
+    });
+  });
 
   document.getElementById('signupForm').addEventListener('submit', function(e){
     e.preventDefault();
