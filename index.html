@@ -653,6 +653,10 @@
       <div class="notice-admin-row admin-only" id="noticeAdminRow">
         <input type="text" id="noticeNewTitle" placeholder="새 공지 제목">
         <textarea id="noticeNewBody" placeholder="새 공지 내용"></textarea>
+        <div class="study-upload-row">
+          <input type="file" id="noticeNewFile" accept="image/*">
+          <span class="modal-hint" id="noticeFileName"></span>
+        </div>
         <div class="admin-style-row">
           <label>글씨 크기
             <select id="noticeNewFontSize">
@@ -660,6 +664,14 @@
               <option value="0.85rem" selected>보통</option>
               <option value="0.95rem">크게</option>
               <option value="1.1rem">아주 크게</option>
+            </select>
+          </label>
+          <label>사진 크기
+            <select id="noticeNewImgSize">
+              <option value="100%" selected>100%</option>
+              <option value="70%">70%</option>
+              <option value="50%">50%</option>
+              <option value="30%">30%</option>
             </select>
           </label>
         </div>
@@ -1263,7 +1275,10 @@
   function resetNoticeForm(){
     document.getElementById('noticeNewTitle').value = '';
     document.getElementById('noticeNewBody').value = '';
+    document.getElementById('noticeNewFile').value = '';
+    document.getElementById('noticeFileName').textContent = '';
     document.getElementById('noticeNewFontSize').value = '0.85rem';
+    document.getElementById('noticeNewImgSize').value = '100%';
     document.getElementById('noticeAddBtn').textContent = '공지 등록';
     noticeEditIndex = -1;
   }
@@ -1273,7 +1288,9 @@
     noticeEditIndex = i;
     document.getElementById('noticeNewTitle').value = n.title;
     document.getElementById('noticeNewBody').value = n.body;
+    document.getElementById('noticeFileName').textContent = n.fileData ? '기존 첨부: '+(n.fileName || '사진')+' (그대로 유지, 새 파일 선택 시 교체)' : '';
     document.getElementById('noticeNewFontSize').value = n.fontSize || '0.85rem';
+    document.getElementById('noticeNewImgSize').value = n.imgWidth || '100%';
     document.getElementById('noticeAddBtn').textContent = '공지 수정 완료';
     var row = document.getElementById('noticeAdminRow');
     if(row) row.scrollIntoView({behavior:'smooth', block:'center'});
@@ -1286,15 +1303,22 @@
     if(noticeEditIndex === i) resetNoticeForm();
     renderNotices();
   }
+  function noticeBodyHtml(n){
+    var body = '<p style="font-size:'+(n.fontSize||'1rem')+';">'+escapeHtml(n.body)+'</p>';
+    if(n.fileData){
+      body += '<img src="'+n.fileData+'" alt="첨부 이미지" style="width:'+(n.imgWidth||'100%')+';">';
+    }
+    return body;
+  }
   function renderNotices(){
     var list = loadNotices();
     document.getElementById('tickerText').textContent = list[0].title;
     var tickerHtml = boardPostsHtml(list, '관리자', false);
     var boardHtml = boardPostsHtml(list, '관리자', true);
-    var noticeConfig = {tag: '공지', authorLabel: function(){ return '관리자'; }, showViews: true, onOpen: bumpNoticeViews, onEdit: editNotice, onDelete: deleteNotice};
+    var noticeConfig = {tag: '공지', authorLabel: function(){ return '관리자'; }, showViews: true, onOpen: bumpNoticeViews, onEdit: editNotice, onDelete: deleteNotice, bodyHtml: noticeBodyHtml};
     var noticeList = document.getElementById('noticeList');
     noticeList.innerHTML = tickerHtml;
-    wireBoardToggles(noticeList, list, {tag: '공지', authorLabel: function(){ return '관리자'; }, showViews: true, onOpen: bumpNoticeViews});
+    wireBoardToggles(noticeList, list, {tag: '공지', authorLabel: function(){ return '관리자'; }, showViews: true, onOpen: bumpNoticeViews, bodyHtml: noticeBodyHtml});
     var noticeBoardList = document.getElementById('noticeBoardList');
     if(noticeBoardList){
       noticeBoardList.innerHTML = boardHtml;
@@ -1311,22 +1335,42 @@
     tickerRow.classList.remove('open');
     tickerTrigger.setAttribute('aria-expanded', 'false');
   });
+  document.getElementById('noticeNewFile').addEventListener('change', function(e){
+    var f = e.target.files[0];
+    document.getElementById('noticeFileName').textContent = f ? f.name : '';
+  });
   document.getElementById('noticeAddBtn').addEventListener('click', function(){
     var t = document.getElementById('noticeNewTitle').value.trim();
     var b = document.getElementById('noticeNewBody').value.trim();
     var fs = document.getElementById('noticeNewFontSize').value;
+    var imgW = document.getElementById('noticeNewImgSize').value;
+    var fileInput = document.getElementById('noticeNewFile');
+    var f = fileInput.files[0];
     if(!t) return;
-    var list = loadNotices();
-    if(noticeEditIndex >= 0 && list[noticeEditIndex]){
-      list[noticeEditIndex].title = t;
-      list[noticeEditIndex].body = b;
-      list[noticeEditIndex].fontSize = fs;
-    } else {
-      list.unshift({date: todayStr(), title: t, body: b, views: 0, fontSize: fs});
+    function finish(fileData, fileName, fileType){
+      var list = loadNotices();
+      if(noticeEditIndex >= 0 && list[noticeEditIndex]){
+        var existing = list[noticeEditIndex];
+        existing.title = t;
+        existing.body = b;
+        existing.fontSize = fs;
+        existing.imgWidth = imgW;
+        if(fileData){ existing.fileData = fileData; existing.fileName = fileName; existing.fileType = fileType; }
+      } else {
+        list.unshift({date: todayStr(), title: t, body: b, views: 0, fontSize: fs, imgWidth: imgW, fileData: fileData || '', fileName: fileName || '', fileType: fileType || ''});
+      }
+      saveNotices(list);
+      resetNoticeForm();
+      renderNotices();
     }
-    saveNotices(list);
-    resetNoticeForm();
-    renderNotices();
+    if(f){
+      if(f.size > 4 * 1024 * 1024){ alert('파일 용량은 4MB 이하로 올려주세요.'); return; }
+      var r = new FileReader();
+      r.onload = function(){ finish(r.result, f.name, f.type); };
+      r.readAsDataURL(f);
+    } else {
+      finish();
+    }
   });
   renderNotices();
 
