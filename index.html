@@ -77,6 +77,9 @@
   .topbar .date{font-variant-numeric:tabular-nums;}
   .topbar nav ul{display:flex;gap:var(--space-5);}
   .topbar nav a:hover{color:var(--lavender-deep);}
+  .topbar-icon{display:inline-flex;align-items:center;color:var(--muted);}
+  .topbar-icon:hover{color:var(--lavender-deep);}
+  .topbar-icon svg{width:16px;height:16px;}
   #adminToggle{font:inherit;color:var(--muted);font-size:0.82rem;cursor:pointer;}
   #adminToggle:hover{color:var(--lavender-deep);}
   #adminToggle.active{color:var(--lavender-deep);font-weight:800;}
@@ -128,7 +131,14 @@
   }
   .dropdown a:hover{background:var(--lavender-pale);color:var(--lavender-deep);}
   .dropdown a .ico-sm{width:18px;height:18px;color:var(--lavender);flex-shrink:0;}
-  .dropdown a .dd-sub{display:block;font-size:0.72rem;font-weight:500;color:var(--muted-soft);margin-top:2px;}
+  .dropdown-item{display:flex;align-items:center;gap:var(--space-3);padding:var(--space-3) var(--space-4);border-radius:var(--radius-s);}
+  .dropdown-item:hover{background:var(--lavender-pale);}
+  .dropdown-item .ico-sm{width:18px;height:18px;color:var(--lavender);flex-shrink:0;}
+  .dropdown-item .dd-text{display:flex;flex-direction:column;}
+  .dropdown-item .dd-main{font-size:0.9rem;font-weight:600;color:var(--ink);}
+  .dropdown-item .dd-main:hover{color:var(--lavender-deep);text-decoration:underline;}
+  .dropdown-item .dd-sub{font-size:0.72rem;font-weight:500;color:var(--muted-soft);margin-top:2px;}
+  .dropdown-item .dd-sub:hover{color:var(--lavender-deep);text-decoration:underline;}
 
   .nav-utility{display:flex;align-items:center;gap:var(--space-4);}
   .nav-utility a{color:var(--muted);font-size:0.86rem;font-weight:600;}
@@ -338,7 +348,7 @@
     .nav-list > li{width:100%;}
     .nav-list > li > a, .nav-list > li > button.nav-top{height:auto;padding:var(--space-4) var(--space-3);width:100%;justify-content:space-between;}
     .dropdown{position:static;box-shadow:none;background:var(--lavender-pale);opacity:1;visibility:visible;transform:none;max-height:0;overflow:hidden;padding:0 var(--space-2);transition:max-height .2s ease;border:none;}
-    li.open .dropdown{max-height:300px;padding:var(--space-2);}
+    li.open .dropdown{max-height:340px;padding:var(--space-2);}
     .nav-utility{display:none;}
     .hamburger{display:flex;}
     .rail-grid{grid-template-columns:repeat(2,1fr);}
@@ -363,6 +373,11 @@
         <li><a href="#">로그인</a></li>
         <li><a href="#">회원가입</a></li>
         <li><a href="#">마이페이지</a></li>
+        <li>
+          <a href="#contact" class="topbar-icon" aria-label="문의하기">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><polyline points="2,7 12,14 22,7"/></svg>
+          </a>
+        </li>
         <li><button type="button" id="adminToggle">관리자 모드</button></li>
       </ul>
     </nav>
@@ -393,10 +408,13 @@
       <li class="dd">
         <button class="nav-top" aria-expanded="false">강의<span class="caret"></span></button>
         <div class="dropdown">
-          <a href="https://youna0410.xlink.kr/iframe?r=link&layout_type=banner_txt&sysuid=1787" target="_blank" rel="noopener noreferrer">
+          <div class="dropdown-item">
             <svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M8 8V7a4 4 0 0 1 8 0v1"/></svg>
-            <span>쇼핑쇼츠 1:1 대면<span class="dd-sub">1:1 대면 커리큘럼</span></span>
-          </a>
+            <div class="dd-text">
+              <a class="dd-main" href="https://youna0410.xlink.kr/iframe?r=link&layout_type=banner_txt&sysuid=1787" target="_blank" rel="noopener noreferrer">쇼핑쇼츠 1:1 대면</a>
+              <a class="dd-sub" href="https://app.notion.com/p/1-1-3c840394f34080c9aaeae269d9009a02?source=copy_link" target="_blank" rel="noopener noreferrer">1:1 대면 커리큘럼</a>
+            </div>
+          </div>
           <a href="https://youna0410.xlink.kr/iframe?r=link&layout_type=banner_txt&sysuid=1685" target="_blank" rel="noopener noreferrer">
             <svg class="ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
             쇼핑쇼츠 VOD
@@ -556,7 +574,7 @@
           <div class="card-price"><span class="now">상담 신청 시 안내</span></div>
           <div class="card-actions">
             <a class="btn btn-primary" href="https://youna0410.xlink.kr/iframe?r=link&layout_type=banner_txt&sysuid=1787" target="_blank" rel="noopener noreferrer">1:1 대면 신청하기</a>
-            <a class="btn btn-ghost" href="https://app.notion.com/p/1-1-3c840394f34080c9aaeae269d9009a02" target="_blank" rel="noopener noreferrer">커리큘럼 보기</a>
+            <a class="btn btn-ghost" href="https://app.notion.com/p/1-1-3c840394f34080c9aaeae269d9009a02?source=copy_link" target="_blank" rel="noopener noreferrer">커리큘럼 보기</a>
           </div>
         </div>
       </article>
