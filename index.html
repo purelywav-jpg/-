@@ -77,6 +77,14 @@
   .topbar .date{font-variant-numeric:tabular-nums;}
   .topbar nav ul{display:flex;gap:var(--space-5);}
   .topbar nav a:hover{color:var(--lavender-deep);}
+  #adminToggle{font:inherit;color:var(--muted);font-size:0.82rem;cursor:pointer;}
+  #adminToggle:hover{color:var(--lavender-deep);}
+  #adminToggle.active{color:var(--lavender-deep);font-weight:800;}
+  .admin-only{display:none;}
+  body.admin-mode .admin-only{display:block;}
+  body.admin-mode .admin-only.flex{display:flex;}
+  body.admin-mode .admin-only.grid{display:grid;}
+  body.admin-mode .admin-hide{display:none;}
 
   /* ---------- Header ---------- */
   .site-header{background:var(--cream);padding:var(--space-5) 0 var(--space-4);}
@@ -133,9 +141,22 @@
 
   /* ---------- Notice ticker ---------- */
   .ticker{background:var(--lavender-pale);border-bottom:1px solid var(--lavender-line);}
-  .ticker .container{display:flex;align-items:center;gap:var(--space-4);height:42px;}
-  .ticker .tag{flex-shrink:0;font-size:0.78rem;font-weight:800;letter-spacing:0.02em;background:var(--lavender);color:var(--white);padding:4px 10px;border-radius:999px;}
-  .ticker p{font-size:0.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink-soft);font-weight:600;}
+  .ticker-row{position:relative;}
+  .ticker-trigger{display:flex;align-items:center;gap:var(--space-4);height:42px;width:100%;text-align:left;cursor:pointer;}
+  .ticker-trigger .tag{flex-shrink:0;font-size:0.78rem;font-weight:800;letter-spacing:0.02em;background:var(--lavender);color:var(--white);padding:4px 10px;border-radius:999px;}
+  .ticker-trigger .n-text{flex:1;font-size:0.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink-soft);font-weight:600;}
+  .ticker-caret{width:8px;height:8px;border-right:2px solid var(--muted-soft);border-bottom:2px solid var(--muted-soft);transform:rotate(45deg);flex-shrink:0;transition:transform .15s ease;margin-right:2px;}
+  .ticker-row.open .ticker-caret{transform:rotate(-135deg);}
+  .notice-panel{position:absolute;top:100%;left:0;right:0;background:var(--white);border:1px solid var(--lavender-line);border-top:none;border-radius:0 0 var(--radius-m) var(--radius-m);box-shadow:var(--shadow-card);max-height:0;overflow:hidden;opacity:0;transition:max-height .22s ease, opacity .18s ease;z-index:40;}
+  .ticker-row.open .notice-panel{max-height:420px;opacity:1;overflow:auto;}
+  .notice-item{padding:var(--space-4) var(--space-5);border-bottom:1px solid var(--line);}
+  .notice-item:last-child{border-bottom:none;}
+  .notice-item .n-date{font-size:0.72rem;color:var(--muted-soft);font-weight:700;}
+  .notice-item .n-title{font-size:0.95rem;font-weight:800;color:var(--ink);margin-top:4px;}
+  .notice-item .n-body{font-size:0.85rem;color:var(--muted);margin-top:6px;line-height:1.75;font-family:'Gothic A1',sans-serif;}
+  .notice-admin-row{padding:var(--space-4) var(--space-5);background:var(--cream-deep);}
+  .notice-admin-row input, .notice-admin-row textarea{width:100%;padding:10px 12px;border-radius:var(--radius-s);border:1px solid var(--line);font-family:inherit;font-size:0.85rem;margin-bottom:8px;color:var(--ink);}
+  .notice-admin-row textarea{min-height:60px;resize:vertical;}
 
   /* ---------- Hero ---------- */
   .hero{
@@ -158,6 +179,14 @@
   .hero h2 em{font-style:normal;color:var(--lavender-deep);}
   .hero .lede{margin-top:var(--space-5);color:var(--ink-soft);font-size:1.02rem;line-height:1.85;font-weight:500;}
   .hero .lede b{color:var(--lavender-deep);font-weight:800;}
+
+  .hero-photos{margin-top:var(--space-6);display:flex;gap:var(--space-3);justify-content:center;flex-wrap:wrap;}
+  .hero-photos img{width:128px;height:128px;object-fit:cover;border-radius:var(--radius-m);border:3px solid var(--white);box-shadow:var(--shadow-card);}
+  .hero-photos img:nth-child(1){transform:rotate(-4deg);}
+  .hero-photos img:nth-child(2){transform:rotate(3deg);}
+  .hero-photos img:nth-child(3){transform:rotate(-2deg);}
+  .hero-photos img:nth-child(4){transform:rotate(4deg);}
+  .hero-photos img:hover{transform:rotate(0) scale(1.04);transition:transform .2s ease;}
 
   .consult-bar{
     margin-top:var(--space-6);width:100%;max-width:620px;display:flex;align-items:center;gap:var(--space-3);
@@ -219,6 +248,8 @@
   .card-meta .stars{color:var(--lavender-deep);letter-spacing:1px;}
   .card-price{display:flex;align-items:baseline;gap:var(--space-2);margin-top:auto;padding-top:var(--space-2);}
   .card-price .now{font-size:1.1rem;font-weight:800;color:var(--ink);font-family:'Gothic A1',sans-serif;}
+  .card-actions{display:flex;gap:var(--space-2);}
+  .card-actions .btn{flex:1;padding:12px 14px;font-size:0.85rem;white-space:nowrap;}
 
   /* ---------- Tips cards ---------- */
   .tips-card{display:flex;gap:var(--space-4);background:var(--white);border:1px solid var(--line);border-radius:var(--radius-m);padding:var(--space-5);box-shadow:var(--shadow-card);align-items:flex-start;}
@@ -268,6 +299,43 @@
   .dash-stats .v{font-size:0.9rem;font-weight:800;color:var(--ink);}
   .dash-stats .k{font-size:0.68rem;color:var(--muted);margin-top:2px;}
 
+  /* ---------- Private inquiry ---------- */
+  .contact-wrap{display:grid;grid-template-columns:0.85fr 1.15fr;gap:var(--space-6);align-items:flex-start;}
+  .contact-note{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-m);padding:var(--space-5);box-shadow:var(--shadow-card);}
+  .lock-badge{display:inline-flex;align-items:center;gap:6px;background:var(--lavender-pale);color:var(--lavender-deep);font-size:0.78rem;font-weight:800;padding:6px 12px;border-radius:999px;}
+  .lock-badge svg{width:14px;height:14px;}
+  .contact-note h4{font-size:1.05rem;color:var(--ink);margin-top:var(--space-3);}
+  .contact-note p{color:var(--muted);font-size:0.88rem;margin-top:8px;font-family:'Gothic A1',sans-serif;}
+  .contact-note ul{margin-top:var(--space-4);display:flex;flex-direction:column;gap:8px;}
+  .contact-note li{display:flex;gap:8px;font-size:0.85rem;color:var(--ink-soft);}
+  .contact-note li svg{width:16px;height:16px;color:var(--lavender-deep);flex-shrink:0;margin-top:2px;}
+  #inquiryForm{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-m);padding:var(--space-5);box-shadow:var(--shadow-card);display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4);}
+  #inquiryForm .full{grid-column:1/-1;}
+  .field label{display:block;font-size:0.82rem;font-weight:700;color:var(--ink);margin-bottom:6px;}
+  .field input, .field select, .field textarea{width:100%;padding:12px 14px;border-radius:var(--radius-s);border:1px solid var(--line);font-family:inherit;font-size:0.9rem;color:var(--ink);background:var(--cream);}
+  .field textarea{min-height:110px;resize:vertical;}
+  .field input:focus, .field select:focus, .field textarea:focus{outline:2px solid var(--lavender);}
+  .field-check{display:flex;align-items:flex-start;gap:8px;font-size:0.82rem;color:var(--muted);}
+  .field-check input{margin-top:3px;accent-color:var(--lavender);}
+  #inquiryMsg{font-size:0.85rem;font-weight:700;color:var(--lavender-deep);min-height:1.2em;}
+  .admin-inquiry-list{margin-top:var(--space-6);background:var(--white);border:1px solid var(--line);border-radius:var(--radius-m);padding:var(--space-5);box-shadow:var(--shadow-card);}
+  .admin-inquiry-list h4{font-size:1rem;color:var(--ink);margin-bottom:var(--space-3);}
+  .inquiry-row{padding:var(--space-3) 0;border-bottom:1px solid var(--line);font-size:0.85rem;}
+  .inquiry-row:last-child{border-bottom:none;}
+  .inquiry-row .i-meta{color:var(--muted-soft);font-size:0.76rem;}
+  .inquiry-row .i-body{color:var(--ink-soft);margin-top:4px;}
+
+  /* ---------- Gallery ---------- */
+  .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-4);}
+  .gallery-item{position:relative;aspect-ratio:1/1;border-radius:var(--radius-m);overflow:hidden;background:var(--cream-deep);border:1px solid var(--line);}
+  .gallery-item img{width:100%;height:100%;object-fit:cover;}
+  .gallery-empty{grid-column:1/-1;text-align:center;padding:var(--space-7) var(--space-4);color:var(--muted);background:var(--white);border:1px dashed var(--line);border-radius:var(--radius-m);}
+  .gallery-del{position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:50%;background:rgba(36,28,51,0.72);color:#fff;align-items:center;justify-content:center;font-size:1rem;line-height:1;display:none;}
+  body.admin-mode .gallery-del{display:flex;}
+  .gallery-upload-row{margin-bottom:var(--space-4);align-items:center;gap:var(--space-3);background:var(--white);border:1px dashed var(--lavender);border-radius:var(--radius-m);padding:var(--space-4);}
+  body.admin-mode .gallery-upload-row.admin-only{display:flex;}
+  .gallery-actions{display:flex;gap:var(--space-3);flex-wrap:wrap;margin-top:var(--space-5);}
+
   /* ---------- Footer ---------- */
   footer{background:var(--ink);color:#C9C0DE;padding:var(--space-7) 0 var(--space-6);}
   .footer-grid{display:flex;justify-content:space-between;gap:var(--space-6);flex-wrap:wrap;}
@@ -283,7 +351,10 @@
     .proof-grid{grid-template-columns:1fr 1fr;}
   }
   @media (max-width:720px){
-    .topbar nav ul{gap:var(--space-3);}
+    .topbar .container{gap:var(--space-3);}
+    .topbar nav ul{gap:var(--space-3);flex-wrap:nowrap;overflow-x:auto;white-space:nowrap;-ms-overflow-style:none;scrollbar-width:none;}
+    .topbar nav ul::-webkit-scrollbar{display:none;}
+    .topbar .date{flex-shrink:0;}
     .nav-list{position:fixed;top:96px;left:0;right:0;bottom:0;background:var(--white);flex-direction:column;padding:var(--space-4);overflow:auto;
       transform:translateX(-100%);transition:transform .2s ease;border-top:1px solid var(--line);}
     .nav-list.mobile-open{transform:translateX(0);}
@@ -299,6 +370,10 @@
     .search{min-width:0;flex:1;}
     .site-header .container{flex-direction:column;align-items:stretch;}
     .hero h2{font-size:1.8rem;}
+    .hero-photos img{width:84px;height:84px;}
+    .contact-wrap{grid-template-columns:1fr;}
+    #inquiryForm{grid-template-columns:1fr;}
+    .gallery-grid{grid-template-columns:repeat(2,1fr);}
   }
 </style>
 </head>
@@ -313,7 +388,7 @@
         <li><a href="#">로그인</a></li>
         <li><a href="#">회원가입</a></li>
         <li><a href="#">마이페이지</a></li>
-        <li><a href="#tips">관리자</a></li>
+        <li><button type="button" id="adminToggle">관리자 모드</button></li>
       </ul>
     </nav>
   </div>
@@ -383,9 +458,20 @@
 
 <!-- ================= Notice ticker ================= -->
 <div class="ticker" id="notice">
-  <div class="container">
-    <span class="tag">공지</span>
-    <p>유나업클래스에 오신 것을 환영합니다! 8월 신규 강의 &amp; 1:1 컨설팅 오픈 안내</p>
+  <div class="container ticker-row" id="tickerRow">
+    <button type="button" class="ticker-trigger" id="tickerTrigger" aria-expanded="false">
+      <span class="tag">공지</span>
+      <span class="n-text" id="tickerText">유나업클래스에 오신 것을 환영합니다! 8월 신규 강의 &amp; 1:1 컨설팅 오픈 안내</span>
+      <span class="ticker-caret"></span>
+    </button>
+    <div class="notice-panel" id="noticePanel">
+      <div id="noticeList"></div>
+      <div class="notice-admin-row admin-only">
+        <input type="text" id="noticeNewTitle" placeholder="새 공지 제목">
+        <textarea id="noticeNewBody" placeholder="새 공지 내용"></textarea>
+        <button type="button" class="btn btn-primary btn-sm" id="noticeAddBtn">공지 등록</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -400,6 +486,8 @@
     <p class="lede">기획·촬영·편집·수익화, 쇼핑쇼츠 성장의 4단계를 강의와 1:1 컨설팅이 함께합니다.<br>
     채널을 늘려도 <b>배워야 할 부담은 그대로</b>입니다.<br>
     마케팅팀 없이 돌아가는 채널, <b>오늘</b>부터 가능합니다.</p>
+
+    <div class="hero-photos" id="heroPhotos"></div>
 
     <form class="consult-bar" onsubmit="return false;">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 0 1-8.9 8.4A9 9 0 0 1 4.6 18L3 21l3-1.5A8.4 8.4 0 1 1 21 11.5Z"/></svg>
@@ -422,9 +510,9 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="10" r="6"/><line x1="9.5" y1="18" x2="14.5" y2="18"/></svg>
         AI 활용 tip
       </a>
-      <a class="chip" href="#contact">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><polyline points="2,7 12,14 22,7"/></svg>
-        기타 문의
+      <a class="chip" href="https://pf.kakao.com/_tmKxin" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 0 1-8.9 8.4A9 9 0 0 1 4.6 18L3 21l3-1.5A8.4 8.4 0 1 1 21 11.5Z"/></svg>
+        솔루션 문의
       </a>
     </div>
 
@@ -433,7 +521,6 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 14.6,9 22,9.3 16,14 18,21.5 12,17.3 6,21.5 8,14 2,9.3 9.4,9"/></svg>
         무료 상담 신청하기
       </a>
-      <a class="btn btn-ghost" href="#courses">커리큘럼 보기</a>
     </div>
   </div>
 </section>
@@ -485,7 +572,10 @@
           <p class="desc">내 채널에 맞춘 1:1 밀착 컨설팅으로 쇼핑쇼츠 세팅부터 수익화 전략까지 함께 만듭니다.</p>
           <div class="card-meta"><span class="stars">★★★★★</span><span>후기 000+</span></div>
           <div class="card-price"><span class="now">상담 신청 시 안내</span></div>
-          <a class="btn btn-primary btn-block" href="https://youna0410.xlink.kr/iframe?r=link&layout_type=banner_txt&sysuid=1787" target="_blank" rel="noopener noreferrer">1:1 컨설팅 신청하기</a>
+          <div class="card-actions">
+            <a class="btn btn-primary" href="https://youna0410.xlink.kr/iframe?r=link&layout_type=banner_txt&sysuid=1787" target="_blank" rel="noopener noreferrer">1:1 컨설팅 신청하기</a>
+            <a class="btn btn-ghost" href="https://app.notion.com/p/1-1-3c840394f34080c9aaeae269d9009a02" target="_blank" rel="noopener noreferrer">커리큘럼 보기</a>
+          </div>
         </div>
       </article>
       <article class="card">
@@ -498,7 +588,10 @@
           <p class="desc">초보자도 따라만 하면 완성되는 쇼핑쇼츠 제작 A to Z. 언제 어디서든 반복 수강하세요.</p>
           <div class="card-meta"><span class="stars">★★★★★</span><span>수강생 000명+</span></div>
           <div class="card-price"><span class="now">지금 바로 수강</span></div>
-          <a class="btn btn-primary btn-block" href="https://youna0410.xlink.kr/iframe?r=link&layout_type=banner_txt&sysuid=1685" target="_blank" rel="noopener noreferrer">VOD 바로 수강하기</a>
+          <div class="card-actions">
+            <a class="btn btn-primary" href="https://youna0410.xlink.kr/iframe?r=link&layout_type=banner_txt&sysuid=1685" target="_blank" rel="noopener noreferrer">VOD 바로 수강하기</a>
+            <a class="btn btn-ghost" href="https://app.notion.com/p/1-1-3c840394f34080c9aaeae269d9009a02" target="_blank" rel="noopener noreferrer">커리큘럼 보기</a>
+          </div>
         </div>
       </article>
     </div>
@@ -647,8 +740,104 @@
   </div>
 </section>
 
-<!-- ================= Contact / footer ================= -->
-<footer id="contact">
+<!-- ================= Private inquiry ================= -->
+<section class="block alt" id="contact">
+  <div class="container">
+    <div class="block-head">
+      <div>
+        <span class="eyebrow">Private Inquiry</span>
+        <h2>문의하기</h2>
+        <p class="lede">수강생만을 위한 비공개 상담 공간입니다. 남겨주신 문의는 관리자만 확인하며 다른 방문자에게 공개되지 않습니다.</p>
+      </div>
+    </div>
+    <div class="contact-wrap">
+      <div class="contact-note">
+        <span class="lock-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          비공개 문의
+        </span>
+        <h4>이렇게 처리됩니다</h4>
+        <ul>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+            남기신 문의는 관리자에게만 전달되며, 후기 게시판처럼 공개 노출되지 않습니다.
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+            입력하신 연락처로 순차적으로 개별 답변드립니다.
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+            빠른 상담은 솔루션 문의(카카오 채널)를 이용해주세요.
+          </li>
+        </ul>
+      </div>
+
+      <form id="inquiryForm">
+        <div class="field">
+          <label for="iqName">이름</label>
+          <input type="text" id="iqName" placeholder="이름을 입력해주세요" required>
+        </div>
+        <div class="field">
+          <label for="iqContact">연락처 / 이메일</label>
+          <input type="text" id="iqContact" placeholder="연락받으실 연락처 또는 이메일" required>
+        </div>
+        <div class="field full">
+          <label for="iqType">문의 유형</label>
+          <select id="iqType">
+            <option>강의 문의</option>
+            <option>1:1 컨설팅 문의</option>
+            <option>결제 · 환불 문의</option>
+            <option>기타 문의</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="iqBody">문의 내용</label>
+          <textarea id="iqBody" placeholder="문의하실 내용을 자유롭게 작성해주세요" required></textarea>
+        </div>
+        <div class="field full field-check">
+          <input type="checkbox" id="iqAgree" required>
+          <label for="iqAgree" style="margin:0;font-weight:500;">개인정보(이름, 연락처, 문의내용)를 상담 목적으로 수집·이용하는 것에 동의합니다.</label>
+        </div>
+        <div class="field full" style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);">
+          <span id="inquiryMsg"></span>
+          <button type="submit" class="btn btn-primary">비공개로 문의하기</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="admin-inquiry-list admin-only" id="adminInquiryList">
+      <h4>관리자 전용 · 접수된 문의</h4>
+      <div id="adminInquiryRows"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Gallery ================= -->
+<section class="block" id="gallery">
+  <div class="container">
+    <div class="block-head">
+      <div>
+        <span class="eyebrow">Gallery</span>
+        <h2>포토 갤러리</h2>
+        <p class="lede">수업 현장 사진을 확인해보세요. 최신 소식은 네이버 블로그에서도 만나보실 수 있습니다.</p>
+      </div>
+    </div>
+
+    <div class="gallery-upload-row admin-only">
+      <input type="file" id="galleryUpload" accept="image/*" multiple>
+      <span style="font-size:0.8rem;color:var(--muted);">관리자 모드: 사진을 선택하면 갤러리에 바로 등록됩니다.</span>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid"></div>
+
+    <div class="gallery-actions">
+      <a class="btn btn-ghost" href="https://blog.naver.com/conbizlab" target="_blank" rel="noopener noreferrer">네이버 블로그에서 더 보기 →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
   <div class="container footer-grid">
     <div>
       <h5>유나업클래스</h5>
@@ -659,7 +848,7 @@
       <li><a href="#reviews">수강생후기</a></li>
       <li><a href="#courses">강의</a></li>
       <li><a href="#tips">수익화 tips</a></li>
-      <li><a href="#">문의하기</a></li>
+      <li><a href="#contact">문의하기</a></li>
     </ul>
   </div>
   <div class="container copyright">© 2026 유나업클래스. All rights reserved.</div>
@@ -690,6 +879,166 @@
     var open = navList.classList.toggle('mobile-open');
     ham.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
+
+  function escapeHtml(str){
+    return String(str).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function todayStr(){
+    var now = new Date();
+    return now.getFullYear()+'.'+String(now.getMonth()+1).padStart(2,'0')+'.'+String(now.getDate()).padStart(2,'0');
+  }
+
+  /* ---------- Admin mode (client-side UI gate only, not real security) ---------- */
+  var ADMIN_PIN = 'una2026';
+  var adminBtn = document.getElementById('adminToggle');
+  function setAdmin(on){
+    document.body.classList.toggle('admin-mode', on);
+    adminBtn.classList.toggle('active', on);
+    adminBtn.textContent = on ? '관리자 모드 ON' : '관리자 모드';
+    try{ sessionStorage.setItem('unaAdmin', on ? '1' : '0'); }catch(e){}
+    renderInquiries();
+  }
+  adminBtn.addEventListener('click', function(){
+    if(document.body.classList.contains('admin-mode')){ setAdmin(false); return; }
+    var pin = prompt('관리자 PIN을 입력하세요');
+    if(pin === null) return;
+    if(pin === ADMIN_PIN){ setAdmin(true); }
+    else { alert('PIN이 올바르지 않습니다.'); }
+  });
+  try{ if(sessionStorage.getItem('unaAdmin') === '1') setAdmin(true); }catch(e){}
+
+  /* ---------- Notices ---------- */
+  var NOTICE_KEY = 'unaNotices';
+  function loadNotices(){
+    try{
+      var v = JSON.parse(localStorage.getItem(NOTICE_KEY) || 'null');
+      if(v && v.length) return v;
+    }catch(e){}
+    return [{
+      date: '2026.08.26',
+      title: '유나업클래스에 오신 것을 환영합니다! 8월 신규 강의 & 1:1 컨설팅 오픈 안내',
+      body: '8월 한 달간 신규 강의 오픈 기념 혜택과 1:1 컨설팅 조기 신청자 한정 혜택을 안내드립니다. 자세한 일정과 강의별 커리큘럼은 강의 메뉴에서 확인해주세요.'
+    }];
+  }
+  function saveNotices(list){ try{ localStorage.setItem(NOTICE_KEY, JSON.stringify(list)); }catch(e){} }
+  function renderNotices(){
+    var list = loadNotices();
+    document.getElementById('tickerText').textContent = list[0].title;
+    document.getElementById('noticeList').innerHTML = list.map(function(n){
+      return '<div class="notice-item"><div class="n-date">'+escapeHtml(n.date)+'</div>'+
+        '<div class="n-title">'+escapeHtml(n.title)+'</div>'+
+        '<div class="n-body">'+escapeHtml(n.body)+'</div></div>';
+    }).join('');
+  }
+  var tickerRow = document.getElementById('tickerRow');
+  var tickerTrigger = document.getElementById('tickerTrigger');
+  tickerTrigger.addEventListener('click', function(){
+    var open = tickerRow.classList.toggle('open');
+    tickerTrigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  tickerRow.addEventListener('mouseleave', function(){
+    tickerRow.classList.remove('open');
+    tickerTrigger.setAttribute('aria-expanded', 'false');
+  });
+  document.getElementById('noticeAddBtn').addEventListener('click', function(){
+    var t = document.getElementById('noticeNewTitle').value.trim();
+    var b = document.getElementById('noticeNewBody').value.trim();
+    if(!t) return;
+    var list = loadNotices();
+    list.unshift({date: todayStr(), title: t, body: b});
+    saveNotices(list);
+    document.getElementById('noticeNewTitle').value = '';
+    document.getElementById('noticeNewBody').value = '';
+    renderNotices();
+  });
+  renderNotices();
+
+  /* ---------- Hero photos ---------- */
+  var HERO_PHOTOS = [];
+  var heroPhotos = document.getElementById('heroPhotos');
+  if(HERO_PHOTOS.length){
+    heroPhotos.innerHTML = HERO_PHOTOS.map(function(src){ return '<img src="'+src+'" alt="유나업클래스 수업 현장">'; }).join('');
+  } else {
+    heroPhotos.style.display = 'none';
+  }
+
+  /* ---------- Gallery ---------- */
+  var GALLERY_KEY = 'unaGallery';
+  function loadGallery(){ try{ return JSON.parse(localStorage.getItem(GALLERY_KEY) || '[]'); }catch(e){ return []; } }
+  function saveGallery(list){ try{ localStorage.setItem(GALLERY_KEY, JSON.stringify(list)); }catch(e){} }
+  function renderGallery(){
+    var list = loadGallery();
+    var grid = document.getElementById('galleryGrid');
+    if(!list.length){
+      grid.innerHTML = '<div class="gallery-empty">아직 등록된 사진이 없습니다. 관리자 모드에서 사진을 등록하거나, 네이버 블로그에서 더 많은 현장 사진을 확인해보세요.</div>';
+      return;
+    }
+    grid.innerHTML = list.map(function(src, i){
+      return '<div class="gallery-item"><img src="'+src+'" alt="현장 사진"><button type="button" class="gallery-del" data-i="'+i+'" aria-label="삭제">×</button></div>';
+    }).join('');
+    grid.querySelectorAll('.gallery-del').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var l = loadGallery();
+        l.splice(parseInt(btn.dataset.i, 10), 1);
+        saveGallery(l);
+        renderGallery();
+      });
+    });
+  }
+  document.getElementById('galleryUpload').addEventListener('change', function(e){
+    var files = Array.prototype.slice.call(e.target.files || []);
+    var remaining = files.length;
+    if(!remaining) return;
+    files.forEach(function(f){
+      var r = new FileReader();
+      r.onload = function(){
+        var l = loadGallery();
+        l.push(r.result);
+        saveGallery(l);
+        remaining--;
+        if(remaining === 0) renderGallery();
+      };
+      r.readAsDataURL(f);
+    });
+    e.target.value = '';
+  });
+  renderGallery();
+
+  /* ---------- Private inquiry ---------- */
+  var INQUIRY_KEY = 'unaInquiries';
+  function loadInquiries(){ try{ return JSON.parse(localStorage.getItem(INQUIRY_KEY) || '[]'); }catch(e){ return []; } }
+  function saveInquiries(list){ try{ localStorage.setItem(INQUIRY_KEY, JSON.stringify(list)); }catch(e){} }
+  function renderInquiries(){
+    var rows = document.getElementById('adminInquiryRows');
+    if(!rows) return;
+    var list = loadInquiries();
+    if(!list.length){ rows.innerHTML = '<p style="color:var(--muted);font-size:0.85rem;">접수된 문의가 없습니다.</p>'; return; }
+    rows.innerHTML = list.slice().reverse().map(function(q){
+      return '<div class="inquiry-row"><div class="i-meta">'+escapeHtml(q.at)+' · '+escapeHtml(q.name)+' · '+escapeHtml(q.contact)+' · '+escapeHtml(q.type)+'</div>'+
+        '<div class="i-body">'+escapeHtml(q.body)+'</div></div>';
+    }).join('');
+  }
+  document.getElementById('inquiryForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('iqName').value.trim();
+    var contact = document.getElementById('iqContact').value.trim();
+    var type = document.getElementById('iqType').value;
+    var body = document.getElementById('iqBody').value.trim();
+    var agree = document.getElementById('iqAgree').checked;
+    var msg = document.getElementById('inquiryMsg');
+    if(!name || !contact || !body){ msg.textContent = '필수 항목을 입력해주세요.'; return; }
+    if(!agree){ msg.textContent = '개인정보 수집 동의가 필요합니다.'; return; }
+    var list = loadInquiries();
+    list.push({at: todayStr(), name: name, contact: contact, type: type, body: body});
+    saveInquiries(list);
+    e.target.reset();
+    msg.textContent = '문의가 접수되었습니다. 빠르게 확인 후 개별 연락드리겠습니다.';
+    renderInquiries();
+    setTimeout(function(){ msg.textContent = ''; }, 5000);
+  });
+  renderInquiries();
 })();
 </script>
 </body>
