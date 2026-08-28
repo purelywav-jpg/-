@@ -489,10 +489,10 @@
   <span class="sparkle" style="bottom:40px;left:16%;width:9px;height:9px;"></span>
   <div class="container">
     <span class="hero-badge"><span class="dot"></span>왕초보를 위한 <strong>수익화 클래스</strong></span>
-    <h2>배우고, 실행하고, <em>성장하는</em><br>과정에 함께합니다</h2>
+    <h2><em>배우고, 실행하고, 성장하는</em><br>과정에 함께합니다</h2>
     <p class="hero-subline">쇼핑쇼츠 수익화는 경험과 재능에 묶여 있지 않습니다.</p>
     <p class="lede">CBL은 교육·마케팅·컨설팅을 통해 개인과 기업의 성장을 돕습니다.<br><br>
-    변화에 맞는 교육부터 전략적인 마케팅과 비즈니스 컨설팅까지, 배움이 실제 성과로 이어질 수 있도록 함께합니다.</p>
+    변화에 맞는 교육부터 전략적인 마케팅과 비즈니스 컨설팅까지,<br>배움이 실제 성과로 이어질 수 있도록 함께합니다.</p>
 
     <div class="hero-photos" id="heroPhotos"></div>
 
@@ -966,7 +966,7 @@
   renderNotices();
 
   /* ---------- Hero photos ---------- */
-  var HERO_PHOTOS = [];
+  var HERO_PHOTOS = ['images/hero-1.jpg', 'images/hero-2.jpg', 'images/hero-3.jpg', 'images/hero-4.jpg'];
   var heroPhotos = document.getElementById('heroPhotos');
   if(HERO_PHOTOS.length){
     heroPhotos.innerHTML = HERO_PHOTOS.map(function(src){ return '<img src="'+src+'" alt="유나업클래스 수업 현장">'; }).join('');
