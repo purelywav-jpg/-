@@ -318,6 +318,36 @@
   .admin-inquiry-list{margin-top:var(--space-6);}
   .admin-inquiry-list h4{font-size:1rem;color:var(--ink);margin-bottom:var(--space-3);}
 
+  /* ---------- Auth modals ---------- */
+  .modal-overlay{position:fixed;inset:0;background:rgba(36,28,51,0.55);display:none;align-items:center;justify-content:center;z-index:200;padding:var(--space-5);}
+  .modal-overlay.open{display:flex;}
+  .modal-card{background:var(--white);border-radius:var(--radius-l);padding:var(--space-7) var(--space-6) var(--space-6);width:100%;max-width:400px;box-shadow:0 30px 60px -20px rgba(36,28,51,0.45);max-height:90vh;overflow:auto;position:relative;}
+  .modal-card[hidden]{display:none;}
+  .modal-close{position:absolute;top:var(--space-4);right:var(--space-4);width:32px;height:32px;border-radius:50%;display:grid;place-items:center;color:var(--muted);font-size:1.2rem;line-height:1;}
+  .modal-close:hover{background:var(--cream-deep);color:var(--ink);}
+  .modal-title{display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Jua',sans-serif;font-size:1.4rem;color:var(--ink);text-align:center;}
+  .modal-title svg{width:22px;height:22px;color:var(--lavender-deep);}
+  .modal-sub{text-align:center;color:var(--muted);font-size:0.85rem;margin-top:var(--space-2);}
+  .modal-field{margin-top:var(--space-4);}
+  .modal-field label{display:block;font-size:0.82rem;font-weight:700;color:var(--ink);margin-bottom:7px;}
+  .modal-field input, .modal-field select{width:100%;padding:12px 14px;border-radius:var(--radius-s);border:1px solid var(--line);background:var(--cream-deep);font-family:inherit;font-size:0.88rem;color:var(--ink);}
+  .modal-field input:focus, .modal-field select:focus{outline:2px solid var(--lavender);}
+  .modal-hint{font-size:0.72rem;color:var(--muted-soft);margin-top:6px;}
+  .modal-btn{width:100%;margin-top:var(--space-5);padding:14px;border-radius:var(--radius-s);border:none;background:linear-gradient(135deg,var(--lavender),var(--lavender-deep));color:#fff;font-weight:800;font-size:0.92rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;}
+  .modal-btn svg{width:16px;height:16px;}
+  .modal-btn:hover{filter:brightness(1.06);}
+  .modal-divider{margin:var(--space-6) 0 var(--space-4);border:none;border-top:1px solid var(--line);}
+  .modal-switch{text-align:center;font-size:0.85rem;color:var(--muted);}
+  .modal-switch-btn{margin-top:var(--space-3);width:100%;padding:12px;border-radius:var(--radius-s);border:1px solid var(--line);background:var(--white);color:var(--ink);font-weight:700;font-size:0.86rem;cursor:pointer;}
+  .modal-switch-btn:hover{border-color:var(--lavender);color:var(--lavender-deep);}
+  .modal-email-row{display:flex;gap:8px;align-items:center;}
+  .modal-email-row input{flex:1.3;min-width:0;}
+  .modal-email-row select{flex:1;min-width:0;}
+  .modal-email-row span{color:var(--muted);flex-shrink:0;}
+  .modal-msg{font-size:0.82rem;font-weight:700;margin-top:var(--space-4);text-align:center;min-height:1.2em;}
+  .modal-msg.error{color:#C0392B;}
+  .modal-msg.success{color:var(--lavender-deep);}
+
   /* ---------- Footer ---------- */
   footer{background:var(--ink);color:#C9C0DE;padding:var(--space-7) 0 var(--space-6);}
   .footer-grid{display:flex;justify-content:space-between;gap:var(--space-6);flex-wrap:wrap;}
@@ -371,8 +401,8 @@
     <span class="date" id="todayDate">2026.08.26 수요일</span>
     <nav>
       <ul>
-        <li><a href="#">로그인</a></li>
-        <li><a href="#">회원가입</a></li>
+        <li><a href="#" id="navLogin">로그인</a></li>
+        <li><a href="#" id="navSignup">회원가입</a></li>
         <li><a href="#">마이페이지</a></li>
         <li>
           <a href="#contact" class="topbar-icon" aria-label="문의하기">
@@ -438,8 +468,6 @@
       <li><a href="#contact">문의하기</a></li>
     </ul>
     <div class="nav-utility">
-      <a href="#">쪽지</a>
-      <a href="#">출석체크</a>
       <a href="#">내정보</a>
     </div>
     <button class="hamburger" id="hamburger" aria-label="메뉴 열기" aria-controls="navList" aria-expanded="false">
@@ -638,7 +666,7 @@
       <div>
         <span class="eyebrow">Student Story</span>
         <h2>수강생 후기</h2>
-        <p class="lede">유나업클래스 관리자가 직접 확인하고 등록한 실제 수강생 성과입니다.</p>
+        <p class="lede">유나업클래스 관리자가 직접 확인하고 등록한<br>실제 수강생 성과입니다.</p>
       </div>
     </div>
 
@@ -791,6 +819,102 @@
   </div>
   <div class="container copyright">© 2026 유나업클래스. All rights reserved.</div>
 </footer>
+
+<!-- ================= Auth modals ================= -->
+<div class="modal-overlay" id="authOverlay">
+  <div class="modal-card" id="loginCard">
+    <button type="button" class="modal-close" id="loginClose" aria-label="닫기">×</button>
+    <div class="modal-title">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10,17 15,12 10,7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+      로그인
+    </div>
+    <p class="modal-sub">계정에 로그인하여 서비스를 이용하세요</p>
+    <form id="loginForm">
+      <div class="modal-field">
+        <label>이메일</label>
+        <input type="email" id="loginEmail" placeholder="your@example.com" required>
+      </div>
+      <div class="modal-field">
+        <label>비밀번호</label>
+        <input type="password" id="loginPassword" placeholder="********" required>
+      </div>
+      <p class="modal-msg" id="loginMsg"></p>
+      <button type="submit" class="modal-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10,17 15,12 10,7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        로그인
+      </button>
+    </form>
+    <hr class="modal-divider">
+    <p class="modal-switch">아직 계정이 없으신가요?</p>
+    <button type="button" class="modal-switch-btn" id="gotoSignup">회원가입</button>
+  </div>
+
+  <div class="modal-card" id="signupCard" hidden>
+    <button type="button" class="modal-close" id="signupClose" aria-label="닫기">×</button>
+    <div class="modal-title">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+      회원가입
+    </div>
+    <p class="modal-sub">유나업클래스에 가입하여 서비스를 이용하세요</p>
+    <form id="signupForm">
+      <div class="modal-field">
+        <label>사용자명</label>
+        <input type="text" id="suName" placeholder="홍길동" required>
+        <p class="modal-hint">한글만 사용 가능 (2-10자)</p>
+      </div>
+      <div class="modal-field">
+        <label>이메일 *</label>
+        <div class="modal-email-row">
+          <input type="text" id="suEmailId" placeholder="이메일 아이디" required>
+          <span>@</span>
+          <select id="suEmailDomain">
+            <option>naver.com</option>
+            <option>gmail.com</option>
+            <option>daum.net</option>
+            <option>hanmail.net</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-field">
+        <label>비밀번호</label>
+        <input type="password" id="suPassword" placeholder="********" required>
+        <p class="modal-hint">8자 이상, 영문/숫자/특수문자 조합</p>
+      </div>
+      <div class="modal-field">
+        <label>비밀번호 확인</label>
+        <input type="password" id="suPassword2" placeholder="********" required>
+      </div>
+      <div class="modal-field">
+        <label>휴대폰번호</label>
+        <input type="text" id="suPhone" placeholder="010-1234-5678" required>
+      </div>
+      <div class="modal-field">
+        <label>추천 코드 (선택사항)</label>
+        <input type="text" id="suReferral" placeholder="추천인 코드를 입력하세요">
+      </div>
+      <div class="modal-field">
+        <label>가입 경로 *</label>
+        <select id="suPath" required>
+          <option value="">선택해주세요</option>
+          <option>지인 추천</option>
+          <option>검색(네이버/구글)</option>
+          <option>인스타그램</option>
+          <option>유튜브</option>
+          <option>블로그</option>
+          <option>기타</option>
+        </select>
+      </div>
+      <p class="modal-msg" id="signupMsg"></p>
+      <button type="submit" class="modal-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        회원가입
+      </button>
+    </form>
+    <hr class="modal-divider">
+    <p class="modal-switch">이미 계정이 있으신가요?</p>
+    <button type="button" class="modal-switch-btn" id="gotoLogin">로그인</button>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -985,6 +1109,104 @@
     setTimeout(function(){ msg.textContent = ''; }, 5000);
   });
   renderInquiries();
+
+  /* ---------- Auth (client-side demo only; not real security) ---------- */
+  var USERS_KEY = 'unaUsers';
+  var SESSION_KEY = 'unaSession';
+  function loadUsers(){ try{ return JSON.parse(localStorage.getItem(USERS_KEY) || '[]'); }catch(e){ return []; } }
+  function saveUsers(list){ try{ localStorage.setItem(USERS_KEY, JSON.stringify(list)); }catch(e){} }
+  function encodePw(pw){ try{ return btoa(unescape(encodeURIComponent(pw))); }catch(e){ return pw; } }
+  function getSession(){ try{ return JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null'); }catch(e){ return null; } }
+  function setSession(s){ try{ sessionStorage.setItem(SESSION_KEY, JSON.stringify(s)); }catch(e){} }
+  function clearSession(){ try{ sessionStorage.removeItem(SESSION_KEY); }catch(e){} }
+
+  var authOverlay = document.getElementById('authOverlay');
+  var loginCard = document.getElementById('loginCard');
+  var signupCard = document.getElementById('signupCard');
+  function openAuth(which){
+    authOverlay.classList.add('open');
+    loginCard.hidden = which !== 'login';
+    signupCard.hidden = which !== 'signup';
+  }
+  function closeAuth(){ authOverlay.classList.remove('open'); }
+
+  var navLogin = document.getElementById('navLogin');
+  var navSignup = document.getElementById('navSignup');
+  function updateAuthUI(){
+    var session = getSession();
+    if(session){
+      navLogin.textContent = session.name + '님';
+      navSignup.textContent = '로그아웃';
+    } else {
+      navLogin.textContent = '로그인';
+      navSignup.textContent = '회원가입';
+    }
+  }
+  navLogin.addEventListener('click', function(e){
+    e.preventDefault();
+    if(getSession()) return;
+    openAuth('login');
+  });
+  navSignup.addEventListener('click', function(e){
+    e.preventDefault();
+    if(getSession()){ clearSession(); updateAuthUI(); return; }
+    openAuth('signup');
+  });
+  document.getElementById('gotoSignup').addEventListener('click', function(){ openAuth('signup'); });
+  document.getElementById('gotoLogin').addEventListener('click', function(){ openAuth('login'); });
+  document.getElementById('loginClose').addEventListener('click', closeAuth);
+  document.getElementById('signupClose').addEventListener('click', closeAuth);
+  authOverlay.addEventListener('click', function(e){ if(e.target === authOverlay) closeAuth(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeAuth(); });
+
+  document.getElementById('signupForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var msg = document.getElementById('signupMsg');
+    var name = document.getElementById('suName').value.trim();
+    var emailId = document.getElementById('suEmailId').value.trim();
+    var domain = document.getElementById('suEmailDomain').value;
+    var pw = document.getElementById('suPassword').value;
+    var pw2 = document.getElementById('suPassword2').value;
+    var phone = document.getElementById('suPhone').value.trim();
+    var path = document.getElementById('suPath').value;
+    function fail(t){ msg.className = 'modal-msg error'; msg.textContent = t; }
+    if(!/^[가-힣]{2,10}$/.test(name)){ fail('사용자명은 한글 2~10자로 입력해주세요.'); return; }
+    if(!emailId){ fail('이메일을 입력해주세요.'); return; }
+    var email = emailId + '@' + domain;
+    if(pw.length < 8){ fail('비밀번호는 8자 이상이어야 합니다.'); return; }
+    if(pw !== pw2){ fail('비밀번호가 일치하지 않습니다.'); return; }
+    if(!phone){ fail('휴대폰번호를 입력해주세요.'); return; }
+    if(!path){ fail('가입 경로를 선택해주세요.'); return; }
+    var users = loadUsers();
+    if(users.some(function(u){ return u.email === email; })){ fail('이미 가입된 이메일입니다.'); return; }
+    users.push({
+      name: name, email: email, pw: encodePw(pw), phone: phone,
+      referral: document.getElementById('suReferral').value.trim(), path: path, at: todayStr()
+    });
+    saveUsers(users);
+    setSession({name: name, email: email});
+    msg.className = 'modal-msg success';
+    msg.textContent = '회원가입이 완료되었습니다!';
+    updateAuthUI();
+    setTimeout(function(){ closeAuth(); e.target.reset(); msg.textContent = ''; }, 900);
+  });
+
+  document.getElementById('loginForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var msg = document.getElementById('loginMsg');
+    var email = document.getElementById('loginEmail').value.trim();
+    var pw = document.getElementById('loginPassword').value;
+    var users = loadUsers();
+    var found = users.filter(function(u){ return u.email === email && u.pw === encodePw(pw); })[0];
+    if(!found){ msg.className = 'modal-msg error'; msg.textContent = '이메일 또는 비밀번호가 올바르지 않습니다.'; return; }
+    setSession({name: found.name, email: found.email});
+    msg.className = 'modal-msg success';
+    msg.textContent = '로그인되었습니다!';
+    updateAuthUI();
+    setTimeout(function(){ closeAuth(); e.target.reset(); msg.textContent = ''; }, 700);
+  });
+
+  updateAuthUI();
 })();
 </script>
 </body>
