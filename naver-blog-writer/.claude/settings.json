@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node scripts/*)",
+      "Bash(npm install)",
+      "Bash(npm run *)",
+      "Bash(npx playwright install*)",
+      "Read(./**)",
+      "Write(data/*)",
+      "Write(drafts/*)",
+      "Write(input/photos/_mosaic/*)",
+      "Edit(data/*)",
+      "Edit(drafts/*)",
+      "Edit(CLAUDE.md)"
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+node_modules/
+
+# 네이버 로그인 세션 — 절대 커밋/공유 금지
+naver-profile/
+
+# 사용자 개인 사진/영상 (원본 초상권·개인정보 소재)
+input/photos/*
+!input/photos/.gitkeep
+input/photos/_mosaic/
+input/videos/*
+!input/videos/.gitkeep
+
+# 생성된 초안/검증 결과물
+drafts/*
+!drafts/.gitkeep
+!drafts/_example.draft.json
+
+.DS_Store

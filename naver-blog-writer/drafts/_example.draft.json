@@ -1,0 +1,25 @@
+{
+  "title": "예시: 부산 발전기 정기점검, 이 3가지만 확인하세요",
+  "blocks": [
+    {
+      "type": "text",
+      "text": "발전기 시동 버튼을 눌렀는데 아무 반응이 없으셨죠. 점검 날짜는 다가오는데 막막하실 겁니다. 결론부터 말씀드리면, 열에 아홉은 엔진 문제가 아닙니다."
+    },
+    {
+      "type": "text",
+      "text": "업체 입장에선 이런 글 쓰면 손해인데, 자꾸 당하는 분들이 계셔서 씁니다."
+    },
+    { "type": "subtitle", "text": "1. 배터리부터 확인하세요" },
+    {
+      "type": "image",
+      "path": "input/photos/_mosaic/example1.jpg",
+      "caption": "발전기 배터리 단자 점검 장면"
+    },
+    { "type": "quote", "text": "발전기 고장의 70%는 배터리 문제입니다." },
+    { "type": "divider" },
+    { "type": "text", "text": "다음으로 확인할 부분은 연료 계통입니다." }
+  ],
+  "tags": ["부산발전기", "발전기점검", "비상발전기"],
+  "place": { "query": "부산 발전기 수리", "name": "○○발전기서비스" },
+  "video": { "path": "input/videos/example.mp4", "title": "발전기 시동 안 걸릴 때 확인 순서" }
+}
