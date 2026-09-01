@@ -60,14 +60,20 @@ export async function dismissContinuePopup(frame) {
 }
 
 export async function closeLeftoverDim(page, frame) {
-  const dim = frame.locator('.se-dim, [class*="dimLayer"]');
+  // 반드시 :visible 로 한정한다 — class="se-dim" 요소는 이미 닫힌(display:none) 다른 위젯이나
+  // 아직 열지도 않은 위젯에도 구조적으로 남아있을 수 있어, count()만 보면 엉뚱한 요소까지 강제 제거하게 된다.
+  const dim = frame.locator('.se-dim:visible, [class*="dimLayer"]:visible');
+  if (!(await dim.count())) return;
+
+  const closeBtn = frame.locator('[class*="se-popup-button-close"]:visible').first();
+  if (await closeBtn.count()) {
+    await closeBtn.click({ timeout: 3000 }).catch(() => {});
+  }
+
+  // 닫기 버튼이 없거나, 다른 위젯의 버튼을 잘못 짚었거나, 클릭이 실패한 경우까지 전부 커버하기 위해
+  // 닫기 시도 후에도 "보이는" dim이 남아있으면 그것만 강제 제거한다.
   if (await dim.count()) {
-    const closeBtn = frame.locator('[class*="se-popup-button-close"]').first();
-    if (await closeBtn.count()) {
-      await closeBtn.click().catch(() => {});
-    } else {
-      await dim.evaluateAll((els) => els.forEach((el) => el.remove())).catch(() => {});
-    }
+    await dim.evaluateAll((els) => els.forEach((el) => el.remove())).catch(() => {});
   }
 }
 
