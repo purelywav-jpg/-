@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>크리에이터를 위한 클로드 코드 플러그인 5가지 설치 가이드 | 청정</title>
+<meta name="description" content="콘텐츠 작업 속도를 올려주는 클로드 코드 플러그인 5가지를 초보자 기준으로 정리했습니다. 터미널에서만 되는 것과 웹·앱에서도 되는 것을 구분해서 소개합니다.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cellipse cx='14' cy='17' rx='10' ry='8' transform='rotate(-18 14 17)' fill='%239B7FE0'/%3E%3Cellipse cx='34' cy='17' rx='10' ry='8' transform='rotate(18 34 17)' fill='%239B7FE0'/%3E%3Cellipse cx='24' cy='24' rx='1.8' ry='13' fill='%232B2438'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="../index.html" class="logo">
+      <svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true">
+        <ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender)"/>
+        <ellipse cx="15" cy="30" rx="7" ry="5.5" transform="rotate(-12 15 30)" fill="var(--lavender-deep)"/>
+        <ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender)"/>
+        <ellipse cx="33" cy="30" rx="7" ry="5.5" transform="rotate(12 33 30)" fill="var(--lavender-deep)"/>
+        <ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/>
+        <path d="M23 12 C21 8, 18 7, 16 6" stroke="var(--ink)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        <path d="M25 12 C27 8, 30 7, 32 6" stroke="var(--ink)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span>청정<small>BRANDING &amp; MONETIZING</small></span>
+    </a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="../index.html#about">소개</a></li>
+        <li><a href="../index.html#blog">블로그</a></li>
+        <li><a href="../index.html#services">컨설팅</a></li>
+        <li><a href="../index.html#contact">문의</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a href="../index.html#contact" class="btn btn-primary btn-sm">상담 신청</a>
+      <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="post-hero">
+  <div class="container">
+    <span class="eyebrow">도구</span>
+    <h1>크리에이터를 위한 클로드 코드 플러그인 5가지 설치 가이드</h1>
+    <div class="post-meta">
+      <span>2026.09.02</span>
+      <span>&middot;</span>
+      <span>브랜딩·수익화 컨설턴트 청정</span>
+    </div>
+  </div>
+</section>
+
+<div class="post-divider">
+  <span class="line"></span>
+  <svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--lavender-deep)"/></svg>
+  <span class="line"></span>
+</div>
+
+<article class="article container">
+  <p>콘텐츠를 매일 만들다 보면 반복 작업에 쓰는 시간이 생각보다 큽니다. 클로드 코드를 기본값 그대로 쓰고 있다면, 아래 5가지만 붙여도 토큰·기억·디자인·자동화 문제가 상당 부분 정리됩니다. 깃허브에 직접 들어갈 필요 없이 명령어를 복사해서 붙여넣는 수준이라 개발 경험이 없어도 따라할 수 있습니다.</p>
+
+  <h2>시작 전에 확인할 것 &mdash; 어디서 쓸 수 있나</h2>
+  <p>터미널에서 클로드 코드를 쓰면 5개 전부 쓸 수 있습니다. 클로드 웹이나 데스크탑 앱만 쓴다면 마지막 1개만 해당됩니다.</p>
+  <ul>
+    <li><svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg> OmniRoute, claude-mem, Frontend Design, Playwright &mdash; 클로드 코드(터미널)에서만 동작</li>
+    <li><svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg> Task Observer &mdash; 웹, 데스크탑 앱, 모바일까지 전부 가능, 무료 요금제 포함</li>
+  </ul>
+  <p>앞의 4개는 클로드 코드에 붙는 플러그인이라 웹이나 앱에는 설치할 자리 자체가 없습니다. Task Observer만 스킬 형태라서 어디서든 쓸 수 있습니다. 웹이나 앱만 쓰신다면 맨 아래 5번부터 보시면 됩니다.</p>
+
+  <h3>시작 전에 준비할 것</h3>
+  <ul>
+    <li><svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg> Node.js 설치 (1번 OmniRoute에만 필요) &mdash; nodejs.org에서 LTS 버전을 받고, 설치 후 터미널을 껐다가 다시 켜야 인식됩니다.</li>
+    <li><svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg> 명령어 구분 &mdash; <code>/</code>로 시작하면 클로드 코드 안에서, <code>/</code> 없이 시작하면 터미널(명령 프롬프트)에서 입력합니다.</li>
+  </ul>
+
+  <h2>1. OmniRoute &mdash; 토큰 부족 시 다른 모델로 자동 전환</h2>
+  <p>작업 중 토큰이 부족해지면 다른 모델로 갈아타서 이어가게 해주는 도구입니다. 내 컴퓨터에 작은 중계 서버를 띄우고 클로드 코드가 그쪽을 거쳐가도록 바꿔주는 방식으로 동작합니다.</p>
+  <ul>
+    <li><svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg> 설치(터미널): <code>npm install -g omniroute</code></li>
+    <li><svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg> 실행: 앞으로는 <code>claude</code> 대신 <code>omniroute launch</code>로 켭니다.</li>
+    <li><svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg> 확인: 브라우저에서 <code>http://localhost:20128</code>을 열어 대시보드가 뜨는지 봅니다. 터미널을 닫으면 서버도 같이 꺼집니다.</li>
+  </ul>
+  <p>이 도구는 클로드 코드가 주고받는 트래픽을 로컬 서버가 중계하는 구조라, 회사 계정이나 민감한 프로젝트에서 쓰기 전에는 어떤 서버로 요청이 흘러가는지 문서에서 한 번 확인하고 쓰는 걸 권합니다.</p>
+
+  <h2>2. claude-mem &mdash; 대화를 기억하는 기억 장치</h2>
+  <p>클로드 코드는 창을 닫으면 이전 대화를 잊습니다. claude-mem을 붙이면 지난 작업 내용을 요약해 다음 대화에 자동으로 넣어주고, 예전에 뭘 했는지도 검색할 수 있습니다.</p>
+  <ul>
+    <li><svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg> 설치(클로드 코드 안에서, 권장): <code>/plugin marketplace add thedotmack/claude-mem</code> 다음 줄에 <code>/plugin install claude-mem</code></li>
+    <li><svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg> 대안(터미널): <code>npx claude-mem install</code></li>
+    <li><svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg> 이건 피하세요: <code>npm install -g claude-mem</code>은 부품만 깔리고 기억 기능은 동작하지 않습니다.</li>
+  </ul>
+  <p>회사 업무나 개인정보가 섞인 작업을 기록에 남기고 싶지 않다면, 공식 문서의 제외 설정을 먼저 확인하세요.</p>
+
+  <h2>3. Frontend Design &mdash; AI 티 나는 화면에서 벗어나기</h2>
+  <p>AI에게 화면을 맡기면 비슷한 보라색 그라데이션과 똑같이 생긴 버튼이 반복되기 쉽습니다. 앤트로픽 공식 플러그인으로, 글꼴과 색을 과감하게 골라줘서 어디서 본 듯한 느낌을 줄여줍니다.</p>
+  <ul>
+    <li><svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg> 설치(클로드 코드 안에서): <code>/plugin install frontend-design@claude-plugins-official</code></li>
+    <li><svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg> 명령어가 안 먹히면(터미널): <code>claude plugin marketplace add anthropics/claude-plugins-official</code> 실행 후 다시 시도합니다.</li>
+    <li><svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg> 확인: <code>/plugin</code>을 치면 설치 목록에 frontend-design이 보입니다.</li>
+  </ul>
+  <p>따로 불러낼 필요 없이, 깔아둔 상태에서 평소처럼 &ldquo;대시보드 만들어줘&rdquo;, &ldquo;랜딩페이지 만들어줘&rdquo;라고 요청하면 자동으로 적용됩니다.</p>
+
+  <h2>4. Playwright &mdash; 브라우저를 대신 조작</h2>
+  <p>마이크로소프트가 만든 도구로, 클로드가 직접 브라우저를 열어 페이지를 돌아다니고 버튼을 누르고 스크린샷을 찍게 해줍니다. 내가 만든 화면을 직접 열어보고 이상한 곳을 찾아 고치는 것도 여기서 나옵니다.</p>
+  <ul>
+    <li><svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg> 설치(클로드 코드 안에서): <code>/plugin install playwright@claude-plugins-official</code></li>
+    <li><svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg> 안 되면 3번의 마켓플레이스 등록 명령을 먼저 실행하고 다시 시도합니다.</li>
+  </ul>
+  <p>방금 만든 화면을 띄우고 &ldquo;직접 열어보고 이상한 곳 고쳐줘&rdquo;라고 시키는 게 체감이 가장 큽니다.</p>
+
+  <h2>5. Task Observer &mdash; 반복 작업 자동 탐지 (웹·앱 가능)</h2>
+  <p>옆에서 지켜보다가 매번 똑같이 시키는 일을 찾아내고, 한 번에 처리하는 방법을 먼저 제안해줍니다. 오래 쓸수록 시키는 말이 짧아집니다. 앞의 4개와 달리 플러그인이 아니라 스킬이라 설치 경로가 다릅니다.</p>
+  <ul>
+    <li><svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg> 클로드 설정 &rarr; 기능에서 코드 실행을 먼저 켭니다. 이게 꺼져 있으면 스킬이 안 보입니다.</li>
+    <li><svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg> 커스터마이즈 &rarr; 스킬로 이동해 + 버튼을 누르고, 스킬 zip 파일을 그대로 올립니다(압축을 풀지 않습니다).</li>
+    <li><svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg> 코워크에서 쓸 때는 공유 폴더를 하나 정해서 계속 같은 폴더를 써야 이전 관찰 기록을 이어서 찾습니다.</li>
+  </ul>
+  <p>세션을 마무리할 때 &ldquo;관찰한 거 기록했어?&rdquo;라고 한 번 물어보고, 시간이 지나면 쌓인 제안을 정기적으로 검토하는 방식으로 씁니다. 무료 요금제를 포함해 모든 요금제에서 됩니다.</p>
+
+  <div class="pull-quote">도구는 작업 시간을 줄여줄 뿐, 무엇을 만들지 결정하는 건 여전히 사람의 몫입니다.</div>
+
+  <h2>설치 전 체크리스트</h2>
+  <ul>
+    <li><svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg> 앤트로픽 공식 목록(<code>claude-plugins-official</code>)이 아닌 개인 저장소 기반 도구는 설치 전에 제작자와 소스 코드 저장소를 한 번 확인합니다.</li>
+    <li><svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg> 회사 계정, 고객 데이터, 민감한 프로젝트에서는 트래픽을 중계하거나 대화를 저장하는 도구부터 신중하게 검토합니다.</li>
+    <li><svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg> 처음에는 한 번에 다 깔지 말고 하나씩 붙여보면서 내 작업 방식에 맞는지 확인합니다.</li>
+  </ul>
+
+  <div class="article-cta">
+    <p>콘텐츠 제작 워크플로우를 도구로 정리하고 싶다면, 1:1 컨설팅에서 우선순위부터 함께 잡아 드립니다.</p>
+    <a href="../index.html#contact" class="btn btn-primary">1:1 상담 신청하기</a>
+  </div>
+
+  <a href="../index.html#blog" class="back-link">&larr; 블로그 목록으로 돌아가기</a>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>&copy; 2026 청정. All rights reserved.</span>
+      <span>브랜딩·수익화 컨설턴트 청정</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>
