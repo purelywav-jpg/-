@@ -194,14 +194,20 @@
 
   /* ---------- Hero ---------- */
   .hero{
-    padding:var(--space-8) 0 var(--space-7);position:relative;overflow:hidden;
+    padding:var(--space-8) 0 130px;position:relative;overflow:hidden;
     background:
-      radial-gradient(circle at 12% 20%, rgba(139,111,232,0.10), transparent 40%),
-      radial-gradient(circle at 88% 12%, rgba(139,111,232,0.14), transparent 38%),
-      radial-gradient(circle at 92% 80%, rgba(139,111,232,0.08), transparent 45%),
-      var(--cream);
+      radial-gradient(circle at 14% 18%, rgba(255,255,255,0.16), transparent 40%),
+      radial-gradient(circle at 88% 10%, rgba(255,255,255,0.14), transparent 42%),
+      linear-gradient(165deg, #E7DAF8 0%, #C9AEF0 42%, #9C74E0 78%, #7C4FDB 100%);
   }
-  .hero .container{position:relative;max-width:820px;text-align:center;display:flex;flex-direction:column;align-items:center;}
+  .hero-butterfly{position:absolute;width:34px;color:#fff;opacity:0.7;pointer-events:none;filter:drop-shadow(0 6px 10px rgba(95,39,194,0.25));}
+  .hero-butterfly.b1{top:12%;left:6%;width:30px;transform:rotate(-10deg);}
+  .hero-butterfly.b2{top:20%;right:8%;width:24px;transform:rotate(12deg);opacity:0.55;}
+  .hero-butterfly.b3{bottom:30%;left:10%;width:22px;transform:rotate(-6deg);opacity:0.5;}
+  .hero-butterfly.b4{bottom:22%;right:6%;width:30px;transform:rotate(9deg);}
+  .hero-waves{position:absolute;left:0;right:0;bottom:0;width:100%;line-height:0;pointer-events:none;}
+  .hero-waves svg{width:100%;height:110px;display:block;}
+  .hero .container{position:relative;z-index:1;max-width:820px;text-align:center;display:flex;flex-direction:column;align-items:center;}
   .hero-badge{
     display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--line);
     border-radius:var(--radius-full);padding:8px 18px 8px 14px;font-size:0.85rem;font-weight:700;color:var(--ink-soft);
@@ -209,11 +215,14 @@
   }
   .hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--lavender);}
   .hero-badge strong{color:var(--lavender-deep);font-weight:800;}
-  .hero h2{margin-top:var(--space-5);font-size:clamp(2.1rem,4.6vw,3.1rem);line-height:1.42;color:var(--ink);}
-  .hero h2 em{font-style:normal;color:var(--lavender-deep);}
-  .hero-subline{margin-top:var(--space-3);color:var(--ink-soft);font-size:1.05rem;font-weight:700;}
-  .hero .lede{margin-top:var(--space-5);color:var(--ink-soft);font-size:1.02rem;line-height:1.85;font-weight:500;}
-  .hero .lede b{color:var(--lavender-deep);font-weight:800;}
+  .hero h2{margin-top:var(--space-5);font-size:clamp(2.1rem,4.6vw,3.1rem);line-height:1.42;color:var(--white);}
+  .hero h2 em{font-style:normal;color:var(--lavender-pale);}
+  .hero-subline{margin-top:var(--space-3);color:rgba(255,255,255,0.92);font-size:1.05rem;font-weight:700;}
+  .hero-divider{display:flex;align-items:center;gap:14px;width:200px;margin-top:var(--space-4);}
+  .hero-divider span{flex:1;height:1px;background:rgba(255,255,255,0.5);}
+  .hero-divider i{font-style:normal;color:#fff;font-size:0.85rem;}
+  .hero .lede{margin-top:var(--space-5);color:rgba(255,255,255,0.85);font-size:1.02rem;line-height:1.85;font-weight:500;}
+  .hero .lede b{color:#fff;font-weight:800;}
 
   .hero-photos{margin-top:var(--space-6);display:flex;gap:var(--space-3);justify-content:center;flex-wrap:wrap;}
   .hero-photos img{width:128px;height:128px;object-fit:cover;border-radius:var(--radius-m);border:3px solid var(--white);box-shadow:var(--shadow-card);}
@@ -457,6 +466,12 @@
     .site-header .container{flex-direction:column;align-items:stretch;}
     .hero h2{font-size:1.8rem;}
     .hero-photos img{width:84px;height:84px;}
+    .hero-waves svg{height:60px;}
+    .hero-butterfly{width:20px !important;}
+    .hero-butterfly.b1{top:5%;left:3%;}
+    .hero-butterfly.b2{top:6%;right:3%;}
+    .hero-butterfly.b3{bottom:36%;left:3%;}
+    .hero-butterfly.b4{bottom:30%;right:3%;}
     .contact-wrap{grid-template-columns:1fr;}
     #inquiryForm{grid-template-columns:1fr;}
   }
@@ -571,13 +586,39 @@
 <main id="mainContent">
 <!-- ================= Hero ================= -->
 <section class="hero">
-  <span class="sparkle" style="top:60px;left:8%;"></span>
-  <span class="sparkle" style="top:140px;right:10%;width:8px;height:8px;"></span>
-  <span class="sparkle" style="bottom:40px;left:16%;width:9px;height:9px;"></span>
+  <svg class="hero-butterfly b1" viewBox="0 0 64 64" aria-hidden="true"><g fill="currentColor">
+    <path d="M32 30c-4-14-16-22-24-18-7 4-4 18 8 20 8 1.5 14-1 16-2z" opacity=".9"/>
+    <path d="M32 30c4-14 16-22 24-18 7 4 4 18-8 20-8 1.5-14-1-16-2z" opacity=".9"/>
+    <path d="M32 30c-3 10-11 16-18 14-5-1.5-4-11 5-13 6-1.5 11 0 13-1z" opacity=".7"/>
+    <path d="M32 30c3 10 11 16 18 14 5-1.5 4-11-5-13-6-1.5-11 0-13-1z" opacity=".7"/>
+    <rect x="30.5" y="18" width="3" height="26" rx="1.5"/>
+  </g></svg>
+  <svg class="hero-butterfly b2" viewBox="0 0 64 64" aria-hidden="true"><g fill="currentColor">
+    <path d="M32 30c-4-14-16-22-24-18-7 4-4 18 8 20 8 1.5 14-1 16-2z" opacity=".9"/>
+    <path d="M32 30c4-14 16-22 24-18 7 4 4 18-8 20-8 1.5-14-1-16-2z" opacity=".9"/>
+    <path d="M32 30c-3 10-11 16-18 14-5-1.5-4-11 5-13 6-1.5 11 0 13-1z" opacity=".7"/>
+    <path d="M32 30c3 10 11 16 18 14 5-1.5 4-11-5-13-6-1.5-11 0-13-1z" opacity=".7"/>
+    <rect x="30.5" y="18" width="3" height="26" rx="1.5"/>
+  </g></svg>
+  <svg class="hero-butterfly b3" viewBox="0 0 64 64" aria-hidden="true"><g fill="currentColor">
+    <path d="M32 30c-4-14-16-22-24-18-7 4-4 18 8 20 8 1.5 14-1 16-2z" opacity=".9"/>
+    <path d="M32 30c4-14 16-22 24-18 7 4 4 18-8 20-8 1.5-14-1-16-2z" opacity=".9"/>
+    <path d="M32 30c-3 10-11 16-18 14-5-1.5-4-11 5-13 6-1.5 11 0 13-1z" opacity=".7"/>
+    <path d="M32 30c3 10 11 16 18 14 5-1.5 4-11-5-13-6-1.5-11 0-13-1z" opacity=".7"/>
+    <rect x="30.5" y="18" width="3" height="26" rx="1.5"/>
+  </g></svg>
+  <svg class="hero-butterfly b4" viewBox="0 0 64 64" aria-hidden="true"><g fill="currentColor">
+    <path d="M32 30c-4-14-16-22-24-18-7 4-4 18 8 20 8 1.5 14-1 16-2z" opacity=".9"/>
+    <path d="M32 30c4-14 16-22 24-18 7 4 4 18-8 20-8 1.5-14-1-16-2z" opacity=".9"/>
+    <path d="M32 30c-3 10-11 16-18 14-5-1.5-4-11 5-13 6-1.5 11 0 13-1z" opacity=".7"/>
+    <path d="M32 30c3 10 11 16 18 14 5-1.5 4-11-5-13-6-1.5-11 0-13-1z" opacity=".7"/>
+    <rect x="30.5" y="18" width="3" height="26" rx="1.5"/>
+  </g></svg>
   <div class="container">
     <span class="hero-badge"><span class="dot"></span>왕초보를 위한 <strong>수익화 클래스</strong></span>
     <h2><em>배우고, 실행하고, 성장하는</em><br>과정에 함께합니다</h2>
     <p class="hero-subline">쇼핑쇼츠 수익화는 경험과 재능에 묶여 있지 않습니다.</p>
+    <div class="hero-divider" aria-hidden="true"><span></span><i>✦</i><span></span></div>
     <p class="lede">CBL은 교육·마케팅·컨설팅을 통해 개인과 기업의 성장을 돕습니다.<br>
     변화에 맞는 교육부터 전략적인 마케팅과 비즈니스 컨설팅까지,<br>배움이 실제 성과로 이어질 수 있도록 함께합니다.</p>
 
@@ -609,6 +650,13 @@
     <div class="hero-actions">
       <a class="btn btn-primary" href="https://pf.kakao.com/_tmKxin" target="_blank" rel="noopener noreferrer">무료 상담 신청하기</a>
     </div>
+  </div>
+  <div class="hero-waves" aria-hidden="true">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path d="M0,64 C240,120 480,0 720,32 C960,64 1200,120 1440,64 L1440,120 L0,120 Z" fill="rgba(255,255,255,0.35)"/>
+      <path d="M0,80 C240,40 480,120 720,80 C960,40 1200,100 1440,70 L1440,120 L0,120 Z" fill="rgba(255,255,255,0.6)"/>
+      <path d="M0,100 C240,70 480,110 720,90 C960,70 1200,110 1440,90 L1440,120 L0,120 Z" fill="#FFFFFF"/>
+    </svg>
   </div>
 </section>
 
