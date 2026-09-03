@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}대시보드 - 네이버 블로그 순위추적{% endblock %}
+{% block content %}
+
+<div class="dash-head">
+  <h1>{{ today[:4] }}년 {{ today[5:7]|int }}월 {{ today[8:10]|int }}일 현황</h1>
+  <form method="post" action="{{ url_for('check_now') }}">
+    <button type="submit" class="btn-primary">지금 순위 체크</button>
+  </form>
+</div>
+
+<div class="stat-grid">
+  <div class="stat-card"><span>등록 포스팅</span><strong>{{ summary.post_count }}</strong></div>
+  <div class="stat-card"><span>추적 키워드</span><strong>{{ summary.keyword_count }}</strong></div>
+  <div class="stat-card top"><span>TOP 10</span><strong>{{ summary.top10 }}</strong></div>
+  <div class="stat-card top"><span>TOP 30</span><strong>{{ summary.top30 }}</strong></div>
+  <div class="stat-card out"><span>미노출</span><strong>{{ summary.not_found }}</strong></div>
+  <div class="stat-card up"><span>오늘 상승</span><strong>{{ summary.up }}</strong></div>
+  <div class="stat-card down"><span>오늘 하락</span><strong>{{ summary.down }}</strong></div>
+  <div class="stat-card"><span>변동 없음</span><strong>{{ summary.same }}</strong></div>
+</div>
+
+<div class="filter-bar">
+  {% for key, label in [("all","전체"), ("up","상승"), ("down","하락"), ("same","변동 없음"),
+                         ("top10","TOP 10"), ("top30","TOP 30"), ("not_found","미노출")] %}
+    <a href="{{ url_for('dashboard', filter=key, date=today) }}"
+       class="chip {% if mode == key %}active{% endif %}">{{ label }}</a>
+  {% endfor %}
+</div>
+
+<table class="rank-table">
+  <thead>
+    <tr><th>포스팅</th><th>키워드</th><th>현재 순위</th><th>변동</th></tr>
+  </thead>
+  <tbody>
+    {% for r in rows %}
+    <tr>
+      <td class="post-cell">
+        <a href="{{ url_for('post_detail', post_id=r.post_id) }}">{{ r.post_title }}</a>
+      </td>
+      <td>{{ r.keyword }}</td>
+      <td class="rank-cell">
+        {% if r.status == "RANKED" %}{{ r.rank }}위{% else %}미노출{% endif %}
+      </td>
+      <td class="change-cell {% if (r.change_delta or 0) > 0 %}up{% elif (r.change_delta or 0) < 0 %}down{% endif %}">
+        {{ r.change_label }}
+      </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="4" class="empty">데이터가 없습니다. "지금 순위 체크"를 눌러 첫 측정을 시작하세요.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
