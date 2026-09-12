@@ -3,43 +3,95 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>네이버 홈판용 원고자판기 | 청정</title>
+<title>홈판용 원고자판기 | 청정</title>
 <meta name="description" content="홈판 노출에 최적화된 글을 체계적으로 작성하는 도구. 데이터 분석 기반 구조로 홈판 진입을 실험하세요.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cellipse cx='14' cy='17' rx='10' ry='8' transform='rotate(-18 14 17)' fill='%239B7FE0'/%3E%3Cellipse cx='34' cy='17' rx='10' ry='8' transform='rotate(18 34 17)' fill='%239B7FE0'/%3E%3Cellipse cx='24' cy='24' rx='1.8' ry='13' fill='%232B2438'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #FAFAFA;
+  }
+
+  .site-header {
+    background: #fff;
+    border-bottom: 1px solid #eee;
+  }
+
+  .generator-section {
+    background: #fff;
+    padding: 4rem 0;
+    min-height: calc(100vh - 200px);
+  }
+
   .generator-container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .gen-header {
+    margin-bottom: 3rem;
+  }
+
+  .gen-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin: 0 0 1rem 0;
+    color: #000;
+  }
+
+  .gen-header h1 strong {
+    color: #D946EF;
+  }
+
+  .gen-header p {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0;
+    max-width: 600px;
   }
 
   .generator-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.2fr 1fr;
     gap: 3rem;
-    margin: 2rem 0;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     .generator-grid {
       grid-template-columns: 1fr;
       gap: 2rem;
     }
   }
 
-  .input-section, .output-section {
-    background: var(--cream);
-    border-radius: 12px;
-    padding: 2rem;
+  .input-panel {
+    background: #fff;
   }
 
-  .input-section h3 {
-    margin-bottom: 1.5rem;
-    font-size: 1.2rem;
-    color: var(--ink);
+  .input-section {
+    padding: 2rem 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .input-section:last-child {
+    border-bottom: none;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   .form-group {
@@ -48,59 +100,48 @@
 
   .form-group label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.6rem;
     font-size: 0.95rem;
     font-weight: 600;
-    color: var(--ink);
+    color: #000;
+    letter-spacing: -0.5px;
+  }
+
+  .form-group small {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.85rem;
+    color: #999;
   }
 
   .form-group input,
   .form-group textarea,
   .form-group select {
     width: 100%;
-    padding: 0.75rem;
-    border: 2px solid var(--lavender-light);
-    border-radius: 8px;
+    padding: 0.9rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
     font-family: inherit;
     font-size: 0.95rem;
-    color: var(--ink);
-    transition: border-color 0.2s;
+    color: #000;
+    background: #fafafa;
+    transition: all 0.2s;
   }
 
   .form-group input:focus,
   .form-group textarea:focus,
   .form-group select:focus {
     outline: none;
-    border-color: var(--lavender-deep);
-    background-color: var(--white);
+    border-color: #D946EF;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(217, 70, 239, 0.1);
   }
 
   .form-group textarea {
     resize: vertical;
     min-height: 80px;
-  }
-
-  .form-group small {
-    display: block;
-    margin-top: 0.3rem;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-  }
-
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-
-  .form-row .form-group {
-    margin-bottom: 0;
-  }
-
-  @media (max-width: 480px) {
-    .form-row {
-      grid-template-columns: 1fr;
-    }
+    font-family: 'Gowun Batang', serif;
+    line-height: 1.6;
   }
 
   .btn-group {
@@ -111,41 +152,74 @@
 
   .btn-group .btn {
     flex: 1;
+    padding: 1rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: #000;
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    background: #D946EF;
   }
 
   .btn-secondary {
-    background-color: var(--lavender-light);
-    color: var(--ink);
-    border: 2px solid var(--lavender-light);
+    background: #f5f5f5;
+    color: #000;
+    border: 1px solid #ddd;
   }
 
   .btn-secondary:hover {
-    background-color: var(--lavender);
-    border-color: var(--lavender);
+    background: #eee;
   }
 
-  .output-section h3 {
-    margin-bottom: 1.5rem;
-    font-size: 1.2rem;
-    color: var(--ink);
+  .output-panel {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+  }
+
+  .output-box {
+    background: #000;
+    color: #fff;
+    border-radius: 8px;
+    padding: 2rem;
+    overflow: hidden;
+  }
+
+  .output-label {
+    font-size: 0.85rem;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    font-weight: 600;
   }
 
   .output-content {
-    background: var(--white);
-    border: 2px solid var(--lavender-light);
-    border-radius: 8px;
+    background: #fff;
+    color: #000;
+    border-radius: 6px;
     padding: 1.5rem;
     min-height: 400px;
     max-height: 600px;
     overflow-y: auto;
     line-height: 1.8;
+    font-size: 0.95rem;
   }
 
   .output-content.empty {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-secondary);
+    color: #ccc;
     text-align: center;
   }
 
@@ -156,155 +230,179 @@
   .output-content h4 {
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
-    color: var(--lavender-deep);
-    font-size: 1.05rem;
+    color: #D946EF;
+    font-size: 1rem;
+    font-weight: 700;
   }
 
   .output-content h4:first-child {
     margin-top: 0;
   }
 
-  .copy-btn {
-    margin-top: 1rem;
-    width: 100%;
-  }
-
-  .info-box {
-    background: #FFF3CD;
-    border-left: 4px solid #FFC107;
-    padding: 1rem;
-    border-radius: 6px;
-    margin-bottom: 2rem;
-    font-size: 0.95rem;
-    line-height: 1.6;
-  }
-
-  .info-box strong {
-    display: block;
-    color: var(--ink);
-    margin-bottom: 0.5rem;
-  }
-
-  .step-indicator {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .step {
-    text-align: center;
-    padding: 1rem;
-    background: var(--white);
-    border-radius: 8px;
-    border: 2px solid var(--lavender-light);
-  }
-
-  .step.active {
-    border-color: var(--lavender-deep);
-    background: var(--cream);
-  }
-
-  .step-num {
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    background: var(--lavender);
-    color: var(--white);
-    border-radius: 50%;
-    line-height: 32px;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-  }
-
-  .step.active .step-num {
-    background: var(--lavender-deep);
-  }
-
-  .step-label {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-  }
-
   .generated-title {
-    background: var(--lavender-light);
-    padding: 1rem;
+    background: #f5f5f5;
+    padding: 1.2rem;
     border-radius: 6px;
     margin-bottom: 1.5rem;
-    border-left: 4px solid var(--lavender-deep);
+    border-left: 3px solid #D946EF;
   }
 
   .generated-title strong {
     display: block;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
+    font-size: 0.8rem;
+    color: #999;
     margin-bottom: 0.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   .generated-title h2 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     margin: 0;
-    color: var(--ink);
+    color: #000;
+    font-weight: 700;
   }
 
-  .validation-tips {
-    background: #E8F5E9;
-    border-left: 4px solid #4CAF50;
+  .copy-btn {
+    width: 100%;
     padding: 1rem;
+    background: #D946EF;
+    color: #fff;
+    border: none;
     border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.2s;
+  }
+
+  .copy-btn:hover {
+    background: #c936de;
+  }
+
+  .warning-banner {
+    background: #FEF3C7;
+    border-left: 4px solid #F59E0B;
+    padding: 1.5rem;
+    border-radius: 6px;
+    margin-bottom: 2rem;
     font-size: 0.95rem;
-    margin-top: 1.5rem;
+    line-height: 1.7;
   }
 
-  .validation-tips strong {
+  .warning-banner strong {
     display: block;
-    color: var(--ink);
-    margin-bottom: 0.5rem;
+    color: #000;
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
   }
 
-  .validation-tips ul {
-    margin: 0;
-    padding-left: 1.2rem;
-  }
-
-  .validation-tips li {
-    margin-bottom: 0.3rem;
-  }
-
-  .tab-section {
-    margin-top: 2rem;
+  .warning-banner em {
+    color: #D946EF;
+    font-style: normal;
+    font-weight: 600;
   }
 
   .tab-buttons {
     display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid var(--lavender-light);
+    gap: 0;
+    border-bottom: 1px solid #eee;
+    margin-top: 1.5rem;
   }
 
   .tab-btn {
-    padding: 0.75rem 1rem;
+    padding: 1rem;
     background: none;
     border: none;
     border-bottom: 3px solid transparent;
     cursor: pointer;
     font-size: 0.95rem;
-    color: var(--text-secondary);
+    color: #999;
     font-weight: 600;
     transition: all 0.2s;
   }
 
   .tab-btn.active {
-    color: var(--lavender-deep);
-    border-bottom-color: var(--lavender-deep);
+    color: #000;
+    border-bottom-color: #D946EF;
   }
 
   .tab-content {
     display: none;
+    margin-top: 1.5rem;
   }
 
   .tab-content.active {
     display: block;
+  }
+
+  .checklist-item {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem;
+  }
+
+  .checklist-item:last-child {
+    border-bottom: none;
+  }
+
+  .tips-list li {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  .tips-list li:last-child {
+    border-bottom: none;
+  }
+
+  .tips-list strong {
+    color: #D946EF;
+    font-weight: 700;
+  }
+
+  .hero {
+    display: none;
+  }
+
+  .posts {
+    background: #fff;
+    padding: 0;
+  }
+
+  .cta-banner {
+    background: #000;
+    color: #fff;
+    padding: 4rem 0;
+    margin-top: 4rem;
+  }
+
+  .cta-box {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .cta-copy h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+
+  .cta-copy p {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .gen-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .output-panel {
+      position: static;
+    }
   }
 </style>
 </head>
@@ -341,70 +439,22 @@
   </div>
 </header>
 
-<section class="hero">
-  <div class="hero-bg"></div>
-  <svg class="hero-float f1 butterfly" viewBox="0 0 48 48" aria-hidden="true">
-    <ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender)"/>
-    <ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender)"/>
-    <ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--lavender-deep)"/>
-  </svg>
-  <svg class="hero-float f2 butterfly" viewBox="0 0 48 48" aria-hidden="true">
-    <ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/>
-    <ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/>
-    <ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--lavender-ink)"/>
-  </svg>
-  <svg class="hero-float f3 butterfly" viewBox="0 0 48 48" aria-hidden="true">
-    <ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender)"/>
-    <ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender)"/>
-    <ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--lavender-deep)"/>
-  </svg>
-
-  <div class="container">
-    <div class="hero-inner">
-      <span class="eyebrow">
-        <svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender-deep)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender-deep)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg>
-        NAVER HOMEPAGE POST GENERATOR
-      </span>
-      <h1>홈판에 꽂히는<br><em>원고를 만들다</em></h1>
-      <p class="lead">데이터 기반의 구조 분석부터 초안 생성까지. 홈판 진입을 위한 체계적인 글쓰기 프레임워크로 당신의 콘텐츠를 한 단계 업그레이드하세요.</p>
+<section class="generator-section">
+  <div class="generator-container">
+    <div class="gen-header">
+      <h1>홈판에 꽂히는 <strong>원고 자판기</strong></h1>
+      <p>데이터 기반의 구조로 홈판 진입을 노린다. 체계적인 글쓰기 프레임으로 당신의 콘텐츠를 한 단계 업그레이드하세요.</p>
     </div>
-  </div>
-</section>
 
-<section class="posts" style="background: #FAFAFA; padding: 3rem 0;">
-  <div class="container generator-container">
-    <div class="info-box">
+    <div class="warning-banner">
       <strong>⚠️ 중요 안내</strong>
-      이 도구는 AI를 활용한 초안 생성 보조 도구입니다. 다음 단계를 반드시 거쳐야 합니다:<br>
-      1️⃣ 생성된 초안을 바탕으로 본인이 직접 검수 및 수정<br>
-      2️⃣ 사실 관계 확인 및 출처 검증<br>
-      3️⃣ 본인의 경험과 톤으로 재작성<br>
-      4️⃣ 최종 검수 후 발행<br>
-      <strong style="color: #D32F2F;">AI가 만든 문장을 그대로 사용하거나, 다른 블로거의 표현을 참고하는 것은 금지됩니다.</strong>
-    </div>
-
-    <div class="step-indicator">
-      <div class="step active" id="step1">
-        <div class="step-num">1</div>
-        <div class="step-label">기본 정보 입력</div>
-      </div>
-      <div class="step" id="step2">
-        <div class="step-num">2</div>
-        <div class="step-label">스타일 설정</div>
-      </div>
-      <div class="step" id="step3">
-        <div class="step-num">3</div>
-        <div class="step-label">글 정보 작성</div>
-      </div>
-      <div class="step" id="step4">
-        <div class="step-num">4</div>
-        <div class="step-label">초안 생성</div>
-      </div>
+      이 도구는 AI 초안 생성 보조 도구입니다. <em>AI 문장을 그대로 사용하면 안 되며,</em> 반드시 본인이 직접 검수·수정·재작성한 후 발행해야 합니다.
     </div>
 
     <form id="generatorForm" class="generator-grid">
-      <div class="input-section">
-        <h3>📝 기본 정보</h3>
+      <div class="input-panel">
+        <div class="input-section">
+        <h3 class="section-title">📝 기본 정보</h3>
 
         <div class="form-group">
           <label for="mainKeyword">메인 키워드 <span style="color: #D32F2F;">*</span></label>
@@ -438,7 +488,7 @@
       </div>
 
       <div class="input-section">
-        <h3>🎨 스타일 설정</h3>
+        <h3 class="section-title">🎨 스타일 설정</h3>
 
         <div class="form-group">
           <label for="wordCount">글의 길이</label>
@@ -481,7 +531,7 @@
       </div>
 
       <div class="input-section">
-        <h3>📖 글 정보</h3>
+        <h3 class="section-title">📖 글 정보</h3>
 
         <div class="form-group">
           <label for="topic">글의 주제 <span style="color: #D32F2F;">*</span></label>
@@ -507,7 +557,7 @@
       </div>
 
       <div class="input-section">
-        <h3>🔍 참고 & 요청사항</h3>
+        <h3 class="section-title">🔍 참고 & 요청사항</h3>
 
         <div class="form-group">
           <label for="references">참고할 자료/링크</label>
@@ -533,14 +583,15 @@
         </div>
       </div>
 
-      <div class="output-section">
-        <h3>✨ 생성된 초안</h3>
-        <div id="generatedOutput" class="output-content empty">
-          <p>입력을 완료하고 "초안 생성하기"를 클릭하면 여기에 초안이 나타납니다.</p>
-        </div>
-        <button id="copyBtn" class="btn btn-primary copy-btn" style="display: none;">클립보드에 복사</button>
+      <div class="output-panel">
+        <div class="output-box">
+          <div class="output-label">생성된 초안</div>
+          <div id="generatedOutput" class="output-content empty">
+            <p>입력을 완료하고 "초안 생성하기"를 클릭하면 여기에 초안이 나타납니다.</p>
+          </div>
+          <button id="copyBtn" class="copy-btn" style="display: none;">클립보드에 복사</button>
 
-        <div class="tab-section">
+          <div class="tab-section">
           <div class="tab-buttons">
             <button type="button" class="tab-btn active" data-tab="preview">미리보기</button>
             <button type="button" class="tab-btn" data-tab="checklist">발행 전 체크리스트</button>
@@ -552,37 +603,30 @@
           </div>
 
           <div id="checklist" class="tab-content" style="display: none;">
-            <div class="validation-tips">
-              <strong>발행 전 필수 검수 사항</strong>
-              <ul style="list-style: none; padding: 0;">
-                <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.1);">✓ 제목과 본문 내용이 일치하는가?</li>
-                <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.1);">✓ 제목의 궁금증이 본문에서 제대로 해소되는가?</li>
-                <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.1);">✓ 확인되지 않은 내용을 사실처럼 쓰지 않았는가?</li>
-                <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.1);">✓ 다른 블로거의 문장·사례·표현을 가져오지 않았는가?</li>
-                <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.1);">✓ 내 경험이 아닌 내용을 경험한 것처럼 쓰지 않았는가?</li>
-                <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.1);">✓ 민감한 내용의 사실관계를 확인했는가?</li>
-                <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.1);">✓ 선정성이나 논란만을 노린 표현은 없는가?</li>
-                <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.1);">✓ 사진·캡처 사용 권한과 출처를 확인했는가?</li>
-                <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.1);">✓ AI 말투를 내 말투로 한 번 더 다듬었는가?</li>
-                <li style="padding: 0.5rem 0;">✓ 이 글을 내가 직접 발행해도 괜찮은가?</li>
-              </ul>
-            </div>
+            <div class="checklist-item">✓ 제목과 본문 내용이 일치하는가?</div>
+            <div class="checklist-item">✓ 제목의 궁금증이 본문에서 제대로 해소되는가?</div>
+            <div class="checklist-item">✓ 확인되지 않은 내용을 사실처럼 쓰지 않았는가?</div>
+            <div class="checklist-item">✓ 다른 블로거의 문장·사례·표현을 가져오지 않았는가?</div>
+            <div class="checklist-item">✓ 내 경험이 아닌 내용을 경험한 것처럼 쓰지 않았는가?</div>
+            <div class="checklist-item">✓ 민감한 내용의 사실관계를 확인했는가?</div>
+            <div class="checklist-item">✓ 선정성이나 논란만을 노린 표현은 없는가?</div>
+            <div class="checklist-item">✓ 사진·캡처 사용 권한과 출처를 확인했는가?</div>
+            <div class="checklist-item">✓ AI 말투를 내 말투로 한 번 더 다듬었는가?</div>
+            <div class="checklist-item">✓ 이 글을 내가 직접 발행해도 괜찮은가?</div>
           </div>
 
           <div id="tips" class="tab-content" style="display: none;">
-            <div class="validation-tips">
-              <strong>생성된 초안 검수 팁</strong>
-              <ul>
-                <li><strong>첫 인상 체크:</strong> 첫 3~5줄을 읽고 독자가 계속 읽고 싶을까?</li>
-                <li><strong>구조 확인:</strong> 제목의 궁금증이 언제 회수되는가? 너무 길게 끌지 않는가?</li>
-                <li><strong>문장 길이:</strong> 한 문단이 5줄 이상이면 끊어서 가독성을 높여라</li>
-                <li><strong>소제목 활용:</strong> 소제목이 다음 내용을 자연스럽게 연결하는가?</li>
-                <li><strong>말투 통일:</strong> 처음부터 끝까지 톤이 일관되는가?</li>
-                <li><strong>구체성:</strong> 추상적 표현만 있지 않은가? 숫자, 사례, 구체적 액션이 있는가?</li>
-                <li><strong>마무리:</strong> 끝이 뚝 떨어지지 않고 자연스럽게 마무리되는가?</li>
-              </ul>
-            </div>
+            <ul class="tips-list" style="list-style: none; padding: 0; margin: 0;">
+              <li><strong>첫 인상 체크:</strong> 첫 3~5줄을 읽고 독자가 계속 읽고 싶을까?</li>
+              <li><strong>구조 확인:</strong> 제목의 궁금증이 언제 회수되는가? 너무 길게 끌지 않는가?</li>
+              <li><strong>문장 길이:</strong> 한 문단이 5줄 이상이면 끊어서 가독성을 높여라</li>
+              <li><strong>소제목 활용:</strong> 소제목이 다음 내용을 자연스럽게 연결하는가?</li>
+              <li><strong>말투 통일:</strong> 처음부터 끝까지 톤이 일관되는가?</li>
+              <li><strong>구체성:</strong> 추상적 표현만 있지 않은가? 숫자, 사례, 구체적 액션이 있는가?</li>
+              <li><strong>마무리:</strong> 끝이 뚝 떨어지지 않고 자연스럽게 마무리되는가?</li>
+            </ul>
           </div>
+        </div>
         </div>
       </div>
     </form>
@@ -590,19 +634,19 @@
 </section>
 
 <section class="cta-banner" id="contact">
-  <div class="container">
+  <div class="generator-container">
     <div class="cta-box">
       <div class="cta-copy">
-        <h2>홈판용 글쓰기를 제대로 배우고 싶다면</h2>
-        <p>이 도구는 초안 생성 보조일 뿐입니다. 홈판 진입의 원리를 깊게 이해하고, 내 블로그 데이터를 바탕으로 전략적으로 접근하는 방법은 1:1 컨설팅에서 배울 수 있습니다.</p>
-        <a href="index.html#contact" class="btn btn-ghost">1:1 상담 신청하기</a>
+        <h2>홈판 진입의 <strong>원리</strong>를 배우고 싶다면</h2>
+        <p>이 도구는 초안 생성 보조일 뿐입니다. 홈판 노출의 원리를 깊게 이해하고, 내 블로그 데이터를 바탕으로 전략적으로 접근하는 방법은 1:1 컨설팅에서 배울 수 있습니다.</p>
+        <a href="index.html#contact" class="btn btn-primary">1:1 상담 신청하기</a>
       </div>
     </div>
   </div>
 </section>
 
 <footer class="site-footer">
-  <div class="container">
+  <div class="generator-container">
     <div class="footer-grid">
       <div>
         <a href="index.html" class="logo">
