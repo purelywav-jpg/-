@@ -4,47 +4,43 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>홈판용 원고자판기 | 청정</title>
-<meta name="description" content="홈판 노출에 최적화된 글을 체계적으로 작성하는 도구. 데이터 분석 기반 구조로 홈판 진입을 실험하세요.">
+<meta name="description" content="한 번의 클릭으로 홈판 최적화 원고 완성">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cellipse cx='14' cy='17' rx='10' ry='8' transform='rotate(-18 14 17)' fill='%239B7FE0'/%3E%3Cellipse cx='34' cy='17' rx='10' ry='8' transform='rotate(18 34 17)' fill='%239B7FE0'/%3E%3Cellipse cx='24' cy='24' rx='1.8' ry='13' fill='%232B2438'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
 <style>
   * { box-sizing: border-box; }
 
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #FAFAFA;
-  }
-
-  .site-header {
-    background: #fff;
-    border-bottom: 1px solid #eee;
-  }
-
-  .generator-section {
-    background: #fff;
-    padding: 4rem 0;
-    min-height: calc(100vh - 200px);
+    background: #000;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .generator-container {
-    max-width: 1400px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 0 2rem;
+    text-align: center;
   }
 
   .gen-header {
     margin-bottom: 3rem;
+    color: #fff;
   }
 
   .gen-header h1 {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     font-weight: 800;
     line-height: 1.2;
     margin: 0 0 1rem 0;
-    color: #000;
+    color: #fff;
   }
 
   .gen-header h1 strong {
@@ -52,208 +48,110 @@
   }
 
   .gen-header p {
-    font-size: 1.1rem;
-    color: #666;
-    margin: 0;
-    max-width: 600px;
-  }
-
-  .generator-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 3rem;
-  }
-
-  @media (max-width: 1024px) {
-    .generator-grid {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-  }
-
-  .input-panel {
-    background: #fff;
-  }
-
-  .input-section {
-    padding: 2rem 0;
-    border-bottom: 1px solid #eee;
-  }
-
-  .input-section:last-child {
-    border-bottom: none;
-  }
-
-  .section-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #000;
-    margin: 0 0 1.5rem 0;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .form-group {
-    margin-bottom: 1.5rem;
-  }
-
-  .form-group label {
-    display: block;
-    margin-bottom: 0.6rem;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #000;
-    letter-spacing: -0.5px;
-  }
-
-  .form-group small {
-    display: block;
-    margin-top: 0.4rem;
-    font-size: 0.85rem;
+    font-size: 1.2rem;
     color: #999;
-  }
-
-  .form-group input,
-  .form-group textarea,
-  .form-group select {
-    width: 100%;
-    padding: 0.9rem 1rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-family: inherit;
-    font-size: 0.95rem;
-    color: #000;
-    background: #fafafa;
-    transition: all 0.2s;
-  }
-
-  .form-group input:focus,
-  .form-group textarea:focus,
-  .form-group select:focus {
-    outline: none;
-    border-color: #D946EF;
-    background: #fff;
-    box-shadow: 0 0 0 3px rgba(217, 70, 239, 0.1);
-  }
-
-  .form-group textarea {
-    resize: vertical;
-    min-height: 80px;
-    font-family: 'Gowun Batang', serif;
+    margin: 0;
     line-height: 1.6;
   }
 
-  .btn-group {
+  .button-group {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
-    margin-top: 2rem;
+    margin-top: 3rem;
   }
 
-  .btn-group .btn {
-    flex: 1;
-    padding: 1rem;
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .btn-primary {
-    background: #000;
-    color: #fff;
-  }
-
-  .btn-primary:hover {
+  .generate-btn {
+    padding: 1.5rem 3rem;
     background: #D946EF;
-  }
-
-  .btn-secondary {
-    background: #f5f5f5;
-    color: #000;
-    border: 1px solid #ddd;
-  }
-
-  .btn-secondary:hover {
-    background: #eee;
-  }
-
-  .output-panel {
-    position: sticky;
-    top: 2rem;
-    height: fit-content;
-  }
-
-  .output-box {
-    background: #000;
     color: #fff;
+    border: none;
     border-radius: 8px;
-    padding: 2rem;
-    overflow: hidden;
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    letter-spacing: 0.5px;
   }
 
-  .output-label {
-    font-size: 0.85rem;
-    color: #999;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 1rem;
-    font-weight: 600;
+  .generate-btn:hover {
+    background: #c936de;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(217, 70, 239, 0.3);
+  }
+
+  .generate-btn:active {
+    transform: translateY(0);
+  }
+
+  .output-section {
+    margin-top: 3rem;
   }
 
   .output-content {
-    background: #fff;
-    color: #000;
-    border-radius: 6px;
-    padding: 1.5rem;
-    min-height: 400px;
-    max-height: 600px;
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 12px;
+    padding: 2.5rem;
+    min-height: 300px;
+    max-height: 700px;
     overflow-y: auto;
-    line-height: 1.8;
-    font-size: 0.95rem;
+    line-height: 2;
+    font-size: 1rem;
+    text-align: left;
     font-family: 'Gowun Batang', serif;
+    display: none;
   }
 
-  .output-content.empty {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ccc;
-    text-align: center;
-    font-family: inherit;
+  .output-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   .output-content h1 {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     font-weight: 700;
-    margin: 0 0 1.5rem 0;
-    color: #000;
+    margin: 0 0 2rem 0;
+    color: #D946EF;
   }
 
   .output-content h2 {
-    font-size: 1.2rem;
-    margin: 1.5rem 0 0.8rem 0;
+    font-size: 1.4rem;
+    margin: 2rem 0 1rem 0;
     color: #D946EF;
     font-weight: 700;
   }
 
   .output-content p {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    color: #e0e0e0;
   }
 
-  .copy-btn {
-    width: 100%;
-    padding: 1rem;
-    background: #D946EF;
-    color: #fff;
+  .button-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: center;
+  }
+
+  .copy-btn, .download-btn {
+    padding: 1rem 2rem;
     border: none;
     border-radius: 6px;
     font-weight: 600;
     cursor: pointer;
-    margin-top: 1rem;
     transition: all 0.2s;
+    font-size: 1rem;
+  }
+
+  .copy-btn {
+    background: #D946EF;
+    color: #fff;
   }
 
   .copy-btn:hover {
@@ -261,421 +159,300 @@
   }
 
   .download-btn {
-    width: 100%;
-    padding: 0.8rem;
-    background: #f5f5f5;
-    color: #000;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 0.5rem;
-    transition: all 0.2s;
-    font-size: 0.95rem;
+    background: #333;
+    color: #fff;
+    border: 1px solid #555;
   }
 
   .download-btn:hover {
-    background: #eee;
+    background: #444;
   }
 
-  .warning-banner {
-    background: #FEF3C7;
-    border-left: 4px solid #F59E0B;
-    padding: 1.5rem;
+  .new-post-btn {
+    background: #333;
+    color: #fff;
+    border: 1px solid #555;
+    padding: 1rem 2rem;
     border-radius: 6px;
-    margin-bottom: 2rem;
-    font-size: 0.95rem;
-    line-height: 1.7;
-  }
-
-  .warning-banner strong {
-    display: block;
-    color: #000;
-    margin-bottom: 0.8rem;
-    font-size: 1rem;
-  }
-
-  .warning-banner em {
-    color: #D946EF;
-    font-style: normal;
     font-weight: 600;
-  }
-
-  .sample-buttons {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 0.8rem;
-    margin-bottom: 2rem;
-  }
-
-  .sample-btn {
-    padding: 0.8rem;
-    background: #f5f5f5;
-    border: 1px solid #ddd;
-    border-radius: 6px;
     cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 600;
+    margin-top: 1rem;
     transition: all 0.2s;
-  }
-
-  .sample-btn:hover {
-    background: #D946EF;
-    color: #fff;
-    border-color: #D946EF;
-  }
-
-  .hero {
-    display: none;
-  }
-
-  .posts {
-    background: #fff;
-    padding: 0;
-  }
-
-  .cta-banner {
-    background: #000;
-    color: #fff;
-    padding: 4rem 0;
-    margin-top: 4rem;
-  }
-
-  .cta-copy h2 {
-    font-size: 2rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-  }
-
-  .cta-copy p {
     font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
+  }
+
+  .new-post-btn:hover {
+    background: #444;
+  }
+
+  .loading {
+    display: none;
+    text-align: center;
+    color: #D946EF;
+    font-size: 1.2rem;
+    margin: 2rem 0;
+  }
+
+  .loading.active {
+    display: block;
+  }
+
+  .keywords-display {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    color: #ccc;
+    text-align: left;
+  }
+
+  .keywords-display h3 {
+    color: #D946EF;
+    margin-top: 0;
+    font-size: 1rem;
+  }
+
+  .keyword-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #333;
+    font-size: 0.95rem;
+  }
+
+  .keyword-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .keyword-label {
+    color: #999;
+    font-weight: 600;
+  }
+
+  .keyword-value {
+    color: #e0e0e0;
   }
 
   @media (max-width: 768px) {
     .gen-header h1 {
-      font-size: 1.8rem;
+      font-size: 2.5rem;
     }
 
-    .output-panel {
-      position: static;
+    .gen-header p {
+      font-size: 1rem;
     }
+
+    .keyword-item {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+  }
+
+  /* 스크롤바 스타일 */
+  .output-content::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .output-content::-webkit-scrollbar-track {
+    background: #1a1a1a;
+  }
+
+  .output-content::-webkit-scrollbar-thumb {
+    background: #D946EF;
+    border-radius: 4px;
+  }
+
+  .output-content::-webkit-scrollbar-thumb:hover {
+    background: #c936de;
   }
 </style>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="container">
-    <a href="index.html" class="logo">
-      <svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true">
-        <ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender)"/>
-        <ellipse cx="15" cy="30" rx="7" ry="5.5" transform="rotate(-12 15 30)" fill="var(--lavender-deep)"/>
-        <ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender)"/>
-        <ellipse cx="33" cy="30" rx="7" ry="5.5" transform="rotate(12 33 30)" fill="var(--lavender-deep)"/>
-        <ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/>
-        <path d="M23 12 C21 8, 18 7, 16 6" stroke="var(--ink)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-        <path d="M25 12 C27 8, 30 7, 32 6" stroke="var(--ink)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-      </svg>
-      <span>청정<small>BRANDING &amp; MONETIZING</small></span>
-    </a>
+<div class="generator-container">
+  <div class="gen-header">
+    <h1>홈판에 꽂히는<br><strong>원고 자판기</strong></h1>
+    <p>한 번의 클릭으로 완성되는 홈판 최적화 원고<br>내가 알아서 키워드를 선택해 원고를 만들어드립니다</p>
+  </div>
 
-    <nav class="main-nav">
-      <ul>
-        <li><a href="index.html#about">소개</a></li>
-        <li><a href="index.html#blog">블로그</a></li>
-        <li><a href="index.html#services">컨설팅</a></li>
-        <li><a href="index.html#contact">문의</a></li>
-      </ul>
-    </nav>
+  <div class="button-group">
+    <button class="generate-btn" onclick="generatePost()">원고 생성하기</button>
+  </div>
 
-    <div class="header-actions">
-      <a href="index.html#contact" class="btn btn-primary btn-sm">상담 신청</a>
-      <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false"><span></span></button>
+  <div class="loading" id="loading">⏳ 원고를 만드는 중입니다...</div>
+
+  <div class="keywords-display" id="keywordsDisplay" style="display: none;">
+    <h3>📌 이 원고의 키워드</h3>
+    <div id="keywordsList"></div>
+  </div>
+
+  <div class="output-section">
+    <div class="output-content" id="generatedOutput"></div>
+    <div class="button-actions" id="actions" style="display: none;">
+      <button class="copy-btn" onclick="copyToClipboard()">📋 클립보드 복사</button>
+      <button class="download-btn" onclick="downloadPost()">⬇️ 파일 다운로드</button>
+      <button class="new-post-btn" onclick="resetAndGenerate()">➕ 새 원고 생성</button>
     </div>
   </div>
-</header>
+</div>
 
-<section class="generator-section">
-  <div class="generator-container">
-    <div class="gen-header">
-      <h1>홈판에 꽂히는 <strong>원고 자판기</strong></h1>
-      <p>한 번의 클릭으로 홈판 진입 최적화 원고 완성. 데이터 기반 구조의 블로그 포스트를 바로 뽑아가세요.</p>
-    </div>
-
-    <div class="warning-banner">
-      <strong>⚠️ 중요 안내</strong>
-      생성된 원고는 초안입니다. <em>반드시 본인이 직접 검수·수정·재작성</em>한 후 발행해야 합니다. AI 문장을 그대로 사용하면 안 됩니다.
-    </div>
-
-    <form id="generatorForm" class="generator-grid">
-      <div class="input-panel">
-
-        <!-- 기본 정보 -->
-        <div class="input-section">
-          <h3 class="section-title">📝 기본 정보</h3>
-
-          <div style="margin-bottom: 1rem;">
-            <button type="button" class="sample-btn" onclick="loadSample('routine')">🌅 아침 루틴</button>
-            <button type="button" class="sample-btn" onclick="loadSample('organization')">🏠 집 정리 법칙</button>
-            <button type="button" class="sample-btn" onclick="loadSample('habit')">📚 습관 변화 경험담</button>
-            <button type="button" class="sample-btn" onclick="loadSample('travel')">✈️ 여행 에세이</button>
-          </div>
-
-          <div class="form-group">
-            <label for="mainKeyword">메인 키워드 <span style="color: #D946EF;">*</span></label>
-            <input type="text" id="mainKeyword" name="mainKeyword" placeholder="예: 웨딩 체험단" required>
-            <small>홈판에서 사람들이 멈추고 클릭할 주요 주제</small>
-          </div>
-
-          <div class="form-group">
-            <label for="coreKeyword">핵심 가치</label>
-            <input type="text" id="coreKeyword" name="coreKeyword" placeholder="예: 월 150만원 절약">
-            <small>메인 키워드의 핵심 이득/가치</small>
-          </div>
-
-          <div class="form-group">
-            <label for="subKeyword1">세부 키워드 1 <span style="color: #D946EF;">*</span></label>
-            <input type="text" id="subKeyword1" name="subKeyword1" placeholder="예: 검색 안 해도 찾는 꿀팁" required>
-          </div>
-
-          <div class="form-group">
-            <label for="subKeyword2">세부 키워드 2 <span style="color: #D946EF;">*</span></label>
-            <input type="text" id="subKeyword2" name="subKeyword2" placeholder="예: 신혼부부가 모르는 3가지" required>
-          </div>
-        </div>
-
-        <!-- 스타일 -->
-        <div class="input-section">
-          <h3 class="section-title">🎨 스타일 설정</h3>
-
-          <div class="form-group">
-            <label for="tone">톤 & 스타일</label>
-            <select id="tone" name="tone">
-              <option value="casual" selected>편한 일상톤 (~했어요)</option>
-              <option value="friendly">친근한 톤 (친구한테 말하듯)</option>
-              <option value="formal">정보제공톤 (~합니다)</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="perspective">관점</label>
-            <select id="perspective" name="perspective">
-              <option value="experience" selected>경험 기반 (내가 직접 해봤어요)</option>
-              <option value="observation">관찰 기반 (많은 사람들을 봤어요)</option>
-              <option value="information">정보 기반 (이런 정보가 있어요)</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="targetAudience">타겟 독자 <span style="color: #D946EF;">*</span></label>
-            <textarea id="targetAudience" name="targetAudience" placeholder="예: 30대 신혼부부, 처음 웨딩을 준비하는 사람" required></textarea>
-          </div>
-        </div>
-
-        <!-- 글 정보 -->
-        <div class="input-section">
-          <h3 class="section-title">📖 글 정보</h3>
-
-          <div class="form-group">
-            <label for="topic">글의 핵심 주제 <span style="color: #D946EF;">*</span></label>
-            <textarea id="topic" name="topic" placeholder="예: 웨딩 체험단으로 월 150만원 절약하면서 신혼집 꾸미는 방법" required></textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="feeling">독자가 느꼈으면 하는 감정</label>
-            <input type="text" id="feeling" name="feeling" placeholder="예: 나도 할 수 있을 것 같은 용기">
-          </div>
-
-          <div class="form-group">
-            <label for="emphasis">가장 강조하고 싶은 포인트</label>
-            <textarea id="emphasis" name="emphasis" placeholder="예: 이것만 기억하세요: 중요한 내용"></textarea>
-          </div>
-        </div>
-
-        <!-- 버튼 -->
-        <div class="input-section" style="border-bottom: none;">
-          <div class="btn-group">
-            <button type="reset" class="btn btn-secondary">초기화</button>
-            <button type="submit" class="btn btn-primary">원고 생성하기</button>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- 출력 패널 -->
-      <div class="output-panel">
-        <div class="output-box">
-          <div class="output-label">생성된 원고</div>
-          <div id="generatedOutput" class="output-content empty">
-            <p>입력을 완료하고<br>"원고 생성하기"를<br>클릭하세요</p>
-          </div>
-          <button id="copyBtn" class="copy-btn" style="display: none;">📋 클립보드 복사</button>
-          <button id="downloadBtn" class="download-btn" style="display: none;">⬇️ 텍스트 다운로드</button>
-        </div>
-      </div>
-
-    </form>
-  </div>
-</section>
-
-<section class="cta-banner">
-  <div class="generator-container">
-    <div style="text-align: center;">
-      <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">홈판 진입의 <strong style="color: #D946EF;">원리</strong>를 배우고 싶다면</h2>
-      <p style="font-size: 1rem; line-height: 1.7; margin-bottom: 1.5rem; color: #ccc; max-width: 600px; margin-left: auto; margin-right: auto;">
-        이 도구는 초안 생성 보조일 뿐입니다. 홈판 노출의 원리를 깊게 이해하고, 내 블로그 데이터를 바탕으로 전략적으로 접근하는 방법은 1:1 컨설팅에서 배울 수 있습니다.
-      </p>
-      <a href="index.html#contact" class="btn btn-primary" style="background: #D946EF; display: inline-block; padding: 1rem 2rem;">1:1 상담 신청하기</a>
-    </div>
-  </div>
-</section>
-
-<footer class="site-footer">
-  <div class="generator-container">
-    <div class="footer-grid">
-      <div>
-        <a href="index.html" class="logo">
-          <svg class="butterfly" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="8" transform="rotate(-18 14 17)" fill="var(--lavender)"/><ellipse cx="34" cy="17" rx="10" ry="8" transform="rotate(18 34 17)" fill="var(--lavender)"/><ellipse cx="24" cy="24" rx="1.8" ry="13" fill="var(--ink)"/></svg>
-          <span>청정</span>
-        </a>
-        <p class="footer-tagline">브랜딩과 수익화를 함께 설계하는 1:1 컨설팅</p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 청정. All rights reserved.</span>
-    </div>
-  </div>
-</footer>
-
-<script src="script.js"></script>
 <script>
-  // 샘플 데이터
-  const samples = {
-    routine: {
+  // 홈판 최적화 키워드 데이터베이스
+  const homepageKeywords = [
+    {
       mainKeyword: '아침 루틴',
       coreKeyword: '30분 아침 루틴으로 하루가 바뀐다',
-      subKeyword1: '아침 공복감을 깨우는 가장 간단한 방법',
-      subKeyword2: '바쁜 아침에 마음의 여유를 만드는 습관 3가지',
-      targetAudience: '직장인, 항상 바쁜 사람, 아침이 힘든 사람',
+      subKeyword1: '아침을 깨우는 가장 간단한 방법',
+      subKeyword2: '바쁜 아침에 여유를 만드는 3가지 습관',
+      targetAudience: '직장인, 항상 바쁜 사람들',
       tone: 'casual',
       perspective: 'experience',
       topic: '30분 아침 루틴으로 하루를 긍정적으로 시작하는 방법',
       feeling: '아침이 두렵지 않고 오히려 기대되는 마음',
-      emphasis: '완벽한 루틴이 아니라 지속 가능한 작은 습관의 중요성'
+      emphasis: '완벽한 루틴이 아니라 지속 가능한 작은 습관이 중요하다'
     },
-    organization: {
+    {
       mainKeyword: '집 정리',
-      coreKeyword: '버리기보다 정리의 순서가 중요하다',
+      coreKeyword: '버리기보다 정리의 순서가 결정한다',
       subKeyword1: '가장 먼저 정리해야 할 공간이 따로 있다',
       subKeyword2: '정리 후 물건이 자꾸 쌓이는 이유',
-      targetAudience: '집이 어수선한 사람, 정리를 시작하려는 사람',
+      targetAudience: '집이 어수선한 사람들',
       tone: 'friendly',
       perspective: 'experience',
       topic: '집 정리는 순서가 결정한다는 깨달음',
       feeling: '정리된 공간에서 평안함과 집중력 회복',
       emphasis: '물건 버리기가 아니라 공간과 생활 방식의 정렬'
     },
-    habit: {
+    {
       mainKeyword: '습관 변화',
       coreKeyword: '큰 계획보다 작은 습관이 인생을 바꾼다',
       subKeyword1: '실패하는 사람들의 공통된 실수',
       subKeyword2: '1주일 안에 습관이 자리잡는 신호들',
-      targetAudience: '자기계발에 관심 있지만 실패가 많은 사람',
+      targetAudience: '자기계발에 관심 있지만 실패가 많은 사람들',
       tone: 'friendly',
       perspective: 'observation',
       topic: '6개월간 작은 습관을 만들면서 배운 것들',
       feeling: '나도 충분히 변할 수 있다는 확신',
       emphasis: '유명한 방법론이 아니라 현실에서 작동하는 법칙'
     },
-    travel: {
+    {
       mainKeyword: '여행 경험',
       coreKeyword: '계획 없는 여행이 더 많은 것을 남긴다',
       subKeyword1: '여행에서 발견되는 가장 소중한 순간들',
       subKeyword2: '지역 주민처럼 여행하는 법',
-      targetAudience: '여행을 좋아하지만 시간이 부족한 사람',
+      targetAudience: '여행을 좋아하지만 시간이 부족한 사람들',
       tone: 'casual',
       perspective: 'experience',
       topic: '일주일 짧은 여행이라도 의미있게 보내는 방법',
       feeling: '새로운 곳에서 자신을 발견하는 즐거움',
       emphasis: '비용보다 마음가짐의 차이가 여행의 질을 결정한다'
+    },
+    {
+      mainKeyword: '독서 습관',
+      coreKeyword: '책장이 어질러도 괜찮은 이유',
+      subKeyword1: '속도보다 깊이로 읽는 법',
+      subKeyword2: '책을 읽으면서 얻게 되는 예상 밖의 것들',
+      targetAudience: '책을 읽고 싶지만 끝내지 못하는 사람들',
+      tone: 'casual',
+      perspective: 'experience',
+      topic: '한 달에 한 권, 천천히 읽으면서 깨달은 것들',
+      feeling: '책이 삶의 가치를 바꾼다는 작은 확신',
+      emphasis: '책 추천이 아니라 독서의 의미 찾기'
+    },
+    {
+      mainKeyword: '일과 삶의 균형',
+      coreKeyword: '출근 전 1시간이 하루를 결정한다',
+      subKeyword1: '일하면서도 나를 잃지 않는 법',
+      subKeyword2: '퇴근 후 마음이 정리되는 루틴 3가지',
+      targetAudience: '일로 지친 직장인들',
+      tone: 'friendly',
+      perspective: 'experience',
+      topic: '일 중심이 아닌 삶 중심으로 사는 법',
+      feeling: '회사 일이 전부가 아니라는 깨달음',
+      emphasis: '일을 잘하는 것보다 자신을 지키는 게 먼저'
+    },
+    {
+      mainKeyword: '자기계발',
+      coreKeyword: '작년의 나와 달라지는 가장 간단한 방법',
+      subKeyword1: '변화를 원하는 사람이 하는 첫 번째 실수',
+      subKeyword2: '3개월 후 남는 것과 사라지는 것',
+      targetAudience: '성장하고 싶지만 어디서부터 시작할지 모르는 사람들',
+      tone: 'casual',
+      perspective: 'observation',
+      topic: '꾸준함이 아니라 작은 변화의 축적이 인생을 바꾼다',
+      feeling: '변화는 언제든 시작할 수 있다는 용기',
+      emphasis: '거창한 목표보다 하루하루의 선택이 중요하다'
+    },
+    {
+      mainKeyword: '일상의 즐거움',
+      coreKeyword: '특별한 것을 찾으려다 놓치는 일상의 행복',
+      subKeyword1: '평범해 보이는 것에서 찾는 감사',
+      subKeyword2: '오늘 하루를 의미있게 만드는 작은 것들',
+      targetAudience: '일상에 지친 사람들',
+      tone: 'friendly',
+      perspective: 'experience',
+      topic: '특별할 것 없는 하루하루가 가장 소중하다는 것을 깨달은 이야기',
+      feeling: '지금 이 순간이 가장 중요하다는 느낌',
+      emphasis: '큰 행복을 기다리기보다 작은 것을 감사하기'
     }
-  };
+  ];
 
-  // 샘플 로드
-  function loadSample(type) {
-    const sample = samples[type];
-    document.getElementById('mainKeyword').value = sample.mainKeyword;
-    document.getElementById('coreKeyword').value = sample.coreKeyword;
-    document.getElementById('subKeyword1').value = sample.subKeyword1;
-    document.getElementById('subKeyword2').value = sample.subKeyword2;
-    document.getElementById('targetAudience').value = sample.targetAudience;
-    document.getElementById('tone').value = sample.tone;
-    document.getElementById('perspective').value = sample.perspective;
-    document.getElementById('topic').value = sample.topic;
-    document.getElementById('feeling').value = sample.feeling;
-    document.getElementById('emphasis').value = sample.emphasis;
+  function selectRandomKeywords() {
+    return homepageKeywords[Math.floor(Math.random() * homepageKeywords.length)];
   }
-
-  // 폼 제출
-  document.getElementById('generatorForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    generatePost();
-  });
 
   function generatePost() {
-    const data = {
-      mainKeyword: document.getElementById('mainKeyword').value,
-      coreKeyword: document.getElementById('coreKeyword').value,
-      subKeyword1: document.getElementById('subKeyword1').value,
-      subKeyword2: document.getElementById('subKeyword2').value,
-      targetAudience: document.getElementById('targetAudience').value,
-      tone: document.getElementById('tone').value,
-      perspective: document.getElementById('perspective').value,
-      topic: document.getElementById('topic').value,
-      feeling: document.getElementById('feeling').value,
-      emphasis: document.getElementById('emphasis').value
-    };
+    const loading = document.getElementById('loading');
+    loading.classList.add('active');
 
-    const post = createHomepageOptimizedPost(data);
+    setTimeout(() => {
+      const keywords = selectRandomKeywords();
+      const post = createHomepageOptimizedPost(keywords);
 
-    const output = document.getElementById('generatedOutput');
-    output.classList.remove('empty');
-    output.innerHTML = post;
+      const output = document.getElementById('generatedOutput');
+      output.innerHTML = post;
+      output.classList.add('active');
 
-    document.getElementById('copyBtn').style.display = 'block';
-    document.getElementById('downloadBtn').style.display = 'block';
+      document.getElementById('actions').style.display = 'flex';
+      document.getElementById('keywordsDisplay').style.display = 'block';
 
-    // 복사 기능
-    document.getElementById('copyBtn').onclick = () => {
-      navigator.clipboard.writeText(output.innerText).then(() => {
-        const btn = document.getElementById('copyBtn');
-        const orig = btn.innerText;
-        btn.innerText = '✓ 복사됨!';
-        setTimeout(() => { btn.innerText = orig; }, 2000);
-      });
-    };
+      // 키워드 표시
+      const keywordsList = document.getElementById('keywordsList');
+      keywordsList.innerHTML = `
+        <div class="keyword-item">
+          <div class="keyword-label">메인 키워드</div>
+          <div class="keyword-value">${keywords.mainKeyword}</div>
+        </div>
+        <div class="keyword-item">
+          <div class="keyword-label">핵심 가치</div>
+          <div class="keyword-value">${keywords.coreKeyword}</div>
+        </div>
+        <div class="keyword-item">
+          <div class="keyword-label">타겟 독자</div>
+          <div class="keyword-value">${keywords.targetAudience}</div>
+        </div>
+        <div class="keyword-item">
+          <div class="keyword-label">관점</div>
+          <div class="keyword-value">${keywords.perspective === 'experience' ? '경험 기반' : keywords.perspective === 'observation' ? '관찰 기반' : '정보 기반'}</div>
+        </div>
+      `;
 
-    // 다운로드 기능
-    document.getElementById('downloadBtn').onclick = () => {
-      const text = output.innerText;
-      const element = document.createElement('a');
-      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-      element.setAttribute('download', `${data.mainKeyword}_원고_${new Date().toISOString().split('T')[0]}.txt`);
-      element.style.display = 'none';
-      document.body.appendChild(element);
-      element.click();
-      document.body.removeChild(element);
-    };
+      loading.classList.remove('active');
+      window.scrollTo({ top: document.querySelector('.output-content').offsetTop - 100, behavior: 'smooth' });
+    }, 1000);
   }
 
-  function createHomepageOptimizedPost(data) {
-    const title = generateTitle(data);
-    const introduction = generateIntroduction(data);
-    const section1 = generateSection1(data);
-    const section2 = generateSection2(data);
-    const conclusion = generateConclusion(data);
+  function createHomepageOptimizedPost(keywords) {
+    const title = generateTitle(keywords);
+    const introduction = generateIntroduction(keywords);
+    const section1 = generateSection1(keywords);
+    const section2 = generateSection2(keywords);
+    const conclusion = generateConclusion(keywords);
 
     return `
       <h1>${title}</h1>
@@ -683,91 +460,95 @@
       <h2>시작하며</h2>
       <p>${introduction}</p>
 
-      <h2>${data.subKeyword1}</h2>
+      <h2>${keywords.subKeyword1}</h2>
       <p>${section1}</p>
 
-      <h2>${data.subKeyword2}</h2>
+      <h2>${keywords.subKeyword2}</h2>
       <p>${section2}</p>
 
-      ${data.emphasis ? `
+      ${keywords.emphasis ? `
       <h2>꼭 기억하세요</h2>
-      <p><strong>${data.emphasis}</strong></p>
+      <p><strong>${keywords.emphasis}</strong></p>
       ` : ''}
 
       <h2>마치며</h2>
       <p>${conclusion}</p>
-
-      <hr style="margin: 2rem 0; border: none; border-top: 1px solid #ddd;">
-      <p style="font-size: 0.85rem; color: #999; text-align: center;">
-        💬 이 글이 도움이 되었다면 댓글로 여러분의 경험도 나눠주세요.<br>
-        더 궁금한 점이 있으면 언제든 연락 주세요!
-      </p>
     `;
   }
 
-  function generateTitle(data) {
+  function generateTitle(kw) {
     const templates = [
-      `"${data.coreKeyword}"… 알고 보니 이런 비법이?`,
-      `${data.mainKeyword}에서 가장 중요한 것, 당신은 알아요?`,
-      `${data.mainKeyword}, 이것만 꼭 기억하세요`,
-      `${data.mainKeyword}를 제대로 하는 사람들의 공통점 3가지`,
-      `저도 처음에 몰랐던 ${data.mainKeyword}의 진짜 매력`
+      `"${kw.coreKeyword}"… 알고 보니 이런 비법이?`,
+      `${kw.mainKeyword}에서 가장 중요한 것, 당신은 알아요?`,
+      `${kw.mainKeyword}, 이것만 꼭 기억하세요`,
+      `${kw.mainKeyword}를 제대로 하는 사람들의 공통점`,
+      `저도 처음에 몰랐던 ${kw.mainKeyword}의 진짜 의미`
     ];
     return templates[Math.floor(Math.random() * templates.length)];
   }
 
-  function generateIntroduction(data) {
+  function generateIntroduction(kw) {
     const perspectives = {
-      experience: `${data.mainKeyword}에 대해 알고 계세요? 저는 직접 경험하면서 깨닫게 된 것들이 많습니다. 처음엔 "${data.coreKeyword}"라는 것을 전혀 몰랐는데, 이제는 이게 가장 중요하다고 생각해요. 오늘은 제가 배운 것들을 ${data.targetAudience.split(',')[0]}분들과 나누고 싶습니다.`,
-      observation: `요즘 많은 분들이 ${data.mainKeyword}를 놓치고 있어요. 저도 수많은 분들을 보면서 느낀 건데, "${data.coreKeyword}"에 집중하는 사람과 그렇지 않은 사람의 차이가 정말 크더라고요. 그 차이가 뭘까요? 오늘 그 비밀을 풀어보겠습니다.`,
-      information: `${data.mainKeyword}에 관한 정보가 많지만, 정말 필요한 것은 따로 있어요. 바로 "${data.coreKeyword}"입니다. 이 핵심에 집중하면 ${data.mainKeyword}의 70%는 성공한 거예요. 지금부터 그 방법을 알려드릴게요.`
+      experience: `${kw.mainKeyword}에 대해 알고 계세요? 저는 직접 경험하면서 깨닫게 된 것들이 많습니다. 처음엔 "${kw.coreKeyword}"라는 것을 전혀 몰랐는데, 이제는 이게 가장 중요하다고 생각해요. 오늘은 제가 배운 것들을 ${kw.targetAudience}분들과 나누고 싶습니다.`,
+      observation: `요즘 많은 분들이 ${kw.mainKeyword}를 놓치고 있어요. 저도 수많은 분들을 보면서 느낀 건데, "${kw.coreKeyword}"에 집중하는 사람과 그렇지 않은 사람의 차이가 정말 크더라고요. 그 차이가 뭘까요? 오늘 그 비밀을 풀어보겠습니다.`,
+      information: `${kw.mainKeyword}에 관한 정보가 많지만, 정말 필요한 것은 따로 있어요. 바로 "${kw.coreKeyword}"입니다. 이 핵심에 집중하면 ${kw.mainKeyword}의 70%는 성공한 거예요. 지금부터 그 방법을 알려드릴게요.`
     };
-    return perspectives[data.perspective];
+    return perspectives[kw.perspective];
   }
 
-  function generateSection1(data) {
-    const section1Text = {
-      experience: `제가 처음 ${data.mainKeyword}를 했을 때는 정말 몰랐어요. ${data.subKeyword1}이 이렇게 중요할 줄은요. 그런데 시간이 지나면서 깨달았습니다. 이게 얼마나 큰 차이를 만드는지 말이에요.
-
-${data.targetAudience.split(',')[0]}분들도 이 부분에 집중하면 지금과는 완전히 다른 결과를 얻을 거예요. 가장 중요한 건 "왜"를 이해하는 것입니다. 단순히 따라 하는 것이 아니라, 원리를 아는 것이 말이에요.`,
-      observation: `많은 사람들이 놓치는 부분이 바로 ${data.subKeyword1}입니다. 저는 여러 분들을 관찰하면서 성공하는 사람들의 공통점을 찾았거든요. 그들은 모두 이 부분에 집중했어요.
-
-당신도 이제 알 수 있습니다. 이것만 기억하면, 나머지는 자연스럽게 따라올 거예요.`,
-      information: `${data.subKeyword1}의 핵심은 이렇습니다. 많은 자료들이 복잡하게 설명하지만, 정리하면 아주 간단해요.
-
-첫 번째는 X입니다. 두 번째는 Y입니다. 세 번째는 Z입니다. 이 세 가지만 잘 이해하면, ${data.mainKeyword}는 완전히 달라져요.`
+  function generateSection1(kw) {
+    const templates = {
+      experience: `제가 처음 ${kw.mainKeyword}를 했을 때는 정말 몰랐어요. ${kw.subKeyword1}이 이렇게 중요할 줄은요. 그런데 시간이 지나면서 깨달았습니다. 이게 얼마나 큰 차이를 만드는지 말이에요. ${kw.targetAudience}분들도 이 부분에 집중하면 지금과는 완전히 다른 결과를 얻을 거예요. 가장 중요한 건 "왜"를 이해하는 것입니다.`,
+      observation: `많은 사람들이 놓치는 부분이 바로 ${kw.subKeyword1}입니다. 저는 여러 분들을 관찰하면서 성공하는 사람들의 공통점을 찾았거든요. 그들은 모두 이 부분에 집중했어요. 당신도 이제 알 수 있습니다. 이것만 기억하면, 나머지는 자연스럽게 따라올 거예요.`,
+      information: `${kw.subKeyword1}의 핵심은 이렇습니다. 많은 자료들이 복잡하게 설명하지만, 정리하면 아주 간단해요. 이 한 가지만 잘 이해하면, ${kw.mainKeyword}는 완전히 달라져요.`
     };
-    return section1Text[data.perspective];
+    return templates[kw.perspective];
   }
 
-  function generateSection2(data) {
-    const section2Text = {
-      experience: `그 다음이 ${data.subKeyword2}인데요. 저도 처음엔 이걸 간과했어요. 하지만 이게 있고 없고의 차이가 정말 크더라고요.
-
-특히 ${data.targetAudience.split(',')[0]}분들이 자주 실수하는 부분이 바로 여기예요. 이 부분을 제대로 하려면 먼저 마음가짐을 바꿔야 합니다. 그래야 실제 행동도 달라지거든요.`,
-      observation: `그리고 ${data.subKeyword2}는 정말 중요해요. 성공하는 사람들을 보면 이 부분이 확실하더라고요.
-
-당신 주변에서도 잘되는 사람들을 찾아보세요. 그들이 뭘 하고 있는지 보면 답이 나올 거예요.`,
-      information: `${data.subKeyword2}도 꼭 알아야 할 내용입니다.
-
-1번: 첫 번째 방법은 A입니다. 2번: 두 번째 방법은 B입니다. 이 두 가지를 조합하면 가장 효과적입니다.`
+  function generateSection2(kw) {
+    const templates = {
+      experience: `그 다음이 ${kw.subKeyword2}인데요. 저도 처음엔 이걸 간과했어요. 하지만 이게 있고 없고의 차이가 정말 크더라고요. 특히 ${kw.targetAudience}분들이 자주 실수하는 부분이 바로 여기예요. 이 부분을 제대로 하려면 먼저 마음가짐을 바꿔야 합니다.`,
+      observation: `그리고 ${kw.subKeyword2}는 정말 중요해요. 성공하는 사람들을 보면 이 부분이 확실하더라고요. 당신 주변에서도 잘되는 사람들을 찾아보세요. 그들이 뭘 하고 있는지 보면 답이 나올 거예요.`,
+      information: `${kw.subKeyword2}도 꼭 알아야 할 내용입니다. 이를 통해 당신은 더 나은 선택을 할 수 있게 될 거예요.`
     };
-    return section2Text[data.perspective];
+    return templates[kw.perspective];
   }
 
-  function generateConclusion(data) {
-    const concludingText = {
-      experience: `제가 이 글을 쓰는 이유는 ${data.feeling}을 당신도 느꼈으면 해서예요. ${data.mainKeyword}는 결코 어렵지 않습니다. 다만 정확한 방향으로 가야 할 뿐이에요.
-
-당신도 할 수 있습니다. 오늘 배운 것들을 차근차근 실천해보세요. 분명 좋은 결과가 따라올 거예요.`,
-      observation: `${data.mainKeyword}를 잘하는 사람이 되기 위해서는 이 점들이 정말 중요해요. 당신도 이제 이것들을 알았으니, 할 수 있습니다.
-
-주변에서 잘되는 사람들을 더 자세히 관찰해보세요. 더 많은 배움이 있을 거예요.`,
-      information: `${data.mainKeyword}에 대한 정보는 많지만, 이렇게 정리된 내용은 드물어요. 이 글이 당신의 ${data.mainKeyword} 여정에 도움이 되길 바랍니다.
-
-다음에는 더 심화된 내용으로 찾아뵐게요!`
+  function generateConclusion(kw) {
+    const templates = {
+      experience: `제가 이 글을 쓰는 이유는 ${kw.feeling}을 당신도 느꼈으면 해서예요. ${kw.mainKeyword}는 결코 어렵지 않습니다. 다만 정확한 방향으로 가야 할 뿐이에요. 당신도 할 수 있습니다. 오늘 배운 것들을 차근차근 실천해보세요. 분명 좋은 결과가 따라올 거예요.`,
+      observation: `${kw.mainKeyword}를 잘하는 사람이 되기 위해서는 이 점들이 정말 중요해요. 당신도 이제 이것들을 알았으니, 할 수 있습니다. 주변에서 잘되는 사람들을 더 자세히 관찰해보세요. 더 많은 배움이 있을 거예요.`,
+      information: `${kw.mainKeyword}에 대한 정보는 많지만, 이렇게 정리된 내용은 드물어요. 이 글이 당신의 ${kw.mainKeyword} 여정에 도움이 되길 바랍니다. 다음에는 더 심화된 내용으로 찾아뵐게요!`
     };
-    return concludingText[data.perspective];
+    return templates[kw.perspective];
+  }
+
+  function copyToClipboard() {
+    const text = document.getElementById('generatedOutput').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.querySelector('.copy-btn');
+      const original = btn.innerText;
+      btn.innerText = '✓ 복사됨!';
+      setTimeout(() => { btn.innerText = original; }, 2000);
+    });
+  }
+
+  function downloadPost() {
+    const text = document.getElementById('generatedOutput').innerText;
+    const element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', `홈판원고_${new Date().toISOString().split('T')[0]}.txt`);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  }
+
+  function resetAndGenerate() {
+    document.getElementById('generatedOutput').classList.remove('active');
+    document.getElementById('actions').style.display = 'none';
+    document.getElementById('keywordsDisplay').style.display = 'none';
+    setTimeout(() => generatePost(), 300);
   }
 </script>
 </body>
