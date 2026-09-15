@@ -616,14 +616,34 @@
         <strong>✏️ 직접 경험을 반영해서 수정하세요</strong><br>
         이 원고는 템플릿입니다. 실제 경험·숫자·지역·이름을 넣어 완성하세요.<br>
         <small style="color: #999; margin-top: 0.5rem; display: block;">
-          ${charStatus} 본문 ${charCount}자 | 추천 1,800~2,500자<br>
-          • 줄마다 15~18글자 확인<br>
-          • 문단마다 4~5줄 확인<br>
-          • 금칙어(100%, 효능, 상담, 최고, 1위 등) 확인<br>
-          • 제목 25~32자 확인 (현재 ${title.length}자)<br>
-          • 허위 경험·정보 없는지 확인
+          ${charStatus} 본문 ${charCount}자 | 추천 1,800~2,500자 | ${titleStatus} 제목 ${title.length}자 | 추천 25~32자<br>
+          • 줄마다 15~18글자 • 문단마다 4~5줄 • 금칙어 0개 • 허위 정보 없음
         </small>
       </div>
+
+      <div class="prompt-section" style="margin-top: 2rem; padding: 1.5rem; background: #1a1a1a; border: 1px solid #333; border-radius: 10px;">
+        <div onclick="this.parentElement.querySelector('.prompt-content').classList.toggle('hidden')" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3 style="margin: 0; color: #D946EF; font-size: 0.95rem; font-weight: 600;">📝 이 원고를 개선하기 위한 프롬프트</h3>
+          <span style="color: #999; font-size: 1.2rem;">▼</span>
+        </div>
+        <div class="prompt-content" style="font-size: 0.8rem; line-height: 1.7; color: #bbb;">
+          <p style="margin: 0.6rem 0; font-weight: 600; color: #D946EF;">도입부 확인</p>
+          <p style="margin: 0.3rem 0;">✓ 검색자의 상황과 연결되었는가? ✓ 공감 → 정보 순서는? ✓ 매번 다른 도입문인가?</p>
+
+          <p style="margin: 0.6rem 0; font-weight: 600; color: #D946EF;">정보 밀도</p>
+          <p style="margin: 0.3rem 0;">✓ 모든 문단에 새로운 정보가 있는가? ✓ 구체적인 상황과 관찰 중심인가? ✓ 의미 없는 표현은 없는가?</p>
+
+          <p style="margin: 0.6rem 0; font-weight: 600; color: #D946EF;">차별성 (최소 2가지)</p>
+          <p style="margin: 0.3rem 0;">✓ 실제 경험/관찰 ✓ 구체적 비교 ✓ 예상과 다른 부분 ✓ 팁 ✓ 장단점 ✓ 특정 시간대 특징</p>
+
+          <p style="margin: 0.6rem 0; font-weight: 600; color: #D946EF;">가독성</p>
+          <p style="margin: 0.3rem 0;">✓ 각 줄 15~18글자 ✓ 문단 4~5줄 ✓ 문단 사이 빈 줄 ✓ 300~400자마다 사진/인용구</p>
+
+          <p style="margin: 0.6rem 0; font-weight: 600; color: #D946EF;">최종 검수</p>
+          <p style="margin: 0.3rem 0;">✓ 금칙어 0개 ✓ 실제 경험만 ✓ 같은 내용 반복 없음 ✓ 키워드 억지 반복 없음 ✓ 장단점 균형 ✓ 허위정보 없음</p>
+        </div>
+      </div>
+
       <button class="copy-btn" onclick="copyToClipboard()">📋 복사</button>
       <button class="download-btn" onclick="downloadPost('${title.substring(0, 20)}')">💾 다운</button>
       <button class="edit-btn" onclick="toggleEdit()">✏️ 수정</button>
