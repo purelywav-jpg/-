@@ -197,6 +197,80 @@
       background: rgba(217, 70, 239, 0.1);
     }
 
+    .guide-section {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 10px;
+      margin-top: 2rem;
+      overflow: hidden;
+    }
+
+    .guide-header {
+      padding: 1rem 1.5rem;
+      background: #1a1a1a;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #333;
+    }
+
+    .guide-header:hover {
+      background: #222;
+    }
+
+    .guide-header h3 {
+      margin: 0;
+      font-size: 1rem;
+      color: #D946EF;
+    }
+
+    .guide-toggle {
+      color: #999;
+      font-size: 1.2rem;
+      transition: transform 0.3s;
+    }
+
+    .guide-toggle.open {
+      transform: rotate(180deg);
+    }
+
+    .guide-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+
+    .guide-content.open {
+      max-height: 3000px;
+    }
+
+    .guide-inner {
+      padding: 1.5rem;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    .guide-inner h4 {
+      color: #D946EF;
+      margin: 1rem 0 0.5rem 0;
+      font-weight: 700;
+    }
+
+    .guide-inner p {
+      margin: 0.5rem 0;
+    }
+
+    .guide-inner ul {
+      margin: 0.5rem 0;
+      padding-left: 1.5rem;
+    }
+
+    .guide-inner li {
+      margin: 0.3rem 0;
+    }
+
     .textarea-edit {
       width: 100%;
       min-height: 400px;
@@ -231,6 +305,59 @@
     <h1>홈판 <strong>원고</strong> 자판기 v3+</h1>
     <p>주제 선택만 → 풍부한 내용의 원고</p>
     <p style="color: #666; font-size: 0.8rem;">직접 경험을 반영해서 수정하세요</p>
+  </div>
+
+  <div class="guide-section">
+    <div class="guide-header" onclick="toggleGuide()">
+      <h3>📖 네이버 홈판 최적화 작성 가이드</h3>
+      <span class="guide-toggle">▼</span>
+    </div>
+    <div class="guide-content" id="guideContent">
+      <div class="guide-inner">
+        <h4>🎯 절대 작성 규칙</h4>
+        <p>• 검색자의 실제 궁금증을 먼저 해결합니다<br>
+        • 실제 경험과 확인된 정보만 작성합니다<br>
+        • 같은 내용을 반복하지 않습니다<br>
+        • 과장, 허위 후기, 가짜 경험을 만들지 않습니다<br>
+        • 제목과 본문의 내용이 정확히 일치합니다</p>
+
+        <h4>📝 도입부 (첫 2~3문장)</h4>
+        <p>• 검색자의 상황과 직접 연결하기<br>
+        • 공감 → 이 글에서 얻을 정보 순서<br>
+        • 공감형/경험형/반전형 등 다양하게</p>
+
+        <h4>💡 정보 밀도</h4>
+        <p>• 모든 문단에 새로운 정보를 넣습니다<br>
+        • 구체적인 상황과 관찰 중심<br>
+        • 의미 없는 표현(정말 좋아요) 최소화<br>
+        • 400자마다 사진·인용구 배치</p>
+
+        <h4>⭐ 차별성 (최소 2가지 포함)</h4>
+        <p>• 실제 이용 상황<br>
+        • 직접 확인한 특징<br>
+        • 구체적인 비교<br>
+        • 예상과 달랐던 부분<br>
+        • 이용 팁<br>
+        • 장점과 아쉬운 점</p>
+
+        <h4>📏 길이</h4>
+        <p>• 일반 글: 1,800~2,500자<br>
+        • 정보성 글: 최대 3,000자<br>
+        • 줄마다 15~18글자 기본<br>
+        • 문단마다 정확히 4~5줄</p>
+
+        <h4>🚫 금칙어 피하기</h4>
+        <p>• 100%, 효능, 통증, 병원, 상담, 무료, 최고, 1위 등 금칙어 사용 금지<br>
+        • 자연스러운 대체 표현 사용: 판매→제공, 가격→비용, 치료→관리</p>
+
+        <h4>✍️ 최종 검수</h4>
+        <p>• 금칙어 0개 확인<br>
+        • 확인되지 않은 정보 없는지 확인<br>
+        • 허위 경험·후기 없는지 확인<br>
+        • 장점과 아쉬운 점 균형 맞는지 확인<br>
+        • 광고 문구 과다 없는지 확인</p>
+      </div>
+    </div>
   </div>
 
   <div class="control-panel">
@@ -514,14 +641,23 @@
 
   function downloadPost(filename) {
     if (window.lastPost) {
+      const guide = `[네이버 홈판 최적화 작성 가이드]\n\n절대 규칙: 실제 경험만, 과장 금지, 키워드 반복 금지, 같은 내용 반복 금지\n\n도입부: 검색자 상황 → 공감 → 정보 3문장\n\n정보 밀도: 모든 문단에 새로운 정보, 구체적 사례, 400자마다 사진/인용구\n\n차별성: 실제 경험, 특징 확인, 비교, 예상 외 부분, 팁, 장단점 중 2개 이상\n\n길이: 1,800~2,500자, 줄마다 15~18글자, 문단마다 4~5줄\n\n금칙어 금지: 100%, 효능, 통증, 병원, 상담, 무료, 최고, 1위 등\n\n검수: 금칙어 0개, 미확인정보 없음, 가짜경험 없음, 광고 과다 없음, 장단점 균형\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+      const contentWithGuide = guide + window.lastPost;
       const element = document.createElement('a');
-      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(window.lastPost));
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(contentWithGuide));
       element.setAttribute('download', `${filename}.txt`);
       element.style.display = 'none';
       document.body.appendChild(element);
       element.click();
       document.body.removeChild(element);
     }
+  }
+
+  function toggleGuide() {
+    const guideContent = document.getElementById('guideContent');
+    const guideToggle = document.querySelector('.guide-toggle');
+    guideContent.classList.toggle('open');
+    guideToggle.classList.toggle('open');
   }
 
   function resetForm() {
