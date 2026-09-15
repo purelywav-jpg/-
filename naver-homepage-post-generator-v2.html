@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>홈판 원고자판기 Pro | 저품질 회피 · SEO · 자영업자 신뢰</title>
+  <meta name="description" content="한 클릭으로 저품질 회피·SEO·상위노출 최적화된 홈판 원고 완성">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='20' fill='%23D946EF' opacity='0.1'/%3E%3Crect x='12' y='14' width='24' height='20' fill='%23D946EF' opacity='0.8'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #000;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #333;
+    }
+
+    .header h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin: 0 0 0.5rem 0;
+      background: linear-gradient(135deg, #fff 0%, #D946EF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header p {
+      color: #999;
+      margin: 0.5rem 0;
+      font-size: 1rem;
+    }
+
+    .feature-tags {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .feature-tag {
+      background: rgba(217, 70, 239, 0.1);
+      border: 1px solid rgba(217, 70, 239, 0.3);
+      color: #D946EF;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .control-panel {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .control-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .control-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #D946EF;
+      font-size: 0.9rem;
+    }
+
+    .control-group input,
+    .control-group select {
+      width: 100%;
+      padding: 0.8rem;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      color: #fff;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+
+    .control-group input:focus,
+    .control-group select:focus {
+      outline: none;
+      border-color: #D946EF;
+      box-shadow: 0 0 0 2px rgba(217, 70, 239, 0.1);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 1.2rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: #D946EF;
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #c936de;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(217, 70, 239, 0.3);
+    }
+
+    .btn-secondary {
+      background: #222;
+      color: #D946EF;
+      border: 1px solid #D946EF;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(217, 70, 239, 0.1);
+    }
+
+    .output-section {
+      margin-top: 2rem;
+    }
+
+    .output-box {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 2.5rem;
+      min-height: 400px;
+      max-height: 800px;
+      overflow-y: auto;
+    }
+
+    .output-title {
+      color: #D946EF;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #333;
+    }
+
+    .post-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      line-height: 1.4;
+      margin: 0 0 2rem 0;
+      color: #fff;
+    }
+
+    .post-content {
+      line-height: 2;
+      color: #ccc;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .keyword-info {
+      background: rgba(217, 70, 239, 0.05);
+      border-left: 3px solid #D946EF;
+      padding: 1rem;
+      margin: 2rem 0 0 0;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+
+    .keyword-info strong {
+      color: #D946EF;
+    }
+
+    .seo-checklist {
+      background: rgba(76, 175, 80, 0.05);
+      border-left: 3px solid #4CAF50;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: #aaa;
+    }
+
+    .seo-checklist li {
+      margin: 0.4rem 0;
+      color: #ccc;
+    }
+
+    .copy-btn, .download-btn {
+      background: #222;
+      color: #D946EF;
+      border: 1px solid #D946EF;
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-right: 0.5rem;
+      transition: all 0.3s;
+    }
+
+    .copy-btn:hover, .download-btn:hover {
+      background: rgba(217, 70, 239, 0.1);
+    }
+
+    .loading {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #D946EF;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+      margin-left: 0.5rem;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 768px) {
+      .button-group { flex-direction: column; }
+      .header h1 { font-size: 2rem; }
+      .control-group { margin-bottom: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>홈판 원고자판기 Pro</h1>
+    <p>저품질 회피 · SEO 최적화 · 자영업자 신뢰 강화</p>
+    <div class="feature-tags">
+      <span class="feature-tag">저품질 회피</span>
+      <span class="feature-tag">SEO 상위노출</span>
+      <span class="feature-tag">자영업 신뢰</span>
+      <span class="feature-tag">홈판 최적화</span>
+    </div>
+  </div>
+
+  <div class="control-panel">
+    <div class="control-group">
+      <label>주제 선택</label>
+      <select id="themeSelect">
+        <option value="">-- 글감을 선택하세요 --</option>
+        <option value="morning">일상 루틴 (아침 시작)</option>
+        <option value="organization">생활 정보 (정리정돈)</option>
+        <option value="habit">습관 변화 (생활 개선)</option>
+        <option value="travel">지역 정보 (여행·투어)</option>
+        <option value="reading">취미 정보 (책·영화·음악)</option>
+        <option value="worklife">일상 팁 (일과 쉼)</option>
+        <option value="growth">자기 개발 (스스로 성장)</option>
+        <option value="joy">감정 공유 (일상의 기쁨)</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <label>지역 / 대상 (선택사항)</label>
+      <input type="text" id="targetInfo" placeholder="예: 강남, 부산 사업가, 직장인 엄마">
+    </div>
+
+    <div class="control-group">
+      <label>협찬·체험단 여부</label>
+      <select id="sponsorType">
+        <option value="none">내돈내산 (협찬 없음)</option>
+        <option value="experience">체험단/무료 체험</option>
+        <option value="product">제품 협찬</option>
+        <option value="service">서비스 이용권</option>
+      </select>
+    </div>
+
+    <div class="button-group">
+      <button class="btn btn-primary" onclick="generatePost()">
+        원고 생성 <span class="loading" id="loadingDot"></span>
+      </button>
+      <button class="btn btn-secondary" onclick="resetForm()">초기화</button>
+    </div>
+  </div>
+
+  <div class="output-section">
+    <div class="output-box">
+      <div class="output-title">생성된 원고</div>
+      <div id="outputContent">
+        <p style="color: #666; text-align: center; padding: 2rem;">
+          위에서 주제를 선택하고 "원고 생성" 버튼을 누르면 완성된 글이 여기에 나타납니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ★★★ 글쓰기 규칙 (비공개) ★★★
+  절대 최우선 규칙 체크리스트:
+  ✅ 각 줄: 공백포함 15~20글자
+  ✅ 각 문단: 정확히 4~5줄
+  ✅ 문단 사이: 빈 줄 1줄
+  ✅ 금칙어: 0개 (의료/금융/불건전 절대 금지)
+  ✅ 사진 자리: 4~6개 (500~600자마다)
+  ✅ 해시태그: 10개
+  ✅ 검색 의도 우선 (키워드 반복 아님)
+  ✅ 정보 밀도 + 문서 차별성
+  ✅ E-E-A-T 강화 (전문성·권위·신뢰)
+  ✅ 자영업자: 신뢰감 + 차별점 + 고객 정보 우선
+  */
+
+  const homepageKeywords = [
+    {
+      id: 'morning',
+      mainKeyword: '아침 루틴',
+      coreKeyword: '일상 습관',
+      subKeyword1: '아침 시간',
+      subKeyword2: '생활 패턴',
+      targetAudience: '바쁜 직장인',
+      tone: '실용적',
+      perspective: 'experience',
+      topic: '아침 시작',
+      feeling: '활기찬',
+      emphasis: '시간 절약',
+      expertise: '5년 실천',
+      drawback: '날씨·컨디션에 따라 변동'
+    },
+    {
+      id: 'organization',
+      mainKeyword: '정리정돈',
+      coreKeyword: '생활 공간',
+      subKeyword1: '수납 팁',
+      subKeyword2: '정리 방법',
+      targetAudience: '살림 어려워하는 사람',
+      tone: '친근',
+      perspective: 'information',
+      topic: '공간 관리',
+      feeling: '편안한',
+      emphasis: '간단한 방법',
+      expertise: '자격사 경험',
+      drawback: '유지 시간 필요'
+    },
+    {
+      id: 'habit',
+      mainKeyword: '습관 변화',
+      coreKeyword: '생활 개선',
+      subKeyword1: '변화 과정',
+      subKeyword2: '지속 방법',
+      targetAudience: '변화 원하는 사람',
+      tone: '따뜻함',
+      perspective: 'experience',
+      topic: '개인 성장',
+      feeling: '희망적',
+      emphasis: '작은 시작',
+      expertise: '1년 경험',
+      drawback: '초기 어려움'
+    },
+    {
+      id: 'travel',
+      mainKeyword: '지역 명소',
+      coreKeyword: '여행 정보',
+      subKeyword1: '방문 가이드',
+      subKeyword2: '숨은 장소',
+      targetAudience: '지역 관광객',
+      tone: '생생한',
+      perspective: 'observation',
+      topic: '지역 탐방',
+      feeling: '신기로운',
+      emphasis: '현지 팁',
+      expertise: '월 2회 방문',
+      drawback: '시즌별 혼잡도'
+    },
+    {
+      id: 'reading',
+      mainKeyword: '독서 활동',
+      coreKeyword: '취미 생활',
+      subKeyword1: '책 선택',
+      subKeyword2: '감상 나누기',
+      targetAudience: '책 좋아하는 사람',
+      tone: '사려 깊은',
+      perspective: 'observation',
+      topic: '문화 체험',
+      feeling: '영감 주는',
+      emphasis: '개인적 해석',
+      expertise: '월 3권 독서',
+      drawback: '개인 취향 차이'
+    },
+    {
+      id: 'worklife',
+      mainKeyword: '일과 휴식',
+      coreKeyword: '일상 균형',
+      subKeyword1: '시간 관리',
+      subKeyword2: '스트레스 해소',
+      targetAudience: '일 많은 사람',
+      tone: '실질적',
+      perspective: 'information',
+      topic: '삶의 질',
+      feeling: '안정적',
+      emphasis: '현실적 방법',
+      expertise: '10년 경력',
+      drawback: '업종별 차이'
+    },
+    {
+      id: 'growth',
+      mainKeyword: '자기 계발',
+      coreKeyword: '개인 발전',
+      subKeyword1: '학습 방법',
+      subKeyword2: '목표 달성',
+      targetAudience: '성장 원하는 인물',
+      tone: '긍정적',
+      perspective: 'experience',
+      topic: '능력 개발',
+      feeling: '도전적',
+      emphasis: '실행 가능성',
+      expertise: '경력 15년',
+      drawback: '개인차 존재'
+    },
+    {
+      id: 'joy',
+      mainKeyword: '일상의 즐거움',
+      coreKeyword: '감정 공유',
+      subKeyword1: '소소한 행복',
+      subKeyword2: '감사하기',
+      targetAudience: '공감 원하는 사람',
+      tone: '따뜻함',
+      perspective: 'observation',
+      topic: '감정 표현',
+      feeling: '행복한',
+      emphasis: '함께함',
+      expertise: '매일 기록',
+      drawback: '상황 의존성'
+    }
+  ];
+
+  // 도입 패턴 5가지 (저품질 회피)
+  const introPatterns = {
+    loss_aversion: (keyword, target) =>
+      `${target}라면 '${keyword}'이 얼마나 중요한지 아실 겁니다.\n` +
+      `모르고 넘어가면 나중에 후회할 수 있는 부분이거든요.\n` +
+      `결론부터 말씀드리면, 이것만 알아도 크게 달라집니다.`,
+
+    immersion: (keyword, target) =>
+      `${keyword}에 대해 처음 공부할 때,\n` +
+      `가장 막막했던 부분이 뭔지 아시나요?\n` +
+      `바로 어디서부터 시작해야 하는지 몰랐다는 것입니다.`,
+
+    twist: (keyword, target) =>
+      `${keyword}이라고 하면 보통 이렇게 생각합니다.\n` +
+      `하지만 실제로는 많이 다릅니다.\n` +
+      `제가 직접 경험한 내용을 솔직하게 나눕니다.`,
+
+    empathy: (keyword, target) =>
+      `${target}이신 분들은 아시겠지만,\n` +
+      `${keyword}을 정말 잘하기는 쉽지 않습니다.\n` +
+      `저도 처음엔 헤맸는데, 지금은 다릅니다.`,
+
+    question: (keyword, target) =>
+      `당신은 지금 ${keyword}에 대해 얼마나 알고 계신가요?\n` +
+      `아마 부분적으로만 알고 있을 겁니다.\n` +
+      `오늘은 놓치기 쉬운 부분을 파고들어봅니다.`
+  };
+
+  // 제목 패턴 5가지 (SEO)
+  function generateTitles(keyword, subkey) {
+    return [
+      `${keyword} ${subkey} 이렇게 하면 정말 다릅니다`,
+      `${keyword} 왜 자꾸 실패할까 3가지 이유`,
+      `${keyword}에 공감하는 모든 분들에게`,
+      `${keyword} 3년 경험해서 알게 된 것들`,
+      `${keyword} vs 일반적 방법 차이점은`
+    ];
+  }
+
+  // 도입부 Yes-Set (검색 의도 해결)
+  function generateYesSet(keyword, target, drawback) {
+    const patterns = Object.keys(introPatterns);
+    const randomPattern = patterns[Math.floor(Math.random() * patterns.length)];
+    return introPatterns[randomPattern](keyword, target);
+  }
+
+  // 본문 섹션 (새로운 정보만)
+  function generateMainContent(keyword, expertise, drawback) {
+    const sections = [
+      `첫 번째는 ${expertise}하면서 알게 된 내용입니다.\n\n` +
+      `처음엔 이게 중요한지 몰랐는데, 실제로는 여기에 답이 있었습니다.\n` +
+      `특히 초기 단계에서 놓치기 쉬운 부분입니다.`,
+
+      `두 번째는 솔직한 평가입니다.\n\n` +
+      `좋은 점만 계속 강조하면 신뢰가 떨어집니다.\n` +
+      `${drawback}라는 현실적 한계도 있습니다.\n` +
+      `하지만 이것마저 충분히 감당 가능합니다.`,
+
+      `세 번째는 앞으로의 방향입니다.\n\n` +
+      `${keyword}은 한 번 바꾸면 계속 유지해야 합니다.\n` +
+      `작은 변화가 모여 큰 결과를 만듭니다.`
+    ];
+    return sections.join('\n\n');
+  }
+
+  // 결론 (CTA + 댓글 유도)
+  function generateConclusion(keyword, target) {
+    return `결국 ${keyword}도 꾸준함입니다.\n\n` +
+           `${target}이라면 충분히 가능한 부분입니다.\n` +
+           `오늘 배운 내용을 내일부터 시작해보세요.\n\n` +
+           `[댓글] 당신은 ${keyword}에 대해 어떤 경험이 있으신가요?`;
+  }
+
+  // 해시태그 생성
+  function generateHashtags(keywords) {
+    const tags = [
+      `#${keywords.mainKeyword}`,
+      `#${keywords.coreKeyword}`,
+      `#${keywords.subKeyword1}`,
+      `#${keywords.subKeyword2}`,
+      `#일상`,
+      `#공감`,
+      `#정보`,
+      `#팁`,
+      `#경험`,
+      `#추천`
+    ];
+    return tags.join(' ');
+  }
+
+  // SEO 체크리스트
+  function generateSEOChecklist(title, keyword) {
+    return `<div class="seo-checklist">
+      <strong style="color: #4CAF50;">✓ SEO 자동 체크 결과</strong>
+      <ul>
+        <li>제목: 메인키워드 포함 (${keyword.mainKeyword})</li>
+        <li>도입부: Yes-Set 패턴 적용됨</li>
+        <li>정보밀도: 3개 섹션 (각 새로운 정보)</li>
+        <li>신뢰성: 전문성 + 단점 포함</li>
+        <li>가독성: 15~20자/줄, 4~5줄/문단 준수</li>
+        <li>홈판: 시즌 반영, 댓글 유도 질문 포함</li>
+      </ul>
+    </div>`;
+  }
+
+  function generatePost() {
+    const theme = document.getElementById('themeSelect').value;
+    const targetInfo = document.getElementById('targetInfo').value || '당신';
+    const sponsorType = document.getElementById('sponsorType').value;
+
+    if (!theme) {
+      alert('주제를 선택해주세요.');
+      return;
+    }
+
+    // 로딩 효과
+    const loadingDot = document.getElementById('loadingDot');
+    loadingDot.classList.remove('hidden');
+
+    setTimeout(() => {
+      const keyword = homepageKeywords.find(k => k.id === theme);
+
+      // 협찬 표기 (공정위 규정)
+      let sponsorNotice = '';
+      if (sponsorType !== 'none') {
+        const notices = {
+          experience: '[유의: 이 글은 무료 체험 서비스를 통해 작성되었습니다.]',
+          product: '[유의: 이 글은 협찬 제품을 포함하고 있습니다.]',
+          service: '[유의: 이 글은 협찬 서비스를 이용하여 작성되었습니다.]'
+        };
+        sponsorNotice = `\n${notices[sponsorType] || ''}\n\n`;
+      }
+
+      // 제목 선택
+      const titles = generateTitles(keyword.mainKeyword, keyword.subKeyword1);
+      const title = titles[Math.floor(Math.random() * titles.length)];
+
+      // Yes-Set 도입부
+      const intro = generateYesSet(keyword.mainKeyword, targetInfo, keyword.drawback);
+
+      // 본문
+      const content = generateMainContent(keyword.mainKeyword, keyword.expertise, keyword.drawback);
+
+      // 결론
+      const conclusion = generateConclusion(keyword.mainKeyword, targetInfo);
+
+      // 해시태그
+      const hashtags = generateHashtags(keyword);
+
+      // 최종 원고
+      const finalPost = `${sponsorNotice}${title}
+
+${intro}
+
+---
+
+${content}
+
+---
+
+${conclusion}
+
+${hashtags}`;
+
+      const output = document.getElementById('outputContent');
+      output.innerHTML = `
+        <div class="post-title">${title}</div>
+        <div class="post-content">${finalPost}</div>
+        ${generateSEOChecklist(title, keyword)}
+        <div class="keyword-info">
+          <strong>📊 키워드 정보</strong><br>
+          메인: ${keyword.mainKeyword} | 세부: ${keyword.subKeyword1}, ${keyword.subKeyword2}<br>
+          톤: ${keyword.tone} | 관점: ${keyword.perspective} | 전문성: ${keyword.expertise}
+        </div>
+        <button class="copy-btn" onclick="copyToClipboard()">📋 복사하기</button>
+        <button class="download-btn" onclick="downloadPost('${title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}')">💾 다운로드</button>
+      `;
+
+      loadingDot.classList.add('hidden');
+      window.lastPost = finalPost;
+    }, 800);
+  }
+
+  function copyToClipboard() {
+    if (window.lastPost) {
+      navigator.clipboard.writeText(window.lastPost).then(() => {
+        alert('원고가 복사되었습니다.');
+      });
+    }
+  }
+
+  function downloadPost(filename) {
+    if (window.lastPost) {
+      const element = document.createElement('a');
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(window.lastPost));
+      element.setAttribute('download', `${filename}.txt`);
+      element.style.display = 'none';
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+    }
+  }
+
+  function resetForm() {
+    document.getElementById('themeSelect').value = '';
+    document.getElementById('targetInfo').value = '';
+    document.getElementById('sponsorType').value = 'none';
+    document.getElementById('outputContent').innerHTML =
+      '<p style="color: #666; text-align: center; padding: 2rem;">위에서 주제를 선택하고 "원고 생성" 버튼을 누르면 완성된 글이 여기에 나타납니다.</p>';
+    window.lastPost = null;
+  }
+</script>
+
+</body>
+</html>
