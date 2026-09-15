@@ -1,96 +1,101 @@
 # 초보자 전용 승인 잘 나는 체험단 사이트 가이드
 
-> 진입장벽을 낮춰 가장 많은 초보자를 유입시키는 용도의 체험단 모음입니다.
-> 각 카테고리별로 승인확률이 높은 순서대로 정렬했습니다.
+> 🎯 **실제 운영 중인 사이트만 엄선했습니다.**
+> 각 카테고리별로 활동이 활발한 순서대로 정렬했습니다.
 
 ---
 
-## 🏆 **[승인확률 높음] TOP 추천 사이트**
+## 🔥 **[필수 등록] 첫 번째 신청할 사이트 (5개)**
 
-*이 사이트들은 승인 빠르고, 정책이 명확하고, 초보자 친화적입니다.*
+*이 5개만 먼저 해도 충분합니다. 승인 빠르고 관리가 잘 됩니다.*
 
-### 1순위 (강력 추천)
-- **리뷰웨이브** - https://reviewwave.kr/
-  - 특징: 초보자 승인률 80% 이상
-  - 상품: 식품, 뷰티, 생활용품 다양
-  
-- **디너의여왕** - https://dinnerqueen.net/
-  - 특징: 식음료 체험단 전문
-  - 승인: 매우 빠름 (당일~2일)
-
-- **투잡커넥트** - https://www.tojobcn.com/
-  - 특징: 부업 관심층 집중
-  - 보상: 현금 + 상품권 많음
-
-### 2순위 (안정적)
-- **레뷰** - https://www.revu.net/
-- **르뷰** - https://rewview.co.kr/campaign_list.php?campaign_open=2
-- **잇플루언서** - https://www.itfluencer.co.kr/campaign-list
-- **리뷰나비** - http://reviewnavi.co.kr/index.php
-- **리뷰마켓** - https://reviewmarket.co.kr/campaign/campaign_list.php
+1. **리뷰웨이브** - https://reviewwave.kr/
+   - 초보자 친화적 / 승인 빠름
+   
+2. **디너의여왕** - https://dinnerqueen.net/
+   - 식음료 체험단 전문 / 당일승인 가능
+   
+3. **레뷰** - https://www.revu.net/
+   - 상품 다양 / 초보자 승인률 높음
+   
+4. **로그통** - https://logtong.co.kr/
+   - 종합 체험단 / 초보자 추천
+   
+5. **리뷰마켓** - https://reviewmarket.co.kr/campaign/campaign_list.php
+   - 상품 많음 / 순위 시스템 있음
 
 ---
 
-## 🛍️ **[상품 중심] 물품 배송형 체험단**
+## 🎁 **[상품 배송] 물품 체험단**
 
-*실제 상품을 받아보는 것을 원하는 분들을 위한 사이트*
+*실제 상품을 받는 것을 원한다면*
 
-### 상품 다양도 TOP
-- **0.8리터** - https://www.08liter.com/try (식품 전문)
-- **모아블** - http://moable.kr/ (종합)
-- **파인앳플** - https://www.fineadple.com/ (뷰티)
-- **브이스탁** - https://www.vstocklab.com/ (라이프스타일)
-- **팔레트미** - https://www.palett.me/ (뷰티+패션)
-
-### 고가 상품 체험단
+- **파인앳플** - https://www.fineadple.com/
+- **팔레트미** - https://www.palett.me/
+- **브이스탁** - https://www.vstocklab.com/
 - **애경서포터즈** - https://www.aklover.co.kr/main/index.php
-- **마인드리퍼블릭** - http://influencer.mindrepublic.kr/
-- **샵텐** - http://www.xn--yh4b421a.com/
+- **강남맛집** - https://xn--939au0g4vj8sq.net/
 
 ---
 
-## 👥 **[커뮤니티 중심] 커뮤니티형 체험단**
+## 👥 **[네이버 카페] 커뮤니티 중심**
 
-*이웃들과 함께 성장하고, 피드백을 주고받을 수 있는 곳*
+*이웃과 함께 성장하는 경험*
 
-### 활발한 카페 커뮤니티
+**필수 가입 5개:**
 - **나는블로거다** - https://cafe.naver.com/imblog2
-- **더먹자** - https://cafe.naver.com/themukja
-- **블로그바스켓** - https://cafe.naver.com/blogbasket
 - **체험단대표카페** - https://cafe.naver.com/jykgroup
+- **블로그바스켓** - https://cafe.naver.com/blogbasket
 - **솔직한체험단** - https://cafe.naver.com/honest1
+- **더먹자** - https://cafe.naver.com/themukja
 
-### 블로그 기반 커뮤니티
-- **소문내블로그** - https://blog.naver.com/somune
-- **블로그원정대** - https://blog.naver.com/ajw4151
-- **블로그동스쿨** - https://blogdong.com/
+**추가 추천:**
+- 말캉체험단 - https://cafe.naver.com/mlkgcommm
+- 맘스베베홀릭 - https://cafe.naver.com/babeholic
+- 여행을삼키다 - https://cafe.naver.com/kkulkkeok
+- 올어바웃뷰티 - https://cafe.naver.com/allaboutbeauty1
+- 탑블로그 - https://cafe.naver.com/tblog
 
 ---
 
-## 🏨 **[숙박/여행] 여행 & 숙박 체험단**
+## 📝 **[네이버 블로그] 블로그형 체험단**
 
-*숙박, 관광지, 음식점 등 경험형 체험*
+*블로거들이 관리하는 체험단 모음*
 
-### 숙박 중심
+**활발한 블로그 TOP 15:**
+1. 가보자블로그 - https://blog.naver.com/dltmdwhd7
+2. 가성비체험단 - https://blog.naver.com/pistols89
+3. 기린아블로그 - https://blog.naver.com/girina2017
+4. 꿀맛체험단 - https://blog.naver.com/nalmedia1
+5. 나는예뻐체험단 - https://blog.naver.com/mcg_157
+6. 나무체험단 - https://blog.naver.com/lounge23
+7. 너랑나랑체험단 - https://blog.naver.com/hikali1006
+8. 놀라운체험단 - https://blog.naver.com/nollauncompany
+9. 놀자블로그 - https://blog.naver.com/dailyblog89
+10. 다뉴체험단 - https://blog.naver.com/daanew1
+11. 다솜체험단 - https://blog.naver.com/dasomgaon12
+12. 더리뷰닷컴 - https://blog.naver.com/smileucomms
+13. 두근두근체험단 - https://blog.naver.com/doogn_doogn
+14. 드루와체험단 - https://blog.naver.com/moa_2018
+15. 라이프체험단 - https://blog.naver.com/life_blog
+
+**더 많은 블로그:**
+- 소문내블로그 - https://blog.naver.com/somune
+- 블로그원정대 - https://blog.naver.com/ajw4151
+- 블로그스토리 - https://blog.naver.com/blogstory1016
+- 어바웃라이프 - https://blog.naver.com/qo191
+- 리뷰천국 - https://blog.naver.com/reviewmarketing
+- 체험단나라 - https://blog.naver.com/expernara
+
+---
+
+## 🏨 **[여행/숙박/맛집] 경험형 체험단**
+
+*상품이 아닌 경험을 원한다면*
+
+- **대한민국어디** - https://www.korod.co.kr/
 - **여행을삼키다** - https://cafe.naver.com/kkulkkeok
 - **어바웃라이프** - https://blog.naver.com/qo191
-- **대한민국어디** - https://www.korod.co.kr/
-
-### 맛집 체험단
-- **강남맛집** - https://xn--939au0g4vj8sq.net/
-- **오마이블로그** - http://www.kormedia.co.kr/
-
----
-
-## 📋 **[종합 모음] 한곳에서 여러 체험단 찾기**
-
-*다양한 체험단을 한 곳에서 검색할 수 있는 플랫폼*
-
-- **체험단나라** - https://blog.naver.com/expernara
-- **체험단닷컴** - http://www.chehumdan.com/html_file.php?file=all_campaign.html
-- **체험뷰** - https://chvu.co.kr/
-- **로그통** - https://logtong.co.kr/
-- **리뷰그램** - http://reviewgram.net/category.php?category=832
 
 ---
 
