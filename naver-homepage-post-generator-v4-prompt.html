@@ -680,6 +680,12 @@
 
     const output = document.getElementById('outputContent');
     output.innerHTML = `
+      <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+        <button class="copy-btn" onclick="copyPrompt()">📋 전체 복사</button>
+        <button class="download-btn" onclick="downloadPrompt()">💾 텍스트 다운로드</button>
+        <button class="edit-btn" onclick="toggleEdit()">✏️ 수정</button>
+      </div>
+
       <div class="prompt-text">${prompt}</div>
 
       <div class="action-notice">
@@ -689,10 +695,6 @@
         • 또는 직접 원고 작성할 때 가이드라인으로 사용<br>
         • 모든 규칙을 따르면 네이버 홈판 최적화 원고 완성
       </div>
-
-      <button class="copy-btn" onclick="copyPrompt()">📋 전체 복사</button>
-      <button class="download-btn" onclick="downloadPrompt()">💾 텍스트 다운로드</button>
-      <button class="edit-btn" onclick="toggleEdit()">✏️ 수정</button>
     `;
   }
 
@@ -725,10 +727,12 @@
       generateDisplayView();
     } else {
       output.innerHTML = `
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+          <button class="copy-btn" onclick="copyPrompt()">📋 복사</button>
+          <button class="download-btn" onclick="downloadPrompt()">💾 다운</button>
+          <button class="edit-btn" onclick="toggleEdit()">✏️ 완료</button>
+        </div>
         <textarea class="textarea-edit">${window.lastPrompt}</textarea>
-        <button class="copy-btn" onclick="copyPrompt()">📋 복사</button>
-        <button class="download-btn" onclick="downloadPrompt()">💾 다운</button>
-        <button class="edit-btn" onclick="toggleEdit()">✏️ 완료</button>
       `;
     }
   }
@@ -736,16 +740,18 @@
   function generateDisplayView() {
     const output = document.getElementById('outputContent');
     output.innerHTML = `
+      <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+        <button class="copy-btn" onclick="copyPrompt()">📋 전체 복사</button>
+        <button class="download-btn" onclick="downloadPrompt()">💾 텍스트 다운로드</button>
+        <button class="edit-btn" onclick="toggleEdit()">✏️ 수정</button>
+      </div>
+
       <div class="prompt-text">${window.lastPrompt}</div>
 
       <div class="action-notice">
         <strong>💡 사용 방법</strong><br>
         이 프롬프트를 복사한 후 AI에게 전달하거나 직접 참고하세요.
       </div>
-
-      <button class="copy-btn" onclick="copyPrompt()">📋 전체 복사</button>
-      <button class="download-btn" onclick="downloadPrompt()">💾 텍스트 다운로드</button>
-      <button class="edit-btn" onclick="toggleEdit()">✏️ 수정</button>
     `;
   }
 
