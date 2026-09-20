@@ -858,33 +858,37 @@
     `;
   }
 
-  function copyPrompt() {
+  async function copyPrompt() {
     if (window.lastPrompt) {
-      const output = document.getElementById('outputContent');
-      const promptDiv = output.querySelector('.prompt-text');
+      try {
+        // 모던 Clipboard API 사용
+        await navigator.clipboard.writeText(window.lastPrompt);
+        alert('✅ 프롬프트가 복사되었습니다!\n\nAI에 붙여넣기하세요.');
+      } catch (err) {
+        // Clipboard API 실패 시 execCommand로 fallback
+        const output = document.getElementById('outputContent');
+        const promptDiv = output.querySelector('.prompt-text');
 
-      if (promptDiv) {
-        // 범위 선택
-        const range = document.createRange();
-        range.selectNodeContents(promptDiv);
-        const sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
+        if (promptDiv) {
+          const range = document.createRange();
+          range.selectNodeContents(promptDiv);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
 
-        // 복사 시도
-        try {
-          const success = document.execCommand('copy');
-          if (success) {
-            alert('✅ 프롬프트가 복사되었습니다!\n\n클립보드에 저장되었으니 AI에 붙여넣기하세요.');
-          } else {
+          try {
+            const success = document.execCommand('copy');
+            if (success) {
+              alert('✅ 프롬프트가 복사되었습니다!\n\nAI에 붙여넣기하세요.');
+            } else {
+              showCopyHelper();
+            }
+          } catch (e) {
             showCopyHelper();
           }
-        } catch (err) {
-          showCopyHelper();
-        }
 
-        // 선택 제거
-        sel.removeAllRanges();
+          sel.removeAllRanges();
+        }
       }
     }
   }
