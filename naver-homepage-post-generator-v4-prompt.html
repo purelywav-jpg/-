@@ -700,25 +700,62 @@
 
   function copyPrompt() {
     if (window.lastPrompt) {
-      // 임시 textarea 생성
-      const textarea = document.createElement('textarea');
-      textarea.value = window.lastPrompt;
-      textarea.style.position = 'fixed';
-      textarea.style.opacity = '0';
-      document.body.appendChild(textarea);
+      const output = document.getElementById('outputContent');
+      const promptDiv = output.querySelector('.prompt-text');
 
-      // 텍스트 선택 및 복사
-      textarea.select();
-      try {
-        document.execCommand('copy');
-        alert('프롬프트가 복사되었습니다. 이제 AI에게 붙여넣기할 수 있습니다.');
-      } catch (err) {
-        alert('복사 실패. 다운로드로 저장한 후 사용해주세요.');
+      if (promptDiv) {
+        // 범위 선택
+        const range = document.createRange();
+        range.selectNodeContents(promptDiv);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+
+        // 복사 시도
+        try {
+          const success = document.execCommand('copy');
+          if (success) {
+            alert('✅ 프롬프트가 복사되었습니다!\n\n클립보드에 저장되었으니 AI에 붙여넣기하세요.');
+          } else {
+            showCopyHelper();
+          }
+        } catch (err) {
+          showCopyHelper();
+        }
+
+        // 선택 제거
+        sel.removeAllRanges();
       }
-
-      // textarea 제거
-      document.body.removeChild(textarea);
     }
+  }
+
+  function showCopyHelper() {
+    const output = document.getElementById('outputContent');
+    output.innerHTML = `
+      <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+        <button class="copy-btn" onclick="copyPrompt()">📋 전체 복사</button>
+        <button class="download-btn" onclick="downloadPrompt()">💾 텍스트 다운로드</button>
+        <button class="edit-btn" onclick="toggleEdit()">✏️ 수정</button>
+      </div>
+
+      <div style="background: #1a3a1a; border-left: 3px solid #4ade80; padding: 1rem; margin-bottom: 1.5rem; border-radius: 4px;">
+        <strong style="color: #4ade80;">📋 수동 복사 방법</strong><br>
+        <span style="color: #aaa; font-size: 0.9rem;">아래 프롬프트를 드래그해서 선택한 후 Ctrl+C (또는 Cmd+C)로 복사하세요.</span>
+      </div>
+
+      <div class="prompt-text" style="cursor: text; user-select: text; padding: 1rem; background: #0a0a0a; border: 1px solid #333; border-radius: 6px;">${window.lastPrompt}</div>
+
+      <div class="action-notice">
+        <strong>💡 사용 방법</strong><br>
+        이 프롬프트를 복사한 후 AI에게 전달하거나 직접 참고하세요.
+      </div>
+
+      <div style="display: flex; gap: 0.5rem; margin-top: 1.5rem; flex-wrap: wrap;">
+        <button class="copy-btn" onclick="copyPrompt()">📋 복사 재시도</button>
+        <button class="download-btn" onclick="downloadPrompt()">💾 다운로드</button>
+        <button class="edit-btn" onclick="toggleEdit()">✏️ 수정</button>
+      </div>
+    `;
   }
 
   function downloadPrompt() {
