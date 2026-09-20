@@ -922,15 +922,33 @@
     `;
   }
 
-  function downloadPrompt() {
+  async function downloadPrompt() {
     if (window.lastPrompt) {
-      const element = document.createElement('a');
-      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(window.lastPrompt));
-      element.setAttribute('download', 'naver-blog-prompt.txt');
-      element.style.display = 'none';
-      document.body.appendChild(element);
-      element.click();
-      document.body.removeChild(element);
+      try {
+        // Artifact downloads API 사용 (Claude 환경)
+        if (window.claude && window.claude.downloads && window.claude.downloads.save) {
+          const blob = new Blob([window.lastPrompt], { type: 'text/plain;charset=utf-8' });
+          await window.claude.downloads.save(blob, 'naver-blog-prompt.txt');
+          alert('✅ 파일이 다운로드되었습니다!');
+          return;
+        }
+      } catch (err) {
+        console.log('Claude downloads API 사용 불가, fallback 사용');
+      }
+
+      // Fallback: 전통적인 data URI 방식
+      try {
+        const element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(window.lastPrompt));
+        element.setAttribute('download', 'naver-blog-prompt.txt');
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+        alert('✅ 파일이 다운로드되었습니다!');
+      } catch (err) {
+        alert('⚠️ 다운로드에 실패했습니다. 복사 기능을 사용해주세요.');
+      }
     }
   }
 
