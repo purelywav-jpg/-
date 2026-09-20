@@ -700,9 +700,24 @@
 
   function copyPrompt() {
     if (window.lastPrompt) {
-      navigator.clipboard.writeText(window.lastPrompt).then(() => {
+      // 임시 textarea 생성
+      const textarea = document.createElement('textarea');
+      textarea.value = window.lastPrompt;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+
+      // 텍스트 선택 및 복사
+      textarea.select();
+      try {
+        document.execCommand('copy');
         alert('프롬프트가 복사되었습니다. 이제 AI에게 붙여넣기할 수 있습니다.');
-      });
+      } catch (err) {
+        alert('복사 실패. 다운로드로 저장한 후 사용해주세요.');
+      }
+
+      // textarea 제거
+      document.body.removeChild(textarea);
     }
   }
 
