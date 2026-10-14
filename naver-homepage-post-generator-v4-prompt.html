@@ -1397,51 +1397,6 @@ AI 도구가 어렵지 않으며 실용적으로 활용 가능하다는 확신 �
     ai: ['#AI활용', '#ChatGPT', '#인공지능', '#AI도구', '#생산성', '#자동화', '#AI학습', '#기술활용', '#업무효율', '#AI팁']
   };
 
-  function wrapText(text, maxLength = 18) {
-    const words = text.split(' ');
-    let lines = [];
-    let currentLine = '';
-    let paragraphLines = [];
-    let lineCount = 0;
-
-    words.forEach((word, index) => {
-      if ((currentLine + word).length > maxLength && currentLine) {
-        paragraphLines.push(currentLine.trim());
-        currentLine = word + ' ';
-        lineCount++;
-
-        // 4-6줄마다 공백 라인 추가
-        if (lineCount % 5 === 0) {
-          paragraphLines.push('');
-          lineCount = 0;
-        }
-      } else {
-        currentLine += word + ' ';
-      }
-    });
-
-    if (currentLine) {
-      paragraphLines.push(currentLine.trim());
-    }
-
-    return paragraphLines.join('\n');
-  }
-
-  function formatPromptWithLineBreaks(rawPrompt) {
-    const sections = rawPrompt.split('\n【');
-    let formattedText = '';
-
-    sections.forEach((section, index) => {
-      if (index === 0) {
-        formattedText += wrapText(section);
-      } else {
-        formattedText += '\n【' + wrapText(section);
-      }
-    });
-
-    return formattedText;
-  }
-
   function generatePrompt() {
     const themeId = document.getElementById('themeSelect').value;
 
@@ -1451,9 +1406,6 @@ AI 도구가 어렵지 않으며 실용적으로 활용 가능하다는 확신 �
     }
 
     let prompt = prompts[themeId];
-
-    // 줄바꿈 처리
-    prompt = formatPromptWithLineBreaks(prompt);
 
     // 해시태그 추가
     const themeHashtags = hashtags[themeId];
