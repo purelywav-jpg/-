@@ -300,6 +300,7 @@
 
     <div class="button-group">
       <button class="btn btn-primary" onclick="generatePrompt()">📝 프롬프트 생성</button>
+      <button class="btn btn-secondary" onclick="autoGeneratePrompt()">⚡ 자동 생성</button>
       <button class="btn btn-secondary" onclick="resetForm()">🔄 초기화</button>
     </div>
   </div>
@@ -321,6 +322,19 @@
 </div>
 
 <script>
+  // 월간조회수 500~1000 키워드 데이터베이스
+  const keywords = {
+    person: ['연예인 근황', '유명인 스타일', '셀러브리티 패션', '연예인 일상', '배우 인터뷰', '가수 소식'],
+    social: ['요즘 트렌드', '사회이슈', '화제의 인물', '최신 뉴스', '일상 변화', '시사 이슈'],
+    trend: ['2024 패션 트렌드', '유행하는 스타일', '요즘 화장법', '인기 색상', '스타일링 팁'],
+    relation: ['결혼 문화', '육아 정보', '부부 관계', '가족 이야기', '인간관계 팁', '결혼식 트렌드'],
+    place: ['숨은 카페', '핫플 장소', '드라이브 코스', '근처 맛집', '관광지 정보', '지역 특산물'],
+    food: ['요즘 먹는 음식', '트렌드 카페', '신메뉴 리뷰', '건강 식단', '음식 트렌드', '맛집 발견'],
+    daily: ['생활 꿀팁', '효율적인 정리법', '시간 관리법', '일상 습관', '생활 개선법', '집 꾸미는 법'],
+    story: ['일상 감정', '감성 순간', '사소한 행복', '일상 스토리', '공감 이야기', '기억할 순간'],
+    ai: ['AI 도구 추천', 'ChatGPT 활용법', 'AI 이미지 생성', '자동화 도구', 'AI 학습', 'AI 비즈니스']
+  };
+
   const prompts = {
     person: `당신은 네이버 블로그 전문 원고 작성자입니다. 아래의 지시사항을 정확히 따라 원고를 작성하세요.
 
@@ -988,6 +1002,57 @@
       <div class="action-notice">
         <strong>💡 사용 방법</strong><br>
         이 프롬프트를 복사한 후 AI에게 전달하거나 직접 참고하세요.
+      </div>
+    `;
+  }
+
+  function autoGeneratePrompt() {
+    // 랜덤 테마 선택
+    const themes = ['person', 'social', 'trend', 'relation', 'place', 'food', 'daily', 'story', 'ai'];
+    const randomTheme = themes[Math.floor(Math.random() * themes.length)];
+
+    // 해당 테마의 랜덤 키워드 선택
+    const themeKeywords = keywords[randomTheme];
+    const randomKeyword = themeKeywords[Math.floor(Math.random() * themeKeywords.length)];
+
+    // 테마 선택
+    document.getElementById('themeSelect').value = randomTheme;
+
+    // 프롬프트 생성
+    let prompt = prompts[randomTheme];
+
+    // 키워드를 프롬프트에 삽입
+    if (randomKeyword) {
+      prompt = prompt.replace(/【주제】/, `【주제】${randomKeyword}\n\n`);
+    }
+
+    // 해시태그 추가
+    const themeHashtags = hashtags[randomTheme];
+    if (themeHashtags) {
+      prompt += '\n\n【추천 해시태그 10개】\n' + themeHashtags.join(' ');
+    }
+
+    window.lastPrompt = prompt;
+
+    const output = document.getElementById('outputContent');
+    output.innerHTML = `
+      <div class="action-buttons-group">
+        <button class="copy-btn" onclick="copyPrompt()">📋 전체 복사</button>
+        <button class="download-btn" onclick="downloadPrompt()">💾 텍스트 다운로드</button>
+        <button class="edit-btn" onclick="toggleEdit()">✏️ 수정</button>
+      </div>
+
+      <div style="background: #fff4e6; border-left: 3px solid #ffa500; padding: 1rem; margin-bottom: 1.5rem; border-radius: 4px;">
+        <strong style="color: #ff8c00;">🔍 자동 선택된 키워드</strong><br>
+        <span style="color: #666; font-size: 0.95rem;"><strong>${randomKeyword}</strong> (월간조회수 500~1000)</span>
+      </div>
+
+      <div class="prompt-text">${prompt}</div>
+
+      <div class="action-notice">
+        <strong>💡 사용 방법</strong><br>
+        이 프롬프트를 복사한 후 ChatGPT, Claude 등 AI에게 전달하세요.<br>
+        "⚡ 자동 생성" 버튼을 다시 누르면 새로운 주제와 키워드로 프롬프트가 생성됩니다.
       </div>
     `;
   }
