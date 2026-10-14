@@ -297,10 +297,6 @@
       </select>
     </div>
 
-    <div class="control-group">
-      <label>🏷️ 구체적 대상·지역 (선택)</label>
-      <input type="text" id="targetInfo" placeholder="예: 강남, 직장인, 초보자, 아침 5시, 유튜브 학습">
-    </div>
 
     <div class="button-group">
       <button class="btn btn-primary" onclick="generatePrompt()">📝 프롬프트 생성</button>
@@ -1401,9 +1397,53 @@ AI 도구가 어렵지 않으며 실용적으로 활용 가능하다는 확신 �
     ai: ['#AI활용', '#ChatGPT', '#인공지능', '#AI도구', '#생산성', '#자동화', '#AI학습', '#기술활용', '#업무효율', '#AI팁']
   };
 
+  function wrapText(text, maxLength = 18) {
+    const words = text.split(' ');
+    let lines = [];
+    let currentLine = '';
+    let paragraphLines = [];
+    let lineCount = 0;
+
+    words.forEach((word, index) => {
+      if ((currentLine + word).length > maxLength && currentLine) {
+        paragraphLines.push(currentLine.trim());
+        currentLine = word + ' ';
+        lineCount++;
+
+        // 4-6줄마다 공백 라인 추가
+        if (lineCount % 5 === 0) {
+          paragraphLines.push('');
+          lineCount = 0;
+        }
+      } else {
+        currentLine += word + ' ';
+      }
+    });
+
+    if (currentLine) {
+      paragraphLines.push(currentLine.trim());
+    }
+
+    return paragraphLines.join('\n');
+  }
+
+  function formatPromptWithLineBreaks(rawPrompt) {
+    const sections = rawPrompt.split('\n【');
+    let formattedText = '';
+
+    sections.forEach((section, index) => {
+      if (index === 0) {
+        formattedText += wrapText(section);
+      } else {
+        formattedText += '\n【' + wrapText(section);
+      }
+    });
+
+    return formattedText;
+  }
+
   function generatePrompt() {
     const themeId = document.getElementById('themeSelect').value;
-    const targetInfo = document.getElementById('targetInfo').value;
 
     if (!themeId) {
       alert('주제를 선택해주세요.');
@@ -1412,9 +1452,8 @@ AI 도구가 어렵지 않으며 실용적으로 활용 가능하다는 확신 �
 
     let prompt = prompts[themeId];
 
-    if (targetInfo) {
-      prompt = prompt.replace(/【지시사항】\n다음을 중심으로/, `【지시사항】\n다음의 "${targetInfo}"를 중심으로`);
-    }
+    // 줄바꿈 처리
+    prompt = formatPromptWithLineBreaks(prompt);
 
     // 해시태그 추가
     const themeHashtags = hashtags[themeId];
@@ -1577,7 +1616,6 @@ AI 도구가 어렵지 않으며 실용적으로 활용 가능하다는 확신 �
 
   function resetForm() {
     document.getElementById('themeSelect').value = '';
-    document.getElementById('targetInfo').value = '';
     document.getElementById('outputContent').innerHTML = `
       <p class="initial-message">
         주제를 선택하고 "프롬프트 생성" 버튼을 누르면<br>
