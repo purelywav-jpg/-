@@ -1,0 +1,22 @@
+{
+  "_readme": "새 PC에서 쓸 때: 이 파일을 같은 폴더에 local_paths.json 이름으로 복사하고 값을 그 PC에 맞게 채운 뒤 이 _readme 줄은 지우세요. local_paths.json은 절대 공유하거나 커밋하지 마세요(API 키가 들어있는 폴더 경로가 담겨 있음).",
+
+  "tts_dir": "C:/Users/직원계정/Desktop/숏파인더 채널/_script",
+  "_tts_dir_설명": "elevenlabs_tts.py와 .env(ELEVENLABS_API_KEY=본인키)가 있는 폴더. 이 폴더가 없으면 새로 만들고 .env 한 줄만 넣으면 됨.",
+
+  "capcut_root": "C:/Users/직원계정/AppData/Local/CapCut/User Data/Projects/com.lveditor.draft",
+  "_capcut_root_설명": "CapCut 설정의 '기본 저장 경로'와 같은 값. CapCut > 설정 > 저장 경로에서 확인.",
+
+  "caption_font": "C:/Users/직원계정/AppData/Local/CapCut/User Data/Cache/effect/<폰트ID>/<해시>/font.ttf",
+  "_caption_font_설명": "자막 폰트(서울한강체 B). CapCut에서 아무 텍스트에 이 폰트를 한 번 적용하면 캐시에 생김. 정확한 경로는 CapCut 실행 중 Cache/effect 폴더를 뒤져서 폰트 이름이 보이는 config.json 옆 font.ttf를 찾으면 됨.",
+
+  "thumb_font_id": "7528305055972199681",
+  "thumb_font": "C:/Users/직원계정/AppData/Local/CapCut/User Data/Cache/effect/7528305055972199681/<해시>/font.ttf",
+  "_thumb_font_설명": "썸네일 폰트(카페24 단정해). caption_font와 같은 방법으로 한 번 적용 후 캐시 경로를 채움.",
+
+  "template_draft": "아무이름",
+  "_template_draft_설명": "그 PC의 CapCut으로 아무 프로젝트나 하나 만들어서 이름을 적으면 됨(그림자 효과 JSON 구조를 복사하는 용도일 뿐, 내용은 안 씀).",
+
+  "voice_id": "5I7B1di44aCL15NkP0jn",
+  "_voice_id_설명": "ElevenLabs 음성 ID. 기본은 Kanna(다국어). 그 직원 ElevenLabs 계정에 원하는 음성이 따로 있으면 그 ID로 바꿔도 됨."
+}
